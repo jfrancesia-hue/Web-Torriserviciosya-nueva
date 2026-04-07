@@ -382,7 +382,7 @@
                     El sistema operativo para inmobiliarias, consorcios y empresas que necesitan orden, trazabilidad y control total sobre sus propiedades y servicios.
                 </p>
                 <div class="hero-360-buttons">
-                    <a href="https://wa.me/5493512139046?text=Hola!%20Quiero%20una%20demo%20de%20Toori360" target="_blank" class="btn-360-primary">
+                    <a href="https://toori360-app.vercel.app/login" target="_blank" class="btn-360-primary">
                         <i class="bi bi-play-circle"></i> Solicitar demo
                     </a>
                     <a href="#features" class="btn-360-secondary">
@@ -572,7 +572,7 @@
             Unite a las inmobiliarias y empresas que ya gestionan sus propiedades con Toori360.
         </p>
         <div class="reveal" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
-            <a href="https://wa.me/5493512139046?text=Hola!%20Quiero%20una%20demo%20de%20Toori360" target="_blank" class="btn-360-primary">
+            <a href="https://toori360-app.vercel.app/login" target="_blank" class="btn-360-primary">
                 <i class="bi bi-whatsapp"></i> Agendar demo gratuita
             </a>
             <a href="./" class="btn-360-secondary">
