@@ -1,0 +1,8 @@
+# Secretos y env
+webhook/.env
+webhook/*.txt
+webhook/*.json
+webhook/*.zip
+
+# Estado interno
+.omc/

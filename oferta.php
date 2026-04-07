@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle de Oferta - Toori ServiciosYa</title>
+    <meta name="description" content="Conocé los detalles de esta oferta de trabajo en Toori.">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/logo.png">
+<script src="script.js"></script>
+<script>
+const supabaseUrl = "https://dhhhftzdfpqthzvkrqoz.supabase.co"
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRoaGhmdHpkZnBxdGh6dmtycW96Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ2OTQyODUsImV4cCI6MjA2MDI3MDI4NX0.-atBYl9Uica9quKZQzqmgWQ8wNd1PFB4ivLrSNv89OQ'
+
+window.supabase = window.supabase.createClient(supabaseUrl, supabaseKey)
+</script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <script type="module" crossorigin src="./assets/oferta-CZS6BMOg.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/supabase-1haNsgbs.js">
+  <link rel="stylesheet" crossorigin href="./assets/main-D3W1u2cc.css">
+</head>
+
+<body style="background-color: var(--bg-soft); min-height: 100vh;">
+
+
+    <!-- Header Include -->
+    <div id="header-include"></div>
+    <script>
+      fetch('/header.php')
+        .then(res => res.text())
+        .then(html => {
+          document.getElementById('header-include').innerHTML = html;
+        });
+    </script>
+
+    <main class="container" style="padding: 60px 0 100px;">
+        <div id="oferta-detalle-container">
+            <!-- Rendered by src/oferta.ts -->
+            <div class="text-center py-5">
+                <div style="font-size: 2rem; color: var(--toori-blue);"><i class="bi bi-arrow-repeat spin"></i></div>
+                <p class="mt-2 text-muted">Cargando detalles de la oferta...</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer style="padding: 60px 0 40px; background: white; border-top: 1px solid #f0f0f0;">
+        <div class="container text-center">
+            <div class="logo logo--footer justify-center mb-3" style="font-size: 1.1rem;">
+                <img src="assets/logo.png" alt="Toori Logo">
+                <span>Toori ServiciosYa</span>
+            </div>
+            <p class="text-muted" style="font-size: 0.8rem;">© 2024 Toori ServiciosYa. Todos los derechos reservados.
+            </p>
+        </div>
+    </footer>
+
+    <style>
+        .justify-center {
+            justify-content: center;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .spin {
+            animation: spin 1s linear infinite;
+            display: inline-block;
+        }
+
+        /* Specific layout for detail */
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 40px;
+        }
+
+        @media (max-width: 992px) {
+            .detail-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--toori-dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 18px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--toori-gray);
+            font-family: var(--font-body);
+            transition: all 0.2s;
+        }
+
+        .form-control:focus {
+            border-color: var(--toori-blue);
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(59, 168, 224, 0.1);
+        }
+    </style>
+
+
+</body>
+
+</html>

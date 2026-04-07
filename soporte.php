@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soporte y Ayuda - Toori ServiciosYa</title>
+  <meta name="description"
+    content="¿Necesitás ayuda con Toori? Encontrá respuestas a tus dudas o contactate con nuestro equipo de soporte técnico.">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<script>
+const supabaseUrl = "https://dhhhftzdfpqthzvkrqoz.supabase.co"
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRoaGhmdHpkZnBxdGh6dmtycW96Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ2OTQyODUsImV4cCI6MjA2MDI3MDI4NX0.-atBYl9Uica9quKZQzqmgWQ8wNd1PFB4ivLrSNv89OQ'
+
+window.supabase = window.supabase.createClient(supabaseUrl, supabaseKey)
+</script>
+
+  <style>
+    .support-hero {
+      background: linear-gradient(135deg, var(--toori-blue) 0%, #1d4ed8 100%);
+      padding: 80px 0;
+      color: white;
+      text-align: center;
+    }
+
+    .faq-card {
+      background: white;
+      border-radius: 20px;
+      padding: 0;
+      overflow: hidden;
+      box-shadow: var(--shadow-premium);
+      border: 1px solid #f1f5f9;
+    }
+
+    .accordion-item {
+      border: none;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .accordion-button:not(.collapsed) {
+      background-color: rgba(0, 194, 203, 0.05);
+      color: var(--toori-blue);
+      box-shadow: none;
+    }
+
+    .accordion-button:focus {
+      box-shadow: none;
+      border-color: rgba(0, 194, 203, 0.1);
+    }
+
+    .contact-box {
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      text-align: center;
+      height: 100%;
+      border: 1px solid #f1f5f9;
+      transition: transform 0.2s;
+    }
+
+    .contact-box:hover {
+      transform: translateY(-5px);
+    }
+
+    .round-icon {
+      width: 60px;
+      height: 60px;
+      background: rgba(0, 194, 203, 0.1);
+      color: var(--toori-blue);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 1.5rem;
+    }
+  </style>
+  <script type="module" crossorigin src="./assets/supabase-1haNsgbs.js"></script>
+<script src="script.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/main-D3W1u2cc.css">
+</head>
+
+<body class="bg-light">
+
+  <header class="navbar navbar--sticky">
+    <div class="container-header">
+      <a href="./" class="logo" style="margin-right: auto;">
+        <img src="assets/logo.png" alt="Toori Logo">
+        <span>Toori ServiciosYa</span>
+      </a>
+      <div class="menu-toggle" id="mobile-menu-btn">
+        <i class="bi bi-list"></i>
+      </div>
+      <nav class="nav-menu" id="nav-menu">
+        <a href="./" class="nav-link">Inicio</a>
+        <a href="/index.php#search-section" class="nav-link">Servicios</a>
+        <a href="/login.php" class="nav-link" style="color: var(--toori-blue);">Ingresá</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Header Include -->
+  <div id="header-include"></div>
+  <script>
+    fetch('/header.php')
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('header-include').innerHTML = html;
+      });
+  </script>
+
+  <section class="support-hero">
+    <div class="container">
+      <h1 class="fw-bold mb-3">¿Cómo podemos ayudarte?</h1>
+      <p class="opacity-75 lead">Estamos acá para resolver todas tus dudas sobre Toori</p>
+    </div>
+  </section>
+
+  <main class="container py-5" style="margin-top: -40px;">
+    <div class="row g-4 mb-5">
+      <div class="col-md-4">
+        <div class="contact-box shadow-sm">
+          <div class="round-icon"><i class="bi bi-whatsapp"></i></div>
+          <h5 class="fw-bold">WhatsApp Bot</h5>
+          <p class="text-muted small">Escribinos para una respuesta automática e inmediata.</p>
+          <a href="https://wa.me/5493512139046?text=Hola!%20Necesito%20ayuda%20con%20Toori"
+            class="btn btn-outline-primary rounded-pill px-4">Chatbot</a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="contact-box shadow-sm">
+          <div class="round-icon"><i class="bi bi-envelope-at"></i></div>
+          <h5 class="fw-bold">Email</h5>
+          <p class="text-muted small">Para consultas más complejas o administrativas.</p>
+          <a href="mailto:soporte@tooriservicios.com" class="btn btn-outline-primary rounded-pill px-4">Enviar Mail</a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="contact-box shadow-sm">
+          <div class="round-icon"><i class="bi bi-instagram"></i></div>
+          <h5 class="fw-bold">Instagram</h5>
+          <p class="text-muted small">Seguinos y envianos un mensaje directo por redes.</p>
+          <a href="https://www.instagram.com/tooriservicios" target="_blank"
+            class="btn btn-outline-primary rounded-pill px-4">Ir a Instagram</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <h3 class="fw-bold mb-4 text-center">Preguntas Frecuentes</h3>
+        <div class="faq-card accordion shadow-sm" id="faqAccordion">
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                ¿Cómo solicito un servicio?
+              </button>
+            </h2>
+            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+              <div class="accordion-body text-muted">
+                Es muy simple. Elegí la categoría que necesitás en el inicio, completá los detalles de tu pedido y hacé
+                clic en solicitar. Nuestro bot de WhatsApp te conectará con el mejor prestador disponible.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse"
+                data-bs-target="#faq2">
+                ¿Qué pasa si el trabajador no asiste?
+              </button>
+            </h2>
+            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body text-muted">
+                Toori te respalda. Si tenés algún inconveniente con el prestador, informalo inmediatamente a nuestro
+                soporte por WhatsApp y buscaremos una solución o un reemplazo a la brevedad.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse"
+                data-bs-target="#faq3">
+                ¿Cómo me registro para ofrecer servicios?
+              </button>
+            </h2>
+            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body text-muted">
+                Andá a la sección "Soy Trabajador" en el menú, completá tu postulación con tus datos y documentación.
+                Una vez verificado tu perfil, empezarás a recibir ofertas de trabajo en tu zona.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer style="background-color: var(--toori-dark); color: white; padding: 40px 0 20px; margin-top: 80px;">
+    <div class="container text-center">
+      <img src="assets/logo.png" alt="Toori Logo" style="height: 60px; margin-bottom: 20px;">
+      <p class="opacity-50 small">© 2024 Toori ServiciosYa · Unimos confianza con soluciones.</p>
+      <div class="d-flex justify-content-center gap-3 mt-3">
+        <a href="Terminos-y-condiciones.php" class="text-white-50 text-decoration-none small">Términos y
+          Condiciones</a>
+        <a href="/politicas-de-privacidad.php" class="text-white-50 text-decoration-none small">Privacidad</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
