@@ -28,43 +28,221 @@
 
     <?php include 'header.php'; ?>
 
-    <!-- ===================== HERO SECTION con PARALLAX ===================== -->
-    <section class="hero hero-parallax" id="home"
-        style="background-image: url('assets/hero_house.png'); background-position: bottom; align-items: flex-start;">
-        <div class="hero-overlay"
-            style="background: linear-gradient(180deg, rgba(75, 78, 109, 0.9) 0%, rgba(75, 78, 109, 0.5) 50%, rgba(255, 255, 255, 0) 100%);">
-        </div>
-        <div class="container"
-            style="display: flex; flex-direction: column; align-items: center; text-align: center; justify-content: flex-start; padding-top: 22vh; gap: 24px;">
-            <div class="hero-content animate-in" style="max-width: 800px;">
-                <h1 style="font-size: 3.8rem; margin-bottom: 1rem; line-height: 1.1; color: white; text-shadow: 0 4px 20px rgba(0,0,0,0.3);">
-                    Hace tu vida mas facil
-                </h1>
-                <p style="font-size: 1.35rem; color: rgba(255,255,255,0.92); margin-bottom: 2rem; text-shadow: 0 2px 10px rgba(0,0,0,0.3); font-weight: 400; max-width: 550px; margin-left: auto; margin-right: auto; line-height: 1.5;">
-                    Disfruta de cualquier servicio profesional, en la comodidad de tu propio hogar.
-                </p>
-                <div class="hero-cta-bar">
-                    <a href="https://wa.me/5493512139046" class="btn btn-primary btn-ripple">Buscar un Servicio</a>
-                    <a href="registro.php" class="btn btn-ripple" style="background: #f1f8e9; color: #558b2f; font-weight: 600;">Ofrecer Servicios</a>
-                </div>
-            </div>
+    <!-- ===================== HERO - Slideshow con Ken Burns ===================== -->
+    <style>
+      .hero-slideshow {
+        position: relative;
+        min-height: 100vh;
+        display: flex;
+        align-items: flex-start;
+        overflow: hidden;
+      }
 
-            <!-- Trust badges -->
-            <div class="trust-badges" style="margin-top: 20px;">
-                <div class="trust-badge">
-                    <i class="bi bi-shield-check"></i>
-                    <span>Prestadores verificados</span>
-                </div>
-                <div class="trust-badge">
-                    <i class="bi bi-clock"></i>
-                    <span>Respuesta en minutos</span>
-                </div>
-                <div class="trust-badge">
-                    <i class="bi bi-star"></i>
-                    <span>Garantia de calidad</span>
-                </div>
-            </div>
+      /* Slides de fondo */
+      .hero-slide {
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center;
+        opacity: 0;
+        transition: opacity 1.2s ease-in-out;
+        will-change: opacity, transform;
+      }
+
+      .hero-slide.active {
+        opacity: 1;
+        animation: kenBurns 8s ease-in-out forwards;
+      }
+
+      @keyframes kenBurns {
+        0% { transform: scale(1) translate(0, 0); }
+        100% { transform: scale(1.08) translate(-1%, -1%); }
+      }
+
+      /* Variantes de animacion para cada slide */
+      .hero-slide:nth-child(2).active {
+        animation: kenBurns2 8s ease-in-out forwards;
+      }
+      @keyframes kenBurns2 {
+        0% { transform: scale(1.05) translate(-1%, 0); }
+        100% { transform: scale(1) translate(1%, -1%); }
+      }
+
+      .hero-slide:nth-child(3).active {
+        animation: kenBurns3 8s ease-in-out forwards;
+      }
+      @keyframes kenBurns3 {
+        0% { transform: scale(1) translate(1%, 1%); }
+        100% { transform: scale(1.1) translate(-1%, 0); }
+      }
+
+      .hero-slide:nth-child(4).active {
+        animation: kenBurns4 8s ease-in-out forwards;
+      }
+      @keyframes kenBurns4 {
+        0% { transform: scale(1.08) translate(0, -1%); }
+        100% { transform: scale(1) translate(0, 1%); }
+      }
+
+      .hero-slide:nth-child(5).active {
+        animation: kenBurns5 8s ease-in-out forwards;
+      }
+      @keyframes kenBurns5 {
+        0% { transform: scale(1) translate(-1%, -1%); }
+        100% { transform: scale(1.06) translate(1%, 0); }
+      }
+
+      /* Overlay oscuro + gradiente */
+      .hero-slide-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          180deg,
+          rgba(30, 30, 50, 0.85) 0%,
+          rgba(30, 30, 50, 0.6) 40%,
+          rgba(30, 30, 50, 0.4) 70%,
+          rgba(255, 255, 255, 0) 100%
+        );
+        z-index: 2;
+      }
+
+      /* Indicadores de slide */
+      .hero-indicators {
+        position: absolute;
+        bottom: 100px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 10px;
+        z-index: 5;
+      }
+
+      .hero-indicator {
+        width: 32px;
+        height: 4px;
+        border-radius: 2px;
+        background: rgba(255,255,255,0.3);
+        cursor: pointer;
+        transition: all 0.4s;
+        border: none;
+        padding: 0;
+      }
+
+      .hero-indicator.active {
+        background: white;
+        width: 48px;
+      }
+
+      /* Etiqueta de la foto actual */
+      .hero-slide-label {
+        position: absolute;
+        bottom: 120px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: rgba(255,255,255,0.5);
+        font-size: 0.78rem;
+        font-weight: 500;
+        z-index: 5;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        opacity: 0;
+        transition: opacity 0.5s;
+      }
+
+      .hero-slide-label.visible {
+        opacity: 1;
+      }
+
+      /* Contenido hero */
+      .hero-slideshow .hero-main-content {
+        position: relative;
+        z-index: 3;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        justify-content: flex-start;
+        padding-top: 22vh;
+        gap: 24px;
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+
+      @media (max-width: 768px) {
+        .hero-slideshow { min-height: 90vh; }
+        .hero-slideshow .hero-main-content { padding-top: 16vh; }
+        .hero-indicators { bottom: 80px; }
+        .hero-slide-label { bottom: 100px; font-size: 0.7rem; }
+      }
+    </style>
+
+    <section class="hero-slideshow" id="home">
+      <!-- Slides de fondo - prestadores reales trabajando -->
+      <div class="hero-slide active"
+        style="background-image: url('https://images.pexels.com/photos/8005397/pexels-photo-8005397.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop');"
+        data-label="Electricista profesional"></div>
+      <div class="hero-slide"
+        style="background-image: url('https://images.pexels.com/photos/6419128/pexels-photo-6419128.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop');"
+        data-label="Plomero verificado"></div>
+      <div class="hero-slide"
+        style="background-image: url('https://images.pexels.com/photos/6474471/pexels-photo-6474471.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop');"
+        data-label="Pintor de interiores"></div>
+      <div class="hero-slide"
+        style="background-image: url('https://images.pexels.com/photos/1301856/pexels-photo-1301856.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop');"
+        data-label="Jardinero experto"></div>
+      <div class="hero-slide"
+        style="background-image: url('https://images.pexels.com/photos/4107120/pexels-photo-4107120.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop');"
+        data-label="Servicio de limpieza"></div>
+
+      <!-- Overlay -->
+      <div class="hero-slide-overlay"></div>
+
+      <!-- Contenido -->
+      <div class="hero-main-content">
+        <div class="hero-content animate-in" style="max-width: 800px;">
+          <h1 style="font-size: 3.8rem; margin-bottom: 1rem; line-height: 1.1; color: white; text-shadow: 0 4px 24px rgba(0,0,0,0.4);">
+            Hace tu vida mas facil
+          </h1>
+          <p style="font-size: 1.35rem; color: rgba(255,255,255,0.92); margin-bottom: 2rem; text-shadow: 0 2px 12px rgba(0,0,0,0.4); font-weight: 400; max-width: 550px; margin-left: auto; margin-right: auto; line-height: 1.5;">
+            Disfruta de cualquier servicio profesional, en la comodidad de tu propio hogar.
+          </p>
+          <div class="hero-cta-bar">
+            <a href="https://wa.me/5493512139046" class="btn btn-primary btn-ripple">Buscar un Servicio</a>
+            <a href="registro.php" class="btn btn-ripple" style="background: #f1f8e9; color: #558b2f; font-weight: 600;">Ofrecer Servicios</a>
+          </div>
         </div>
+
+        <!-- Trust badges -->
+        <div class="trust-badges" style="margin-top: 20px;">
+          <div class="trust-badge">
+            <i class="bi bi-shield-check"></i>
+            <span>Prestadores verificados</span>
+          </div>
+          <div class="trust-badge">
+            <i class="bi bi-clock"></i>
+            <span>Respuesta en minutos</span>
+          </div>
+          <div class="trust-badge">
+            <i class="bi bi-star"></i>
+            <span>Garantia de calidad</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Etiqueta de slide actual -->
+      <div class="hero-slide-label visible" id="hero-label">Electricista profesional</div>
+
+      <!-- Indicadores -->
+      <div class="hero-indicators" id="hero-indicators">
+        <button class="hero-indicator active" data-index="0"></button>
+        <button class="hero-indicator" data-index="1"></button>
+        <button class="hero-indicator" data-index="2"></button>
+        <button class="hero-indicator" data-index="3"></button>
+        <button class="hero-indicator" data-index="4"></button>
+      </div>
     </section>
 
     <!-- ===================== STATS BAR con CONTADOR ANIMADO ===================== -->
@@ -1068,6 +1246,69 @@ function playSpVideo(container) {
             item.classList.add('active');
         }
     }
+    </script>
+
+    <!-- Hero Slideshow Controller -->
+    <script>
+    (function() {
+        const slides = document.querySelectorAll('.hero-slide');
+        const indicators = document.querySelectorAll('.hero-indicator');
+        const label = document.getElementById('hero-label');
+        let current = 0;
+        let interval;
+        const DURATION = 6000; // 6 segundos por slide
+
+        function goToSlide(index) {
+            // Quitar active de todos
+            slides.forEach(s => s.classList.remove('active'));
+            indicators.forEach(i => i.classList.remove('active'));
+
+            // Fade label
+            if (label) {
+                label.classList.remove('visible');
+            }
+
+            current = index;
+
+            // Activar nuevo
+            slides[current].classList.add('active');
+            indicators[current].classList.add('active');
+
+            // Actualizar label con delay
+            setTimeout(() => {
+                if (label) {
+                    label.textContent = slides[current].dataset.label || '';
+                    label.classList.add('visible');
+                }
+            }, 400);
+        }
+
+        function nextSlide() {
+            goToSlide((current + 1) % slides.length);
+        }
+
+        function startAutoplay() {
+            interval = setInterval(nextSlide, DURATION);
+        }
+
+        function stopAutoplay() {
+            clearInterval(interval);
+        }
+
+        // Click en indicadores
+        indicators.forEach(ind => {
+            ind.addEventListener('click', () => {
+                stopAutoplay();
+                goToSlide(parseInt(ind.dataset.index));
+                startAutoplay();
+            });
+        });
+
+        // Iniciar
+        if (slides.length > 0) {
+            startAutoplay();
+        }
+    })();
     </script>
 
     <script>
