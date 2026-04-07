@@ -94,18 +94,48 @@
     <!-- Mesh divider -->
     <div class="mesh-divider"></div>
 
-    <!-- ===================== SPONSORS ===================== -->
+    <!-- ===================== SPONSORS - Carrusel Profesional ===================== -->
 <section class="section" id="sponsors">
   <div class="container text-center">
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&display=swap');
+
+      #sponsors {
+        background: linear-gradient(135deg, #0f0c29 0%, #1a1a3e 40%, #24243e 100%);
+        padding: 90px 0;
+        overflow: hidden;
+        position: relative;
+      }
+
+      #sponsors::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(ellipse 50% 50% at 15% 50%, rgba(167,139,250,0.1) 0%, transparent 60%),
+          radial-gradient(ellipse 40% 50% at 85% 50%, rgba(52,211,153,0.08) 0%, transparent 60%);
+        pointer-events: none;
+      }
+
+      .sponsors-header {
+        margin-bottom: 52px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .sponsors-divider {
+        width: 60px; height: 3px;
+        background: linear-gradient(90deg, #a78bfa, #34d399);
+        border-radius: 2px;
+        margin: 0 auto 16px;
+      }
 
       .sponsors-title {
         font-family: 'Syne', sans-serif;
         font-size: 2.5rem;
         font-weight: 800;
         color: #fff;
-        margin-bottom: 48px;
+        margin-bottom: 10px;
       }
 
       .sponsors-title span {
@@ -115,35 +145,99 @@
         background-clip: text;
       }
 
-      .sponsor-card-v2 {
-        border-radius: 20px;
-        padding: 36px 24px 24px;
-        background: linear-gradient(145deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.04) 100%);
-        border: 1px solid rgba(255,255,255,0.12);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-        cursor: pointer;
-        transition: transform 0.4s cubic-bezier(.22,1,.36,1), box-shadow 0.4s;
+      .sponsors-sub {
+        color: rgba(255,255,255,0.5);
+        font-size: 0.95rem;
       }
 
-      .sponsor-card-v2:hover {
-        transform: translateY(-10px) scale(1.02);
-        box-shadow: 0 20px 50px rgba(0,0,0,0.4), 0 0 30px rgba(167,139,250,0.15);
+      /* --- Carrusel infinito --- */
+      .sponsor-carousel-wrapper {
+        position: relative;
+        overflow: hidden;
+        padding: 10px 0 20px;
+        z-index: 2;
       }
 
-      .sponsor-icon-v2 {
-        width: 72px; height: 72px;
-        border-radius: 18px;
-        display: flex; align-items: center; justify-content: center;
-        font-size: 2rem;
-        margin: 0 auto 16px;
-        box-shadow: 0 4px 16px rgba(0,0,0,0.25);
-      }
-
-      .sponsor-badge-v2 {
+      /* Fade izq/der */
+      .sponsor-carousel-wrapper::before,
+      .sponsor-carousel-wrapper::after {
+        content: '';
         position: absolute;
-        top: 14px; right: 14px;
+        top: 0;
+        bottom: 0;
+        width: 80px;
+        z-index: 3;
+        pointer-events: none;
+      }
+
+      .sponsor-carousel-wrapper::before {
+        left: 0;
+        background: linear-gradient(90deg, #0f0c29, transparent);
+      }
+
+      .sponsor-carousel-wrapper::after {
+        right: 0;
+        background: linear-gradient(270deg, #24243e, transparent);
+      }
+
+      .sponsor-carousel-track {
+        display: flex;
+        gap: 28px;
+        animation: scroll-sponsors 35s linear infinite;
+        width: max-content;
+      }
+
+      .sponsor-carousel-track:hover {
+        animation-play-state: paused;
+      }
+
+      @keyframes scroll-sponsors {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+      }
+
+      /* --- Card sponsor --- */
+      .sp-card {
+        flex-shrink: 0;
+        width: 300px;
+        border-radius: 20px;
+        overflow: hidden;
+        background: linear-gradient(145deg, rgba(255,255,255,0.09) 0%, rgba(255,255,255,0.03) 100%);
+        border: 1px solid rgba(255,255,255,0.1);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        transition: transform 0.4s cubic-bezier(.22,1,.36,1), box-shadow 0.4s;
+        cursor: pointer;
+        position: relative;
+      }
+
+      .sp-card:hover {
+        transform: translateY(-8px) scale(1.03);
+        box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 30px rgba(167,139,250,0.12);
+      }
+
+      .sp-card-img {
+        width: 100%;
+        height: 170px;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.5s ease;
+      }
+
+      .sp-card:hover .sp-card-img {
+        transform: scale(1.08);
+      }
+
+      .sp-card-img-wrap {
+        overflow: hidden;
+        position: relative;
+      }
+
+      .sp-card-badge {
+        position: absolute;
+        top: 12px;
+        right: 12px;
         background: linear-gradient(90deg, #a78bfa, #6366f1);
         color: #fff;
         font-size: 0.6rem;
@@ -152,60 +246,305 @@
         border-radius: 20px;
         letter-spacing: 0.1em;
         text-transform: uppercase;
-        z-index: 4;
+        z-index: 2;
+        box-shadow: 0 2px 10px rgba(99,102,241,0.4);
       }
 
-      .sponsor-name {
+      .sp-card-body {
+        padding: 20px;
+      }
+
+      .sp-card-name {
         font-family: 'Syne', sans-serif;
-        font-size: 1.1rem;
+        font-size: 1.05rem;
         font-weight: 800;
         color: #fff;
         margin-bottom: 6px;
       }
 
-      .sponsor-desc {
-        color: rgba(255,255,255,0.55);
-        font-size: 0.88rem;
+      .sp-card-desc {
+        color: rgba(255,255,255,0.5);
+        font-size: 0.85rem;
         line-height: 1.5;
+        margin-bottom: 0;
       }
 
-      .sponsors-divider {
-        width: 60px; height: 3px;
-        background: linear-gradient(90deg, #a78bfa, #34d399);
-        border-radius: 2px;
-        margin: 0 auto 16px;
+      .sp-card-cat {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 12px;
+        font-size: 0.72rem;
+        color: rgba(255,255,255,0.4);
+        background: rgba(255,255,255,0.06);
+        padding: 4px 10px;
+        border-radius: 20px;
+      }
+
+      /* --- Video card --- */
+      .sp-card-video {
+        width: 300px;
+        flex-shrink: 0;
+      }
+
+      .sp-video-wrap {
+        width: 100%;
+        height: 100%;
+        min-height: 280px;
+        border-radius: 20px;
+        overflow: hidden;
+        position: relative;
+        background: #111;
+        border: 1px solid rgba(255,255,255,0.1);
+        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        cursor: pointer;
+        transition: transform 0.4s cubic-bezier(.22,1,.36,1), box-shadow 0.4s;
+      }
+
+      .sp-video-wrap:hover {
+        transform: translateY(-8px) scale(1.03);
+        box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+      }
+
+      .sp-video-wrap iframe,
+      .sp-video-wrap video {
+        width: 100%;
+        height: 100%;
+        min-height: 280px;
+        object-fit: cover;
+        border: none;
+        display: block;
+      }
+
+      .sp-video-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0,0,0,0.3);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        opacity: 1;
+        transition: opacity 0.3s;
+        pointer-events: none;
+      }
+
+      .sp-video-wrap:hover .sp-video-overlay {
+        opacity: 0;
+      }
+
+      .sp-video-play {
+        width: 60px;
+        height: 60px;
+        background: rgba(255,255,255,0.15);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(8px);
+        margin-bottom: 10px;
+      }
+
+      .sp-video-play i {
+        font-size: 1.5rem;
+        color: white;
+        margin-left: 4px;
+      }
+
+      .sp-video-label {
+        color: rgba(255,255,255,0.8);
+        font-size: 0.8rem;
+        font-weight: 600;
+      }
+
+      /* --- CTA Sponsor --- */
+      .sponsor-cta {
+        margin-top: 48px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .sponsor-cta a {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: rgba(255,255,255,0.08);
+        border: 1px solid rgba(255,255,255,0.15);
+        color: rgba(255,255,255,0.8);
+        padding: 14px 28px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.95rem;
+        transition: all 0.3s;
+      }
+
+      .sponsor-cta a:hover {
+        background: rgba(167,139,250,0.15);
+        border-color: rgba(167,139,250,0.4);
+        color: white;
+        transform: translateY(-2px);
+      }
+
+      @media (max-width: 768px) {
+        .sponsors-title { font-size: 1.8rem; }
+        .sp-card { width: 260px; }
+        .sp-card-img { height: 140px; }
+        .sp-card-video { width: 260px; }
+        .sp-video-wrap { min-height: 240px; }
+        .sp-video-wrap iframe,
+        .sp-video-wrap video { min-height: 240px; }
+        .sponsor-carousel-wrapper::before,
+        .sponsor-carousel-wrapper::after { width: 40px; }
       }
     </style>
 
-    <div class="sponsors-divider reveal"></div>
-    <h2 class="sponsors-title reveal">Nuestros <span>Sponsors</span></h2>
-
-    <div class="grid stagger-children" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 28px; position: relative; z-index: 1;">
-
-      <div class="sponsor-card-v2 reveal" style="position:relative;">
-        <span class="sponsor-badge-v2">Sponsor</span>
-        <div class="sponsor-icon-v2" style="background: linear-gradient(135deg, #FF6B35, #ff9a6c); color: #fff;">🔧</div>
-        <div class="sponsor-name">Ferreteria El Tornillo</div>
-        <p class="sponsor-desc">Materiales y herramientas de calidad al mejor precio</p>
-      </div>
-
-      <div class="sponsor-card-v2 reveal" style="position:relative;">
-        <span class="sponsor-badge-v2">Sponsor</span>
-        <div class="sponsor-icon-v2" style="background: linear-gradient(135deg, #2C3E50, #4a6fa5); color: #fff;">🚗</div>
-        <div class="sponsor-name">Automotores Catamarca</div>
-        <p class="sponsor-desc">Financiacion inmediata, sin tramites complicados</p>
-      </div>
-
-      <div class="sponsor-card-v2 reveal" style="position:relative;">
-        <span class="sponsor-badge-v2">Sponsor</span>
-        <div class="sponsor-icon-v2" style="background: linear-gradient(135deg, #27AE60, #52c97e); color: #fff;">💊</div>
-        <div class="sponsor-name">Farmacia Central</div>
-        <p class="sponsor-desc">Medicamentos, cosmeticos y atencion personalizada</p>
-      </div>
-
+    <div class="sponsors-header">
+      <div class="sponsors-divider reveal"></div>
+      <h2 class="sponsors-title reveal">Nuestros <span>Sponsors</span></h2>
+      <p class="sponsors-sub reveal">Empresas que confian en Toori y respaldan a nuestros profesionales</p>
     </div>
+
+    <!-- Carrusel infinito -->
+    <div class="sponsor-carousel-wrapper">
+      <div class="sponsor-carousel-track" id="sponsor-track">
+
+        <!-- Sponsor 1: Ferreteria -->
+        <div class="sp-card">
+          <div class="sp-card-img-wrap">
+            <span class="sp-card-badge">Sponsor</span>
+            <img class="sp-card-img" src="https://images.pexels.com/photos/1029243/pexels-photo-1029243.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Ferreteria El Tornillo">
+          </div>
+          <div class="sp-card-body">
+            <div class="sp-card-name">Ferreteria El Tornillo</div>
+            <p class="sp-card-desc">Materiales y herramientas de calidad al mejor precio para tu hogar</p>
+            <span class="sp-card-cat"><i class="bi bi-tools"></i> Materiales & Herramientas</span>
+          </div>
+        </div>
+
+        <!-- Sponsor 2: Automotores -->
+        <div class="sp-card">
+          <div class="sp-card-img-wrap">
+            <span class="sp-card-badge">Sponsor</span>
+            <img class="sp-card-img" src="https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Automotores Catamarca">
+          </div>
+          <div class="sp-card-body">
+            <div class="sp-card-name">Automotores Catamarca</div>
+            <p class="sp-card-desc">Financiacion inmediata, sin tramites complicados</p>
+            <span class="sp-card-cat"><i class="bi bi-car-front"></i> Automotores</span>
+          </div>
+        </div>
+
+        <!-- Sponsor 3: Farmacia -->
+        <div class="sp-card">
+          <div class="sp-card-img-wrap">
+            <span class="sp-card-badge">Sponsor</span>
+            <img class="sp-card-img" src="https://images.pexels.com/photos/3683098/pexels-photo-3683098.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Farmacia Central">
+          </div>
+          <div class="sp-card-body">
+            <div class="sp-card-name">Farmacia Central</div>
+            <p class="sp-card-desc">Medicamentos, cosmeticos y atencion personalizada 24hs</p>
+            <span class="sp-card-cat"><i class="bi bi-heart-pulse"></i> Salud & Bienestar</span>
+          </div>
+        </div>
+
+        <!-- VIDEO SPONSOR -->
+        <div class="sp-card-video">
+          <div class="sp-video-wrap" id="sp-video-container" onclick="playSpVideo(this)">
+            <img class="sp-card-img" src="https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Video Toori" id="sp-video-thumb" style="height:100%;min-height:280px;">
+            <div class="sp-video-overlay" id="sp-video-overlay">
+              <div class="sp-video-play"><i class="bi bi-play-fill"></i></div>
+              <span class="sp-video-label">Ver video institucional</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sponsor 4: Corralon -->
+        <div class="sp-card">
+          <div class="sp-card-img-wrap">
+            <span class="sp-card-badge">Sponsor</span>
+            <img class="sp-card-img" src="https://images.pexels.com/photos/2760243/pexels-photo-2760243.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Corralon del Norte">
+          </div>
+          <div class="sp-card-body">
+            <div class="sp-card-name">Corralon del Norte</div>
+            <p class="sp-card-desc">Arena, cemento, ladrillos y todo para tu obra</p>
+            <span class="sp-card-cat"><i class="bi bi-bricks"></i> Construccion</span>
+          </div>
+        </div>
+
+        <!-- Sponsor 5: Electrica -->
+        <div class="sp-card">
+          <div class="sp-card-img-wrap">
+            <span class="sp-card-badge">Sponsor</span>
+            <img class="sp-card-img" src="https://images.pexels.com/photos/257736/pexels-photo-257736.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Electrica San Martin">
+          </div>
+          <div class="sp-card-body">
+            <div class="sp-card-name">Electrica San Martin</div>
+            <p class="sp-card-desc">Cables, llaves termicas, tableros y materiales electricos</p>
+            <span class="sp-card-cat"><i class="bi bi-lightning"></i> Electricidad</span>
+          </div>
+        </div>
+
+        <!-- Sponsor 6: Pintureria -->
+        <div class="sp-card">
+          <div class="sp-card-img-wrap">
+            <span class="sp-card-badge">Sponsor</span>
+            <img class="sp-card-img" src="https://images.pexels.com/photos/1749900/pexels-photo-1749900.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Pintureria Colores">
+          </div>
+          <div class="sp-card-body">
+            <div class="sp-card-name">Pintureria Colores</div>
+            <p class="sp-card-desc">Pinturas, rodillos, esmaltes y accesorios para renovar tu hogar</p>
+            <span class="sp-card-cat"><i class="bi bi-palette"></i> Pintura & Deco</span>
+          </div>
+        </div>
+
+      </div><!-- /track -->
+    </div><!-- /wrapper -->
+
+    <!-- CTA -->
+    <div class="sponsor-cta reveal">
+      <a href="https://wa.me/5493512139046?text=Hola!%20Quiero%20ser%20sponsor%20de%20Toori">
+        <i class="bi bi-stars"></i> Quiero ser sponsor de Toori
+      </a>
+    </div>
+
   </div>
 </section>
+
+<!-- Script para duplicar items y crear loop infinito + video -->
+<script>
+(function() {
+  document.addEventListener('DOMContentLoaded', () => {
+    // Duplicar cards para loop infinito
+    const track = document.getElementById('sponsor-track');
+    if (track) {
+      const items = track.innerHTML;
+      track.innerHTML = items + items;
+    }
+  });
+})();
+
+function playSpVideo(container) {
+    // Reemplazar thumbnail con iframe de video
+    // CAMBIAR esta URL por el video real del sponsor/empresa
+    const videoUrl = 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1';
+    const thumb = document.getElementById('sp-video-thumb');
+    const overlay = document.getElementById('sp-video-overlay');
+
+    if (thumb) thumb.style.display = 'none';
+    if (overlay) overlay.style.display = 'none';
+
+    const iframe = document.createElement('iframe');
+    iframe.src = videoUrl;
+    iframe.allow = 'autoplay; encrypted-media';
+    iframe.allowFullscreen = true;
+    container.appendChild(iframe);
+
+    // Pausar carrusel cuando se reproduce video
+    const track = document.getElementById('sponsor-track');
+    if (track) track.style.animationPlayState = 'paused';
+}
+</script>
 
     <!-- ===================== COMO FUNCIONA ===================== -->
     <section class="section mesh-bg-soft" id="como-funciona" style="background-color: var(--bg-white);">
