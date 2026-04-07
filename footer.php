@@ -21,6 +21,7 @@
           <li><a href="PerfileProfesionales.php">Profesionales</a></li>
           <li><a href="ofertas.php">Ofertas disponibles</a></li>
           <li><a href="registro.php">Ofrecer servicios</a></li>
+          <li><a href="toori360.php" style="color:var(--toori-green);">Toori360 <i class="bi bi-arrow-up-right"></i></a></li>
         </ul>
       </div>
 

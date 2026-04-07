@@ -1055,6 +1055,75 @@ function playSpVideo(container) {
         </div>
     </section>
 
+    <!-- ===================== TOORI360 PROMO ===================== -->
+    <section style="background: linear-gradient(135deg, #0f0c29, #1a1a3e, #24243e); padding: 80px 0; overflow: hidden; position: relative;">
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse 50% 50% at 30% 50%, rgba(59,168,224,0.08) 0%, transparent 60%);pointer-events:none;"></div>
+        <div class="container" style="position:relative;z-index:2;">
+            <div class="grid reveal" style="grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;">
+                <div>
+                    <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(135,78,153,0.15);border:1px solid rgba(135,78,153,0.3);color:var(--toori-purple);padding:5px 14px;border-radius:50px;font-size:0.78rem;font-weight:600;margin-bottom:20px;">
+                        <i class="bi bi-rocket-takeoff"></i> Nuevo producto
+                    </div>
+                    <h2 style="color:white;font-size:2rem;margin-bottom:14px;line-height:1.2;">
+                        Conoce <span style="background:linear-gradient(90deg,var(--toori-blue),var(--toori-green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Toori360</span>
+                    </h2>
+                    <p style="color:rgba(255,255,255,0.6);font-size:1rem;line-height:1.7;margin-bottom:28px;max-width:420px;">
+                        La plataforma B2B para inmobiliarias y consorcios que necesitan gestionar mantenimiento, incidencias y proveedores con trazabilidad total.
+                    </p>
+                    <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:24px;">
+                        <div style="display:flex;align-items:center;gap:8px;color:rgba(255,255,255,0.7);font-size:0.88rem;">
+                            <i class="bi bi-check-circle-fill" style="color:var(--toori-green);"></i> Tickets inteligentes
+                        </div>
+                        <div style="display:flex;align-items:center;gap:8px;color:rgba(255,255,255,0.7);font-size:0.88rem;">
+                            <i class="bi bi-check-circle-fill" style="color:var(--toori-green);"></i> WhatsApp + IA
+                        </div>
+                        <div style="display:flex;align-items:center;gap:8px;color:rgba(255,255,255,0.7);font-size:0.88rem;">
+                            <i class="bi bi-check-circle-fill" style="color:var(--toori-green);"></i> Multi-tenant
+                        </div>
+                    </div>
+                    <a href="toori360.php" class="btn btn-primary btn-ripple" style="padding:14px 32px;border-radius:14px;font-size:1rem;">
+                        <i class="bi bi-arrow-right me-2"></i> Conocer mas
+                    </a>
+                </div>
+                <div class="reveal-right" style="text-align:center;">
+                    <div style="background:#1e1e2e;border-radius:16px;border:1px solid rgba(255,255,255,0.08);box-shadow:0 20px 60px rgba(0,0,0,0.4);overflow:hidden;max-width:380px;margin:0 auto;">
+                        <div style="display:flex;align-items:center;gap:6px;padding:10px 14px;background:rgba(255,255,255,0.03);border-bottom:1px solid rgba(255,255,255,0.06);">
+                            <div style="width:8px;height:8px;border-radius:50%;background:#ff5f57;"></div>
+                            <div style="width:8px;height:8px;border-radius:50%;background:#ffbd2e;"></div>
+                            <div style="width:8px;height:8px;border-radius:50%;background:#28ca41;"></div>
+                        </div>
+                        <div style="padding:20px;display:flex;flex-direction:column;gap:10px;">
+                            <div style="display:flex;gap:10px;">
+                                <div style="flex:1;background:rgba(59,168,224,0.1);border-radius:10px;padding:14px;text-align:center;">
+                                    <div style="font-size:1.4rem;font-weight:700;color:var(--toori-blue);font-family:var(--font-title);">24</div>
+                                    <div style="font-size:0.65rem;color:rgba(255,255,255,0.4);">TICKETS</div>
+                                </div>
+                                <div style="flex:1;background:rgba(174,205,90,0.1);border-radius:10px;padding:14px;text-align:center;">
+                                    <div style="font-size:1.4rem;font-weight:700;color:var(--toori-green);font-family:var(--font-title);">87</div>
+                                    <div style="font-size:0.65rem;color:rgba(255,255,255,0.4);">RESUELTOS</div>
+                                </div>
+                            </div>
+                            <div style="background:rgba(255,255,255,0.03);border-radius:8px;padding:10px 12px;display:flex;align-items:center;justify-content:space-between;">
+                                <div style="display:flex;align-items:center;gap:8px;">
+                                    <span style="font-size:0.68rem;color:var(--toori-blue);font-family:monospace;font-weight:600;">TK-0024</span>
+                                    <span style="font-size:0.72rem;color:rgba(255,255,255,0.5);">Fuga de agua 3ro B</span>
+                                </div>
+                                <span style="font-size:0.6rem;padding:2px 8px;border-radius:10px;background:rgba(59,168,224,0.15);color:var(--toori-blue);font-weight:600;">Abierto</span>
+                            </div>
+                            <div style="background:rgba(255,255,255,0.03);border-radius:8px;padding:10px 12px;display:flex;align-items:center;justify-content:space-between;">
+                                <div style="display:flex;align-items:center;gap:8px;">
+                                    <span style="font-size:0.68rem;color:var(--toori-blue);font-family:monospace;font-weight:600;">TK-0023</span>
+                                    <span style="font-size:0.72rem;color:rgba(255,255,255,0.5);">Pintura hall edif.</span>
+                                </div>
+                                <span style="font-size:0.6rem;padding:2px 8px;border-radius:10px;background:rgba(39,174,96,0.15);color:#27ae60;font-weight:600;">Resuelto</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- ===================== FAQ ACCORDION ===================== -->
     <section class="faq-section">
         <div class="container text-center">
