@@ -7,189 +7,463 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ingresar - Toori ServiciosYa</title>
-    <meta name="description"
-        content="Iniciá sesión en tu cuenta de Toori para gestionar tus servicios o tu perfil profesional.">
-    <!-- Favicon -->
+    <meta name="description" content="Inicia sesion en tu cuenta de Toori para gestionar tus servicios o tu perfil profesional.">
     <link rel="icon" type="image/png" href="assets/logo.png">
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
-    <!-- Main CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" crossorigin href="./assets/main-D3W1u2cc.css">
+    <link rel="stylesheet" href="./assets/toori-enhanced.css">
 
-    <!-- Variables de color -->
     <style>
-        :root {
-            --toori-blue: #00c2cb;
-            --toori-purple: #6b5dfc;
+        body { margin: 0; }
+
+        .login-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 100vh;
         }
 
-        body {
-    background-color: #f8fafc;
-    margin: 0;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-}
+        /* Panel izquierdo: visual */
+        .login-visual {
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 48px;
+        }
 
-.login-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* centra verticalmente */
-    align-items: center;     /* centra horizontalmente */
-    min-height: 100vh;
-    padding: 20px;
-}
+        .login-visual-bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            animation: kenBurnsLogin 20s ease-in-out infinite alternate;
+        }
+
+        @keyframes kenBurnsLogin {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1) translate(-1%, -1%); }
+        }
+
+        .login-visual::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(15,12,41,0.4) 0%, rgba(15,12,41,0.85) 100%);
+            z-index: 1;
+        }
+
+        .login-visual-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+        }
+
+        .login-visual-content h2 {
+            font-size: 2.2rem;
+            color: white;
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
+
+        .login-visual-content p {
+            color: rgba(255,255,255,0.7);
+            font-size: 1rem;
+            max-width: 380px;
+            line-height: 1.6;
+            margin-bottom: 28px;
+        }
+
+        .login-visual-features {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .login-visual-feature {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: rgba(255,255,255,0.8);
+            font-size: 0.92rem;
+        }
+
+        .login-visual-feature i {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            color: var(--toori-green);
+            flex-shrink: 0;
+        }
+
+        /* Panel derecho: formulario */
+        .login-form-panel {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 48px 40px;
+            background: #f8fafc;
+        }
+
+        .login-form-inner {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .login-logo {
+            text-align: center;
+            margin-bottom: 36px;
+        }
+
+        .login-logo img {
+            height: 80px;
+            margin-bottom: 12px;
+        }
+
+        .login-logo h1 {
+            font-size: 1.4rem;
+            color: var(--text-main);
+            margin-bottom: 4px;
+        }
+
+        .login-logo p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
         .login-card {
             background: white;
-            border-radius: 24px;
-            padding: 40px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
-            width: 100%;
-            max-width: 450px;
+            border-radius: 20px;
+            padding: 36px 32px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.04);
         }
 
-        .form-control {
-            padding: 12px 20px;
-            border-radius: 12px;
-            border: 1px solid #e2e8f0;
-            background-color: #f8fafc;
+        .login-card .form-label {
+            font-weight: 600;
+            font-size: 0.88rem;
+            color: #444;
+            margin-bottom: 6px;
         }
 
-        .form-control:focus {
-            background-color: white;
+        .login-card .form-control {
+            padding: 13px 16px;
+            border-radius: 14px;
+            border: 2px solid #e8ecf1;
+            background: #fafbfc;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+        }
+
+        .login-card .form-control:focus {
             border-color: var(--toori-blue);
-            box-shadow: 0 0 0 4px rgba(0, 194, 203, 0.1);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(59,168,224,0.08);
         }
 
-        .btn-auth {
-            padding: 14px;
-            border-radius: 12px;
-            font-weight: 600;
+        .login-card .input-group {
+            position: relative;
+        }
+
+        .login-card .input-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #aab;
+            z-index: 4;
+            font-size: 1rem;
+        }
+
+        .login-card .form-control.with-icon {
+            padding-left: 44px;
+        }
+
+        .btn-login {
             width: 100%;
-        }
-
-        .nav-tabs .nav-link {
-            border: none;
-            color: #64748b;
+            padding: 14px;
+            border-radius: 14px;
             font-weight: 600;
-            padding: 15px 20px;
-            background: transparent;
+            font-size: 1rem;
+            background: var(--toori-blue);
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 14px rgba(59,168,224,0.3);
+            position: relative;
+            overflow: hidden;
         }
 
-        .nav-tabs .nav-link.active {
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59,168,224,0.4);
+        }
+
+        .btn-login:active {
+            transform: scale(0.98);
+        }
+
+        .login-divider {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 24px 0;
+            color: #ccc;
+            font-size: 0.82rem;
+        }
+
+        .login-divider::before,
+        .login-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #e8ecf1;
+        }
+
+        .login-alt-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn-alt {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px;
+            border-radius: 14px;
+            border: 2px solid #e8ecf1;
+            background: white;
+            color: var(--text-main);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .btn-alt:hover {
+            border-color: var(--toori-blue);
+            background: rgba(59,168,224,0.03);
             color: var(--toori-blue);
-            border-bottom: 3px solid var(--toori-blue);
-            background: transparent;
+        }
+
+        .btn-alt i {
+            font-size: 1.1rem;
+        }
+
+        .login-footer {
+            text-align: center;
+            margin-top: 24px;
+        }
+
+        .login-footer a {
+            color: var(--toori-blue);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .login-footer a:hover {
+            color: var(--toori-purple);
+        }
+
+        /* Error alert */
+        .login-error {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #991b1b;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            margin-bottom: 16px;
+            display: none;
+        }
+
+        .login-error.show {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .login-error i {
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .login-split {
+                grid-template-columns: 1fr;
+            }
+
+            .login-visual {
+                min-height: 260px;
+                padding: 32px 24px;
+            }
+
+            .login-visual-content h2 {
+                font-size: 1.6rem;
+            }
+
+            .login-visual-features {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .login-form-panel {
+                padding: 32px 20px;
+            }
+
+            .login-card {
+                padding: 28px 20px;
+            }
+
+            .login-visual {
+                min-height: 200px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-<div class="login-container">
-    <div class="text-center mb-4">
-        <a href="./">
-            <img src="assets/logo.png" alt="Toori Logo" style="height: 180px;">
-        </a>
-    </div>
-
-    <div class="login-card">
-            <!-- Tabs -->
-            <ul class="nav nav-tabs justify-content-center mb-4" id="authTabs" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login-pane"
-                        type="button" role="tab">Iniciar sesión</button>
-                </li>
-            </ul>
-
-            <!-- Tab Content -->
-            <div class="tab-content" id="authTabsContent">
-
-                <!-- Login Form -->
-                <div class="tab-pane fade show active" id="login-pane" role="tabpanel" tabindex="0">
-                    <div id="login-error" class="alert alert-danger d-none"></div>
-                    <form id="login-form">
-                        <div class="mb-3">
-                            <label class="form-label text-muted fw-bold">Correo Electrónico</label>
-                            <input type="email" class="form-control" id="login-email" placeholder="tu@correo.com"
-                                required>
-                        </div>
-                        <div class="mb-4">
-                            <label class="form-label text-muted fw-bold">Contraseña</label>
-                            <input type="password" class="form-control" id="login-password" placeholder="••••••••"
-                                required>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-auth" id="login-btn">
-                            Ingresar a mi cuenta
-                        </button>
-                    </form>
+<div class="login-split">
+    <!-- Panel visual izquierdo -->
+    <div class="login-visual">
+        <div class="login-visual-bg" style="background-image: url('https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop');"></div>
+        <div class="login-visual-content">
+            <h2>La plataforma que conecta hogares con profesionales</h2>
+            <p>Ingresa a tu cuenta y gestiona tus servicios de manera simple y segura.</p>
+            <div class="login-visual-features">
+                <div class="login-visual-feature">
+                    <i class="bi bi-shield-check"></i>
+                    <span>Prestadores verificados con documentacion</span>
                 </div>
-
-            </div>
-
-            <div class="text-center mt-4">
-                <p class="text-muted small mb-2">¿Todavía no tienes cuenta?</p>
-                <div class="d-flex flex-column gap-2">
-                    <a href="https://wa.me/5493512139046?text=Hola!%20Quiero%20contratar%20un%20servicio"
-                        target="_blank" class="btn btn-outline-primary btn-sm rounded-pill fw-bold">
-                        <i class="bi bi-person-heart me-1"></i> Quiero Contratar (Cliente)
-                    </a>
-                    <a href="/registro.php" class="btn btn-outline-secondary btn-sm rounded-pill fw-bold">
-                        <i class="bi bi-tools me-1"></i> Quiero Ofrecer Servicios (Trabajador)
-                    </a>
+                <div class="login-visual-feature">
+                    <i class="bi bi-lightning"></i>
+                    <span>Recibe ofertas en minutos</span>
                 </div>
-                <hr class="my-4 opacity-25">
-                <a href="/" class="text-decoration-none" style="color: var(--toori-purple); font-weight: 600;"><i
-                        class="bi bi-arrow-left"></i> Volver al inicio</a>
+                <div class="login-visual-feature">
+                    <i class="bi bi-graph-up-arrow"></i>
+                    <span>Mas de 500 servicios realizados</span>
+                </div>
             </div>
         </div>
-
-        
     </div>
-<!-- Footer -->
-        <?php include 'footer.php'; ?>
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Login Script Supabase -->
-    <script>
-        document.addEventListener('DOMContentLoaded', async () => {
+    <!-- Panel formulario derecho -->
+    <div class="login-form-panel">
+        <div class="login-form-inner">
+            <div class="login-logo">
+                <a href="./"><img src="assets/logo.png" alt="Toori Logo"></a>
+                <h1>Bienvenido de vuelta</h1>
+                <p>Ingresa a tu cuenta de Toori ServiciosYa</p>
+            </div>
 
-            const loginForm = document.getElementById('login-form');
-            const loginError = document.getElementById('login-error');
+            <div class="login-card">
+                <div class="login-error" id="login-error">
+                    <i class="bi bi-exclamation-circle"></i>
+                    <span id="login-error-text"></span>
+                </div>
 
-            // 1️⃣ Revisar si ya hay sesión activa
-            const { data: { session }, error } = await supabaseClient.auth.getSession();
-            if (error) console.error(error);
-            if (session) {
-                window.location.href = 'perfil.php';
-                return;
-            }
+                <form id="login-form">
+                    <div class="mb-3">
+                        <label class="form-label">Correo electronico</label>
+                        <div class="input-group">
+                            <i class="bi bi-envelope input-icon"></i>
+                            <input type="email" class="form-control with-icon" id="login-email" placeholder="tu@correo.com" required>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label">Contrasena</label>
+                        <div class="input-group">
+                            <i class="bi bi-lock input-icon"></i>
+                            <input type="password" class="form-control with-icon" id="login-password" placeholder="Tu contrasena" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-login" id="login-btn">
+                        Ingresar a mi cuenta
+                    </button>
+                </form>
 
-            // 2️⃣ Manejo del formulario de login
-            loginForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                loginError.classList.add('d-none'); // ocultar errores previos
+                <div class="login-divider">o tambien podes</div>
 
-                const email = document.getElementById('login-email').value;
-                const password = document.getElementById('login-password').value;
+                <div class="login-alt-buttons">
+                    <a href="https://wa.me/5493512139046?text=Hola!%20Quiero%20contratar%20un%20servicio" target="_blank" class="btn-alt">
+                        <i class="bi bi-whatsapp" style="color:#25d366;"></i> Contratar un servicio (Cliente)
+                    </a>
+                    <a href="registro.php" class="btn-alt">
+                        <i class="bi bi-tools" style="color:var(--toori-purple);"></i> Registrarme como profesional
+                    </a>
+                </div>
+            </div>
 
-                const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+            <div class="login-footer">
+                <a href="./"><i class="bi bi-arrow-left"></i> Volver al inicio</a>
+            </div>
+        </div>
+    </div>
+</div>
 
-                if (error) {
-                    loginError.textContent = error.message;
-                    loginError.classList.remove('d-none');
-                } else {
-                    window.location.href = 'perfil.php';
-                }
-            });
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-        });
-    </script>
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+    const loginForm = document.getElementById('login-form');
+    const loginError = document.getElementById('login-error');
+    const loginErrorText = document.getElementById('login-error-text');
+    const loginBtn = document.getElementById('login-btn');
+
+    // Revisar si ya hay sesion activa
+    const { data: { session }, error } = await supabaseClient.auth.getSession();
+    if (error) console.error(error);
+    if (session) {
+        window.location.href = 'perfil.php';
+        return;
+    }
+
+    function traducirError(msg) {
+        if (!msg) return 'Error desconocido';
+        if (msg.includes('Invalid login')) return 'Email o contrasena incorrectos';
+        if (msg.includes('Email not confirmed')) return 'Confirma tu email antes de ingresar';
+        return msg;
+    }
+
+    loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        loginError.classList.remove('show');
+        loginBtn.disabled = true;
+        loginBtn.innerHTML = '<i class="bi bi-arrow-repeat spin" style="display:inline-block;animation:spin 1s linear infinite;"></i> Ingresando...';
+
+        const email = document.getElementById('login-email').value;
+        const password = document.getElementById('login-password').value;
+
+        const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+
+        if (error) {
+            loginErrorText.textContent = traducirError(error.message);
+            loginError.classList.add('show');
+            loginBtn.disabled = false;
+            loginBtn.textContent = 'Ingresar a mi cuenta';
+        } else {
+            window.location.href = 'perfil.php';
+        }
+    });
+});
+</script>
+
+<style>@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}</style>
 
 </body>
-
 </html>

@@ -58,3 +58,6 @@
     </div>
   </div>
 </footer>
+
+<!-- Toori Global JS: Toasts, Scroll Bar, WhatsApp Tooltip -->
+<script src="assets/toori-global.js"></script>

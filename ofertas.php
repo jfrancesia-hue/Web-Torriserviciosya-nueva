@@ -10,43 +10,95 @@
     <link rel="icon" type="image/png" href="assets/logo.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" crossorigin href="./assets/main-D3W1u2cc.css">
-    <!-- Bootstrap 5 CSS para modals -->
+    <link rel="stylesheet" href="./assets/toori-enhanced.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .justify-center { justify-content: center; }
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         .spin { animation: spin 1s linear infinite; display: inline-block; }
 
+        /* Hero mini para ofertas */
+        .ofertas-hero {
+            background: linear-gradient(135deg, var(--toori-dark) 0%, #2d3054 100%);
+            padding: 100px 0 50px;
+            position: relative;
+            overflow: hidden;
+        }
+        .ofertas-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 50% 60% at 20% 40%, rgba(59,168,224,0.12) 0%, transparent 60%),
+                        radial-gradient(ellipse 40% 50% at 80% 60%, rgba(174,205,90,0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .ofertas-hero h1 { color: white; position: relative; font-size: 2.2rem; margin-bottom: 8px; }
+        .ofertas-hero p { color: rgba(255,255,255,0.6); position: relative; font-size: 1rem; }
+
+        /* Skeleton loading */
+        .oferta-skeleton {
+            background: white;
+            border-radius: 18px;
+            padding: 24px;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.06);
+        }
+        .oferta-skeleton .sk-line {
+            height: 14px;
+            border-radius: 7px;
+            background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+            background-size: 200px 100%;
+            animation: shimmer 1.5s infinite;
+            margin-bottom: 12px;
+        }
+        .oferta-skeleton .sk-badge {
+            width: 100px; height: 28px;
+            border-radius: 14px;
+            background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+            background-size: 200px 100%;
+            animation: shimmer 1.5s infinite;
+            margin-bottom: 16px;
+        }
+        .oferta-skeleton .sk-block {
+            height: 60px;
+            border-radius: 10px;
+            background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+            background-size: 200px 100%;
+            animation: shimmer 1.5s infinite;
+        }
+
         .oferta-card {
             background: #fff;
             border-radius: 18px;
-            box-shadow: 0 4px 18px 0 rgba(44, 62, 80, 0.10), 0 1.5px 4px 0 rgba(44, 62, 80, 0.08);
-            border: 2px solid var(--toori-blue, #007bff);
-            transition: transform 0.18s, box-shadow 0.18s;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
             overflow: hidden;
-            padding: 1rem;
+            padding: 1.2rem;
         }
         .oferta-card:hover {
-            transform: translateY(-6px) scale(1.025);
-            box-shadow: 0 8px 32px 0 rgba(44, 62, 80, 0.18), 0 3px 8px 0 rgba(44, 62, 80, 0.12);
-            border-color: #0056b3;
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px rgba(59,168,224,0.12);
+            border-color: rgba(59,168,224,0.2);
         }
         .oferta-card .categoria-badge {
-            position: relative;
-            background: linear-gradient(90deg, #007bff 60%, #00c6ff 100%);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: linear-gradient(90deg, var(--toori-blue), #178abf);
             color: #fff;
-            font-size: 0.95rem;
+            font-size: 0.82rem;
             font-weight: 600;
-            padding: 6px 16px;
-            border-radius: 16px;
-            box-shadow: 0 2px 8px 0 rgba(0, 123, 255, 0.10);
+            padding: 5px 14px;
+            border-radius: 20px;
+            margin-bottom: 12px;
         }
         .oferta-card h5 {
             margin-bottom: 0.5rem;
-            color: #007bff;
+            color: var(--text-main);
             font-weight: 700;
-            font-size: 1.25rem;
+            font-size: 1.15rem;
+            font-family: var(--font-body);
         }
         .oferta-card p {
             margin-bottom: 0.5rem;
@@ -127,27 +179,44 @@
 
 <?php include 'header.php'; ?>
 
-    <main class="container" style="padding: 60px 0 100px;">
-        <div class="mb-4">
-            <h2>Ofertas Enviadas</h2>
-            <div id="enviadas-container" class="grid mb-5"
-                style="grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 32px;">
+    <!-- Hero mini -->
+    <div class="ofertas-hero">
+        <div class="container text-center">
+            <h1><i class="bi bi-briefcase me-2"></i> Ofertas de Trabajo</h1>
+            <p>Encontra oportunidades y envia tu presupuesto hoy mismo</p>
+        </div>
+    </div>
+
+    <main class="container" style="padding: 40px 0 100px;">
+        <!-- Ofertas enviadas -->
+        <div class="mb-5">
+            <h2 style="font-family:var(--font-body);font-size:1.4rem;font-weight:700;color:var(--text-main);margin-bottom:20px;">
+                <i class="bi bi-send me-2" style="color:var(--toori-blue);"></i> Tus presupuestos enviados
+            </h2>
+            <div id="enviadas-container" class="grid"
+                style="grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px;">
                 <div id="loading-enviadas" class="text-center py-3">
-                    <div style="font-size: 1.5rem; color: var(--toori-blue);"><i class="bi bi-arrow-repeat spin"></i></div>
-                    <p class="mt-2 text-muted">Cargando tus presupuestos enviados...</p>
+                    <div class="oferta-skeleton"><div class="sk-badge"></div><div class="sk-line" style="width:70%"></div><div class="sk-line" style="width:50%"></div><div class="sk-block"></div></div>
                 </div>
             </div>
         </div>
+
+        <!-- Ofertas disponibles -->
         <div class="mb-4">
-            <h1>Ofertas Disponibles</h1>
-            <p class="text-muted">Encontrá oportunidades y enviá tu presupuesto hoy mismo.</p>
+            <h2 style="font-family:var(--font-body);font-size:1.4rem;font-weight:700;color:var(--text-main);margin-bottom:4px;">
+                <i class="bi bi-lightning me-2" style="color:var(--toori-green);"></i> Ofertas disponibles para vos
+            </h2>
+            <p class="text-muted" style="font-size:0.92rem;margin-bottom:20px;">Ofertas que coinciden con tu categoria profesional</p>
         </div>
-        <div id="loading-ofertas" class="text-center py-5">
-            <div style="font-size: 2rem; color: var(--toori-blue);"><i class="bi bi-arrow-repeat spin"></i></div>
-            <p class="mt-2 text-muted">Buscando las mejores ofertas para vos...</p>
+        <div id="loading-ofertas">
+            <div class="grid" style="grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px;">
+                <div class="oferta-skeleton"><div class="sk-badge"></div><div class="sk-line" style="width:80%"></div><div class="sk-line" style="width:60%"></div><div class="sk-line" style="width:40%"></div><div class="sk-block"></div></div>
+                <div class="oferta-skeleton"><div class="sk-badge"></div><div class="sk-line" style="width:75%"></div><div class="sk-line" style="width:55%"></div><div class="sk-line" style="width:45%"></div><div class="sk-block"></div></div>
+                <div class="oferta-skeleton"><div class="sk-badge"></div><div class="sk-line" style="width:70%"></div><div class="sk-line" style="width:50%"></div><div class="sk-line" style="width:35%"></div><div class="sk-block"></div></div>
+            </div>
         </div>
         <div id="ofertas-container" class="grid"
-            style="grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 32px;">
+            style="grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px;">
         </div>
     </main>
 
