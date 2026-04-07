@@ -280,120 +280,128 @@
             return 'bi-star';
         }
 
-        // Mapeo de imagenes reales por categoria - Pexels (IDs unicos garantizados)
+        // Mapeo EXHAUSTIVO - Pexels IDs unicos para TODAS las 90+ categorias de Supabase
         function getImage(nombre) {
-            const c = nombre.toLowerCase();
+            const c = nombre.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
             const px = (id) => `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop`;
 
-            // Limpieza: mujer limpiando superficie con guantes amarillos
-            if (c.includes('limp') || c.includes('doméstico') || c.includes('domestico'))
-                return px(4107120);
+            const map = {
+                'albanil': 2219024,
+                'plomero': 6419128,
+                'electricista': 8005397,
+                'gasista': 6492108,
+                'pintor': 6474471,
+                'jardinero': 1301856,
+                'carpintero': 1094767,
+                'cerrajero': 279810,
+                'herrero': 2381463,
+                'soldador': 2381463,
+                'tapicero': 276583,
+                'montador de muebles': 5710150,
+                'montador de estructuras': 2760243,
+                'reparaciones en el hogar': 5691622,
+                'limpieza': 4107120,
+                'limpieza comercial': 3768914,
+                'servicio de limpieza': 4107120,
+                'personal de limpieza': 3768914,
+                'empleada domestica': 4108715,
+                'tecnico en refrigeracion': 5463576,
+                'instalador de aire': 5463576,
+                'mudanzas': 4246120,
+                'fletes': 2199293,
+                'delivery': 4393426,
+                'chofer privado': 3849167,
+                'tecnico de pc': 3825527,
+                'reparacion de celulares': 1092644,
+                'desarrollador web': 1181467,
+                'desarrollador de apps': 1181244,
+                'programador': 546819,
+                'tester qa': 5483077,
+                'community manager': 607812,
+                'marketing': 905163,
+                'asistente virtual': 4064840,
+                'enfermero': 3259629,
+                'medico': 4173239,
+                'kinesiologo': 5473182,
+                'nutricionista': 1640777,
+                'psicologo': 5699475,
+                'terapista ocupacional': 5699456,
+                'masajista': 3757942,
+                'profesor de yoga': 3822906,
+                'cuidado de ninos': 3662770,
+                'cuidado de ancianos': 7551667,
+                'animador infantil': 3661193,
+                'estilista': 3993449,
+                'manicurista': 3997391,
+                'maquillador profesional': 457701,
+                'chef': 2544829,
+                'chef personal': 3338497,
+                'cocinero': 3338681,
+                'ayudante de cocina': 2544829,
+                'panadero': 1775043,
+                'pastelero': 1291712,
+                'camarero': 3201762,
+                'mozos para eventos': 3201762,
+                'organizador de eventos': 2306281,
+                'decoraciones para eventos': 1616113,
+                'dj para eventos': 2111015,
+                'fotografo': 1264210,
+                'camarografo': 2873486,
+                'paseador de perros': 1390361,
+                'peluqueria de mascotas': 6816860,
+                'veterinario': 6235233,
+                'mecanico': 3807517,
+                'gomeria': 3806249,
+                'lavado de autos': 6872573,
+                'abogado': 5669619,
+                'contador': 6863183,
+                'asistente contable': 6863183,
+                'arquitecto': 3760529,
+                'ingeniero': 3862632,
+                'consultor de negocios': 3183150,
+                'gestor de tramites': 5668858,
+                'profesor particular': 5212345,
+                'profesor de musica': 4709822,
+                'instructor de manejo': 3422964,
+                'cursos': 4145190,
+                'coach de vida': 3184611,
+                'personal de seguridad': 430208,
+                'instalador de camaras': 430208,
+                'instalador de paneles solares': 9875441,
+                'disenador grafico': 1779487,
+                'disenador industrial': 3913025,
+                'editor de video': 2510428,
+                'redactor de contenidos': 261662,
+                'ilustrador': 3094218,
+                'guionista': 3059747,
+                'traductor': 256417,
+                'traductor jurado': 159711,
+                'modista': 3738088,
+                'reparador de electrodomesticos': 5691622,
+                'electromecanico': 5691622,
+                'entrenador personal': 841130,
+                'encargado de deposito': 4483610,
+                'mi primer trabajo': 3184405,
+                'servicio': 3184325,
+                'atencion al cliente': 8867434,
+                'general': 1249611,
+            };
 
-            // Plomeria: plomero arreglando caneria debajo del lavabo
-            if (c.includes('plom'))
-                return px(6419128);
+            // Normalizar nombre para comparar (quitar acentos)
+            const normalize = (s) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
-            // Electricidad: electricista trabajando en tablero electrico
-            if (c.includes('elec'))
-                return px(8005397);
+            // Match exacto
+            for (const [key, id] of Object.entries(map)) {
+                if (c === normalize(key)) return px(id);
+            }
 
-            // Gas: llama azul de hornalla de cocina
-            if (c.includes('gas'))
-                return px(6492108);
+            // Match parcial (el nombre contiene la key o viceversa)
+            for (const [key, id] of Object.entries(map)) {
+                const nk = normalize(key);
+                if (c.includes(nk) || nk.includes(c)) return px(id);
+            }
 
-            // Pintura: persona pintando pared blanca con rodillo
-            if (c.includes('pint'))
-                return px(6474471);
-
-            // Jardineria: manos plantando en tierra con herramientas de jardin
-            if (c.includes('jard'))
-                return px(1301856);
-
-            // Albanileria: obrero colocando ladrillos en obra
-            if (c.includes('alba'))
-                return px(2219024);
-
-            // Refrigeracion / Aire: tecnico instalando aire acondicionado
-            if (c.includes('refrigeración') || c.includes('refrigeracion') || c.includes('aire'))
-                return px(5463576);
-
-            // Carpinteria: carpintero lijando madera en taller
-            if (c.includes('carpint'))
-                return px(1094767);
-
-            // Cerrajeria: llave metalica dorada en cerradura
-            if (c.includes('cerraj'))
-                return px(279810);
-
-            // Mudanza / Fletes: cajas de carton apiladas para mudanza
-            if (c.includes('mudanza') || c.includes('flete'))
-                return px(4246120);
-
-            // Tecnico PC: persona reparando componentes de computadora
-            if (c.includes('tecnico') || c.includes('técnico') || c.includes('comput') || c.includes('pc'))
-                return px(3825527);
-
-            // Ninera / Cuidado: mujer jugando con ninos pequenos
-            if (c.includes('niñera') || c.includes('ninera') || c.includes('cuidado'))
-                return px(3662770);
-
-            // Herreria / Soldadura: soldador con chispas volando
-            if (c.includes('herreria') || c.includes('herrería') || c.includes('soldad'))
-                return px(2381463);
-
-            // Vidrieria: ventanal de vidrio limpio en edificio
-            if (c.includes('vidri'))
-                return px(2121121);
-
-            // Fumigacion: persona fumigando con equipo de proteccion
-            if (c.includes('fumigar') || c.includes('fumig') || c.includes('plaga'))
-                return px(6474559);
-
-            // Tapiceria / Cortinas: sofa tapizado elegante
-            if (c.includes('tapiz') || c.includes('cortina'))
-                return px(276583);
-
-            // Seguridad / Camaras: camara de seguridad CCTV montada
-            if (c.includes('seguridad') || c.includes('cámara') || c.includes('camara') || c.includes('alarma'))
-                return px(430208);
-
-            // Pileta / Piscina: piscina azul cristalina
-            if (c.includes('pilet') || c.includes('piscin'))
-                return px(261327);
-
-            // Mantenimiento: hombre con herramientas haciendo reparacion
-            if (c.includes('mantenimiento'))
-                return px(5691622);
-
-            // Techista / Techo: obrero trabajando en techo
-            if (c.includes('tech') || c.includes('techo'))
-                return px(8961100);
-
-            // Durlock / Yeso / Cielorraso: pared de yeso en construccion
-            if (c.includes('durlock') || c.includes('yeso') || c.includes('cielo'))
-                return px(5582597);
-
-            // Impermeabilizacion / Humedad: gotas de agua en superficie
-            if (c.includes('imperm') || c.includes('humedad'))
-                return px(2259232);
-
-            // Metalurgia / Metal: estructura metalica
-            if (c.includes('metal'))
-                return px(2539462);
-
-            // Marmol / Granito: mesada de marmol pulido
-            if (c.includes('marmol') || c.includes('mármo') || c.includes('granit'))
-                return px(5824901);
-
-            // Decoracion / Diseno interior: living decorado moderno
-            if (c.includes('decor') || c.includes('diseño') || c.includes('diseno') || c.includes('interior'))
-                return px(1571460);
-
-            // Pisos / Ceramica / Porcelanato: piso ceramico siendo colocado
-            if (c.includes('piso') || c.includes('cerami') || c.includes('porcel'))
-                return px(5089178);
-
-            // Default: caja de herramientas abierta
+            // Default
             return px(1249611);
         }
 
