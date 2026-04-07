@@ -260,7 +260,7 @@
 
                 <div class="category-card reveal">
                     <div class="category-card-img-wrapper">
-                        <img class="category-card-img" src="https://images.unsplash.com/photo-1628177142898-93e36e4e3a50?w=400&h=300&fit=crop&q=80" alt="Limpieza" loading="lazy">
+                        <img class="category-card-img" src="https://images.pexels.com/photos/4107120/pexels-photo-4107120.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Limpieza" loading="lazy">
                     </div>
                     <div class="category-card-body">
                         <i class="bi bi-stars icon-hover-bounce"></i>
@@ -271,7 +271,7 @@
 
                 <div class="category-card reveal">
                     <div class="category-card-img-wrapper">
-                        <img class="category-card-img" src="https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=400&h=300&fit=crop&q=80" alt="Plomeria" loading="lazy">
+                        <img class="category-card-img" src="https://images.pexels.com/photos/6419128/pexels-photo-6419128.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Plomeria" loading="lazy">
                     </div>
                     <div class="category-card-body">
                         <i class="bi bi-wrench icon-hover-bounce"></i>
@@ -282,7 +282,7 @@
 
                 <div class="category-card reveal">
                     <div class="category-card-img-wrapper">
-                        <img class="category-card-img" src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=400&h=300&fit=crop&q=80" alt="Electricidad" loading="lazy">
+                        <img class="category-card-img" src="https://images.pexels.com/photos/8005397/pexels-photo-8005397.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Electricidad" loading="lazy">
                     </div>
                     <div class="category-card-body">
                         <i class="bi bi-lightbulb icon-hover-bounce"></i>
@@ -293,7 +293,7 @@
 
                 <div class="category-card reveal">
                     <div class="category-card-img-wrapper">
-                        <img class="category-card-img" src="https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=400&h=300&fit=crop&q=80" alt="Gas" loading="lazy">
+                        <img class="category-card-img" src="https://images.pexels.com/photos/6492108/pexels-photo-6492108.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Gas" loading="lazy">
                     </div>
                     <div class="category-card-body">
                         <i class="bi bi-fire icon-hover-bounce"></i>
@@ -304,7 +304,7 @@
 
                 <div class="category-card reveal">
                     <div class="category-card-img-wrapper">
-                        <img class="category-card-img" src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=400&h=300&fit=crop&q=80" alt="Pintura" loading="lazy">
+                        <img class="category-card-img" src="https://images.pexels.com/photos/6474471/pexels-photo-6474471.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Pintura" loading="lazy">
                     </div>
                     <div class="category-card-body">
                         <i class="bi bi-brush icon-hover-bounce"></i>
@@ -315,7 +315,7 @@
 
                 <div class="category-card reveal">
                     <div class="category-card-img-wrapper">
-                        <img class="category-card-img" src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=300&fit=crop&q=80" alt="Jardineria" loading="lazy">
+                        <img class="category-card-img" src="https://images.pexels.com/photos/1301856/pexels-photo-1301856.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Jardineria" loading="lazy">
                     </div>
                     <div class="category-card-body">
                         <i class="bi bi-tree icon-hover-bounce"></i>
@@ -326,7 +326,7 @@
 
                 <div class="category-card reveal">
                     <div class="category-card-img-wrapper">
-                        <img class="category-card-img" src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=400&h=300&fit=crop&q=80" alt="Albanileria" loading="lazy">
+                        <img class="category-card-img" src="https://images.pexels.com/photos/2219024/pexels-photo-2219024.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Albanileria" loading="lazy">
                     </div>
                     <div class="category-card-body">
                         <i class="bi bi-bricks icon-hover-bounce"></i>

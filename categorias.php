@@ -280,120 +280,121 @@
             return 'bi-star';
         }
 
-        // Mapeo de imagenes reales por categoria - cada una con imagen unica y relevante
+        // Mapeo de imagenes reales por categoria - Pexels (IDs unicos garantizados)
         function getImage(nombre) {
             const c = nombre.toLowerCase();
+            const px = (id) => `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop`;
 
-            // Limpieza: persona limpiando con productos
+            // Limpieza: mujer limpiando superficie con guantes amarillos
             if (c.includes('limp') || c.includes('doméstico') || c.includes('domestico'))
-                return 'https://images.unsplash.com/photo-1628177142898-93e36e4e3a50?w=400&h=300&fit=crop&q=80';
+                return px(4107120);
 
-            // Plomeria: caneria, llave, herramientas de plomero
+            // Plomeria: plomero arreglando caneria debajo del lavabo
             if (c.includes('plom'))
-                return 'https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=400&h=300&fit=crop&q=80';
+                return px(6419128);
 
-            // Electricidad: cables, tablero electrico
+            // Electricidad: electricista trabajando en tablero electrico
             if (c.includes('elec'))
-                return 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=400&h=300&fit=crop&q=80';
+                return px(8005397);
 
-            // Gas: hornalla, llama azul, instalacion de gas
+            // Gas: llama azul de hornalla de cocina
             if (c.includes('gas'))
-                return 'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=400&h=300&fit=crop&q=80';
+                return px(6492108);
 
-            // Pintura: persona pintando pared con rodillo
+            // Pintura: persona pintando pared blanca con rodillo
             if (c.includes('pint'))
-                return 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=400&h=300&fit=crop&q=80';
+                return px(6474471);
 
-            // Jardineria: plantas, jardin verde, poda
+            // Jardineria: manos plantando en tierra con herramientas de jardin
             if (c.includes('jard'))
-                return 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=300&fit=crop&q=80';
+                return px(1301856);
 
-            // Albanileria: ladrillos, construccion, mezcla
+            // Albanileria: obrero colocando ladrillos en obra
             if (c.includes('alba'))
-                return 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=400&h=300&fit=crop&q=80';
+                return px(2219024);
 
-            // Refrigeracion / Aire acondicionado: equipo de AC, split
+            // Refrigeracion / Aire: tecnico instalando aire acondicionado
             if (c.includes('refrigeración') || c.includes('refrigeracion') || c.includes('aire'))
-                return 'https://images.unsplash.com/photo-1631545806609-3c480b5aa990?w=400&h=300&fit=crop&q=80';
+                return px(5463576);
 
-            // Carpinteria: madera, sierra, taller de carpintero
+            // Carpinteria: carpintero lijando madera en taller
             if (c.includes('carpint'))
-                return 'https://images.unsplash.com/photo-1565372195458-a5f77b702ecc?w=400&h=300&fit=crop&q=80';
+                return px(1094767);
 
-            // Cerrajeria: llaves, cerradura, candado
+            // Cerrajeria: llave metalica dorada en cerradura
             if (c.includes('cerraj'))
-                return 'https://images.unsplash.com/photo-1582139329536-e7284fece509?w=400&h=300&fit=crop&q=80';
+                return px(279810);
 
-            // Mudanza / Fletes: camion, cajas, mudanza
+            // Mudanza / Fletes: cajas de carton apiladas para mudanza
             if (c.includes('mudanza') || c.includes('flete'))
-                return 'https://images.unsplash.com/photo-1600518464441-9154a4dea21b?w=400&h=300&fit=crop&q=80';
+                return px(4246120);
 
-            // Tecnico PC / Computacion: reparacion de computadora
+            // Tecnico PC: persona reparando componentes de computadora
             if (c.includes('tecnico') || c.includes('técnico') || c.includes('comput') || c.includes('pc'))
-                return 'https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?w=400&h=300&fit=crop&q=80';
+                return px(3825527);
 
-            // Ninera / Cuidado: cuidado de ninos
+            // Ninera / Cuidado: mujer jugando con ninos pequenos
             if (c.includes('niñera') || c.includes('ninera') || c.includes('cuidado'))
-                return 'https://images.unsplash.com/photo-1587654780291-39c9404d7dd0?w=400&h=300&fit=crop&q=80';
+                return px(3662770);
 
-            // Herreria / Soldadura: chispas, soldando metal
+            // Herreria / Soldadura: soldador con chispas volando
             if (c.includes('herreria') || c.includes('herrería') || c.includes('soldad'))
-                return 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=400&h=300&fit=crop&q=80';
+                return px(2381463);
 
-            // Vidrieria: ventana de vidrio, cristal
+            // Vidrieria: ventanal de vidrio limpio en edificio
             if (c.includes('vidri'))
-                return 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=400&h=300&fit=crop&q=80';
+                return px(2121121);
 
-            // Fumigacion / Plagas: control de plagas, fumigador
+            // Fumigacion: persona fumigando con equipo de proteccion
             if (c.includes('fumigar') || c.includes('fumig') || c.includes('plaga'))
-                return 'https://images.unsplash.com/photo-1632923057155-1be0cfa1bca0?w=400&h=300&fit=crop&q=80';
+                return px(6474559);
 
-            // Tapiceria / Cortinas: telas, tapizado
+            // Tapiceria / Cortinas: sofa tapizado elegante
             if (c.includes('tapiz') || c.includes('cortina'))
-                return 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&h=300&fit=crop&q=80';
+                return px(276583);
 
-            // Seguridad / Camaras / Alarmas: camara de seguridad
+            // Seguridad / Camaras: camara de seguridad CCTV montada
             if (c.includes('seguridad') || c.includes('cámara') || c.includes('camara') || c.includes('alarma'))
-                return 'https://images.unsplash.com/photo-1558002038-1055907df827?w=400&h=300&fit=crop&q=80';
+                return px(430208);
 
-            // Pileta / Piscina: piscina azul, agua
+            // Pileta / Piscina: piscina azul cristalina
             if (c.includes('pilet') || c.includes('piscin'))
-                return 'https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?w=400&h=300&fit=crop&q=80';
+                return px(261327);
 
-            // Mantenimiento general: herramientas variadas
+            // Mantenimiento: hombre con herramientas haciendo reparacion
             if (c.includes('mantenimiento'))
-                return 'https://images.unsplash.com/photo-1581092921461-eab62e97a780?w=400&h=300&fit=crop&q=80';
+                return px(5691622);
 
-            // Techista / Techo: reparacion de techos
+            // Techista / Techo: obrero trabajando en techo
             if (c.includes('tech') || c.includes('techo'))
-                return 'https://images.unsplash.com/photo-1632759145351-1d592919f522?w=400&h=300&fit=crop&q=80';
+                return px(8961100);
 
-            // Durlock / Yeso / Cielorraso
+            // Durlock / Yeso / Cielorraso: pared de yeso en construccion
             if (c.includes('durlock') || c.includes('yeso') || c.includes('cielo'))
-                return 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=300&fit=crop&q=80';
+                return px(5582597);
 
-            // Impermeabilizacion / Humedad
+            // Impermeabilizacion / Humedad: gotas de agua en superficie
             if (c.includes('imperm') || c.includes('humedad'))
-                return 'https://images.unsplash.com/photo-1523413363574-c4633bafb68a?w=400&h=300&fit=crop&q=80';
+                return px(2259232);
 
-            // Metalurgia / Metal
+            // Metalurgia / Metal: estructura metalica
             if (c.includes('metal'))
-                return 'https://images.unsplash.com/photo-1533667586850-e0c4fdc0b803?w=400&h=300&fit=crop&q=80';
+                return px(2539462);
 
-            // Marmolist / Marmol / Granito
+            // Marmol / Granito: mesada de marmol pulido
             if (c.includes('marmol') || c.includes('mármo') || c.includes('granit'))
-                return 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=400&h=300&fit=crop&q=80';
+                return px(5824901);
 
-            // Decoracion / Diseno interior
+            // Decoracion / Diseno interior: living decorado moderno
             if (c.includes('decor') || c.includes('diseño') || c.includes('diseno') || c.includes('interior'))
-                return 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop&q=80';
+                return px(1571460);
 
-            // Pisos / Ceramica / Porcelanato
+            // Pisos / Ceramica / Porcelanato: piso ceramico siendo colocado
             if (c.includes('piso') || c.includes('cerami') || c.includes('porcel'))
-                return 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=400&h=300&fit=crop&q=80';
+                return px(5089178);
 
-            // Default: imagen generica de herramientas
-            return 'https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=400&h=300&fit=crop&q=80';
+            // Default: caja de herramientas abierta
+            return px(1249611);
         }
 
         let allCategories = [];
