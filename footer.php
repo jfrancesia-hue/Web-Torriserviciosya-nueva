@@ -21,7 +21,16 @@
           <li><a href="PerfileProfesionales.php">Profesionales</a></li>
           <li><a href="ofertas.php">Ofertas disponibles</a></li>
           <li><a href="registro.php">Ofrecer servicios</a></li>
+        </ul>
+      </div>
+
+      <!-- Plataforma -->
+      <div class="footer-col">
+        <h4>Plataforma</h4>
+        <ul>
           <li><a href="toori360.php" style="color:var(--toori-green);">Toori360 <i class="bi bi-arrow-up-right"></i></a></li>
+          <li><a href="crm.php">Toori CRM <span style="font-size:0.6rem;background:rgba(255,255,255,0.12);padding:2px 8px;border-radius:10px;margin-left:4px;">Pronto</span></a></li>
+          <li><a href="facturacion.php">FacturaIA <span style="font-size:0.6rem;background:rgba(255,255,255,0.12);padding:2px 8px;border-radius:10px;margin-left:4px;">Pronto</span></a></li>
         </ul>
       </div>
 

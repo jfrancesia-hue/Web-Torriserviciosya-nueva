@@ -1055,70 +1055,274 @@ function playSpVideo(container) {
         </div>
     </section>
 
-    <!-- ===================== TOORI360 PROMO ===================== -->
-    <section style="background: linear-gradient(135deg, #0f0c29, #1a1a3e, #24243e); padding: 80px 0; overflow: hidden; position: relative;">
-        <div style="position:absolute;inset:0;background:radial-gradient(ellipse 50% 50% at 30% 50%, rgba(59,168,224,0.08) 0%, transparent 60%);pointer-events:none;"></div>
+    <!-- ===================== PLATAFORMA TOORI ===================== -->
+    <section class="platform-section" style="background: linear-gradient(135deg, #0f0c29, #1a1a3e, #24243e); padding: 90px 0; overflow: hidden; position: relative;">
+        <style>
+            .platform-section::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background:
+                    radial-gradient(ellipse 50% 50% at 20% 30%, rgba(59,168,224,0.1) 0%, transparent 60%),
+                    radial-gradient(ellipse 40% 50% at 80% 70%, rgba(52,211,153,0.08) 0%, transparent 60%),
+                    radial-gradient(ellipse 30% 40% at 50% 50%, rgba(129,140,248,0.08) 0%, transparent 60%);
+                pointer-events: none;
+            }
+            .platform-header {
+                text-align: center;
+                margin-bottom: 56px;
+                position: relative;
+                z-index: 2;
+            }
+            .platform-header-eyebrow {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                background: rgba(255,255,255,0.06);
+                border: 1px solid rgba(255,255,255,0.1);
+                color: rgba(255,255,255,0.85);
+                padding: 6px 16px;
+                border-radius: 50px;
+                font-size: 0.78rem;
+                font-weight: 600;
+                margin-bottom: 18px;
+                letter-spacing: 0.06em;
+                text-transform: uppercase;
+            }
+            .platform-header h2 {
+                color: white;
+                font-size: 2.4rem;
+                margin-bottom: 14px;
+                line-height: 1.15;
+                font-weight: 800;
+            }
+            .platform-header h2 span {
+                background: linear-gradient(90deg, #3ba8e0, #34d399, #fcd34d);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+            .platform-header p {
+                color: rgba(255,255,255,0.55);
+                font-size: 1.05rem;
+                max-width: 620px;
+                margin: 0 auto;
+            }
+
+            .platform-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 24px;
+                position: relative;
+                z-index: 2;
+            }
+            .platform-card {
+                background: linear-gradient(145deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
+                border: 1px solid rgba(255,255,255,0.1);
+                border-radius: 20px;
+                padding: 32px 28px;
+                transition: all 0.4s cubic-bezier(.22,1,.36,1);
+                position: relative;
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+                backdrop-filter: blur(14px);
+                -webkit-backdrop-filter: blur(14px);
+            }
+            .platform-card::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                opacity: 0.08;
+                pointer-events: none;
+                transition: opacity 0.3s;
+            }
+            .platform-card:hover {
+                transform: translateY(-6px);
+                border-color: rgba(255,255,255,0.2);
+                box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            }
+            .platform-card:hover::before { opacity: 0.14; }
+
+            .platform-card.toori360::before { background: radial-gradient(circle at 0% 0%, #3ba8e0, transparent 70%); }
+            .platform-card.crm::before { background: radial-gradient(circle at 0% 0%, #818cf8, transparent 70%); }
+            .platform-card.fact::before { background: radial-gradient(circle at 0% 0%, #34d399, transparent 70%); }
+
+            .platform-card-icon {
+                width: 56px;
+                height: 56px;
+                border-radius: 14px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-size: 1.5rem;
+                margin-bottom: 22px;
+                box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+            }
+            .platform-card.toori360 .platform-card-icon { background: linear-gradient(135deg, #3ba8e0, #aecd5a); }
+            .platform-card.crm .platform-card-icon { background: linear-gradient(135deg, #3ba8e0, #818cf8); }
+            .platform-card.fact .platform-card-icon { background: linear-gradient(135deg, #34d399, #fcd34d); }
+
+            .platform-card-title {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                margin-bottom: 10px;
+            }
+            .platform-card h3 {
+                color: white;
+                font-size: 1.4rem;
+                margin: 0;
+                font-weight: 800;
+            }
+            .platform-soon {
+                font-size: 0.6rem;
+                padding: 3px 9px;
+                border-radius: 10px;
+                background: rgba(252,211,77,0.15);
+                color: #fcd34d;
+                font-weight: 800;
+                letter-spacing: 0.05em;
+                text-transform: uppercase;
+            }
+
+            .platform-card-desc {
+                color: rgba(255,255,255,0.6);
+                font-size: 0.95rem;
+                line-height: 1.6;
+                margin-bottom: 20px;
+            }
+
+            .platform-features {
+                list-style: none;
+                padding: 0;
+                margin: 0 0 26px 0;
+                flex: 1;
+            }
+            .platform-features li {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                color: rgba(255,255,255,0.7);
+                font-size: 0.88rem;
+                padding: 6px 0;
+            }
+            .platform-features li i {
+                font-size: 0.95rem;
+                flex-shrink: 0;
+            }
+            .platform-card.toori360 .platform-features li i { color: #aecd5a; }
+            .platform-card.crm .platform-features li i { color: #818cf8; }
+            .platform-card.fact .platform-features li i { color: #34d399; }
+
+            .platform-card-btn {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                padding: 12px 22px;
+                border-radius: 12px;
+                font-weight: 700;
+                text-decoration: none;
+                font-size: 0.92rem;
+                transition: all 0.3s;
+                border: 1px solid rgba(255,255,255,0.15);
+                color: white;
+                background: rgba(255,255,255,0.05);
+            }
+            .platform-card:hover .platform-card-btn {
+                background: rgba(255,255,255,0.12);
+                border-color: rgba(255,255,255,0.25);
+            }
+            .platform-card.toori360:hover .platform-card-btn {
+                background: var(--toori-blue);
+                border-color: var(--toori-blue);
+            }
+            .platform-card.crm:hover .platform-card-btn {
+                background: linear-gradient(135deg, #3ba8e0, #818cf8);
+                border-color: transparent;
+            }
+            .platform-card.fact:hover .platform-card-btn {
+                background: linear-gradient(135deg, #34d399, #fcd34d);
+                border-color: transparent;
+                color: #0c1a12;
+            }
+
+            @media (max-width: 900px) {
+                .platform-grid { grid-template-columns: 1fr; gap: 18px; }
+                .platform-header h2 { font-size: 1.8rem; }
+                .platform-section { padding: 70px 0; }
+            }
+        </style>
+
         <div class="container" style="position:relative;z-index:2;">
-            <div class="grid reveal" style="grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;">
-                <div>
-                    <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(135,78,153,0.15);border:1px solid rgba(135,78,153,0.3);color:var(--toori-purple);padding:5px 14px;border-radius:50px;font-size:0.78rem;font-weight:600;margin-bottom:20px;">
-                        <i class="bi bi-rocket-takeoff"></i> Nuevo producto
+            <div class="platform-header">
+                <div class="platform-header-eyebrow reveal">
+                    <i class="bi bi-stars"></i> La plataforma Toori
+                </div>
+                <h2 class="reveal">Todo lo que necesitas, en <span>un solo lugar</span></h2>
+                <p class="reveal">Tres productos integrados para que gestiones, vendas y factures sin cambiar de herramienta.</p>
+            </div>
+
+            <div class="platform-grid">
+                <!-- Toori360 -->
+                <div class="platform-card toori360 reveal">
+                    <div class="platform-card-icon"><i class="bi bi-buildings"></i></div>
+                    <div class="platform-card-title">
+                        <h3>Toori360</h3>
                     </div>
-                    <h2 style="color:white;font-size:2rem;margin-bottom:14px;line-height:1.2;">
-                        Conoce <span style="background:linear-gradient(90deg,var(--toori-blue),var(--toori-green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Toori360</span>
-                    </h2>
-                    <p style="color:rgba(255,255,255,0.6);font-size:1rem;line-height:1.7;margin-bottom:28px;max-width:420px;">
-                        La plataforma B2B para inmobiliarias y consorcios que necesitan gestionar mantenimiento, incidencias y proveedores con trazabilidad total.
+                    <p class="platform-card-desc">
+                        Gestion de mantenimiento, incidencias y proveedores para inmobiliarias y consorcios con trazabilidad total.
                     </p>
-                    <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:24px;">
-                        <div style="display:flex;align-items:center;gap:8px;color:rgba(255,255,255,0.7);font-size:0.88rem;">
-                            <i class="bi bi-check-circle-fill" style="color:var(--toori-green);"></i> Tickets inteligentes
-                        </div>
-                        <div style="display:flex;align-items:center;gap:8px;color:rgba(255,255,255,0.7);font-size:0.88rem;">
-                            <i class="bi bi-check-circle-fill" style="color:var(--toori-green);"></i> WhatsApp + IA
-                        </div>
-                        <div style="display:flex;align-items:center;gap:8px;color:rgba(255,255,255,0.7);font-size:0.88rem;">
-                            <i class="bi bi-check-circle-fill" style="color:var(--toori-green);"></i> Multi-tenant
-                        </div>
-                    </div>
-                    <a href="toori360.php" class="btn btn-primary btn-ripple" style="padding:14px 32px;border-radius:14px;font-size:1rem;">
-                        <i class="bi bi-arrow-right me-2"></i> Conocer mas
+                    <ul class="platform-features">
+                        <li><i class="bi bi-check-circle-fill"></i> Tickets inteligentes</li>
+                        <li><i class="bi bi-check-circle-fill"></i> WhatsApp + IA integrados</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Multi-tenant</li>
+                    </ul>
+                    <a href="toori360.php" class="platform-card-btn">
+                        Conocer mas <i class="bi bi-arrow-right"></i>
                     </a>
                 </div>
-                <div class="reveal-right" style="text-align:center;">
-                    <div style="background:#1e1e2e;border-radius:16px;border:1px solid rgba(255,255,255,0.08);box-shadow:0 20px 60px rgba(0,0,0,0.4);overflow:hidden;max-width:380px;margin:0 auto;">
-                        <div style="display:flex;align-items:center;gap:6px;padding:10px 14px;background:rgba(255,255,255,0.03);border-bottom:1px solid rgba(255,255,255,0.06);">
-                            <div style="width:8px;height:8px;border-radius:50%;background:#ff5f57;"></div>
-                            <div style="width:8px;height:8px;border-radius:50%;background:#ffbd2e;"></div>
-                            <div style="width:8px;height:8px;border-radius:50%;background:#28ca41;"></div>
-                        </div>
-                        <div style="padding:20px;display:flex;flex-direction:column;gap:10px;">
-                            <div style="display:flex;gap:10px;">
-                                <div style="flex:1;background:rgba(59,168,224,0.1);border-radius:10px;padding:14px;text-align:center;">
-                                    <div style="font-size:1.4rem;font-weight:700;color:var(--toori-blue);font-family:var(--font-title);">24</div>
-                                    <div style="font-size:0.65rem;color:rgba(255,255,255,0.4);">TICKETS</div>
-                                </div>
-                                <div style="flex:1;background:rgba(174,205,90,0.1);border-radius:10px;padding:14px;text-align:center;">
-                                    <div style="font-size:1.4rem;font-weight:700;color:var(--toori-green);font-family:var(--font-title);">87</div>
-                                    <div style="font-size:0.65rem;color:rgba(255,255,255,0.4);">RESUELTOS</div>
-                                </div>
-                            </div>
-                            <div style="background:rgba(255,255,255,0.03);border-radius:8px;padding:10px 12px;display:flex;align-items:center;justify-content:space-between;">
-                                <div style="display:flex;align-items:center;gap:8px;">
-                                    <span style="font-size:0.68rem;color:var(--toori-blue);font-family:monospace;font-weight:600;">TK-0024</span>
-                                    <span style="font-size:0.72rem;color:rgba(255,255,255,0.5);">Fuga de agua 3ro B</span>
-                                </div>
-                                <span style="font-size:0.6rem;padding:2px 8px;border-radius:10px;background:rgba(59,168,224,0.15);color:var(--toori-blue);font-weight:600;">Abierto</span>
-                            </div>
-                            <div style="background:rgba(255,255,255,0.03);border-radius:8px;padding:10px 12px;display:flex;align-items:center;justify-content:space-between;">
-                                <div style="display:flex;align-items:center;gap:8px;">
-                                    <span style="font-size:0.68rem;color:var(--toori-blue);font-family:monospace;font-weight:600;">TK-0023</span>
-                                    <span style="font-size:0.72rem;color:rgba(255,255,255,0.5);">Pintura hall edif.</span>
-                                </div>
-                                <span style="font-size:0.6rem;padding:2px 8px;border-radius:10px;background:rgba(39,174,96,0.15);color:#27ae60;font-weight:600;">Resuelto</span>
-                            </div>
-                        </div>
+
+                <!-- CRM -->
+                <div class="platform-card crm reveal">
+                    <div class="platform-card-icon"><i class="bi bi-people-fill"></i></div>
+                    <div class="platform-card-title">
+                        <h3>Toori CRM</h3>
+                        <span class="platform-soon">Pronto</span>
                     </div>
+                    <p class="platform-card-desc">
+                        Pipeline visual, WhatsApp integrado y automatizaciones para equipos comerciales que quieren vender mas.
+                    </p>
+                    <ul class="platform-features">
+                        <li><i class="bi bi-check-circle-fill"></i> Pipeline Kanban</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Reportes en tiempo real</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Multi-usuario</li>
+                    </ul>
+                    <a href="crm.php" class="platform-card-btn">
+                        Reservar acceso <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- FacturaIA -->
+                <div class="platform-card fact reveal">
+                    <div class="platform-card-icon"><i class="bi bi-receipt"></i></div>
+                    <div class="platform-card-title">
+                        <h3>FacturaIA</h3>
+                        <span class="platform-soon">Pronto</span>
+                    </div>
+                    <p class="platform-card-desc">
+                        Facturacion electronica AFIP con asistente IA. Emite comprobantes A, B, C y notas en segundos.
+                    </p>
+                    <ul class="platform-features">
+                        <li><i class="bi bi-check-circle-fill"></i> Conexion directa AFIP</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Asistente IA integrado</li>
+                        <li><i class="bi bi-check-circle-fill"></i> PDF + envio automatico</li>
+                    </ul>
+                    <a href="facturacion.php" class="platform-card-btn">
+                        Reservar acceso <i class="bi bi-arrow-right"></i>
+                    </a>
                 </div>
             </div>
         </div>
