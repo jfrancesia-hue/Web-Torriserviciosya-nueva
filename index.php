@@ -328,10 +328,9 @@
         font-size: 0.95rem;
       }
 
-      /* --- Carrusel infinito --- */
+      /* --- Carrusel con scroll manual + auto-play --- */
       .sponsor-carousel-wrapper {
         position: relative;
-        overflow: hidden;
         padding: 10px 0 20px;
         z-index: 2;
       }
@@ -361,18 +360,57 @@
       .sponsor-carousel-track {
         display: flex;
         gap: 28px;
-        animation: scroll-sponsors 35s linear infinite;
-        width: max-content;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        scroll-snap-type: x mandatory;
+        padding: 10px 60px;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
       }
 
-      .sponsor-carousel-track:hover {
-        animation-play-state: paused;
+      .sponsor-carousel-track::-webkit-scrollbar {
+        display: none;
       }
 
-      @keyframes scroll-sponsors {
-        0% { transform: translateX(0); }
-        100% { transform: translateX(-50%); }
+      .sp-card, .sp-card-video {
+        scroll-snap-align: start;
       }
+
+      /* Flechas de navegacion manual */
+      .sp-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.08);
+        border: 1px solid rgba(255,255,255,0.15);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        color: #fff;
+        font-size: 1.4rem;
+        cursor: pointer;
+        z-index: 4;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.25s ease;
+      }
+
+      .sp-arrow:hover {
+        background: rgba(167,139,250,0.25);
+        border-color: rgba(167,139,250,0.5);
+        transform: translateY(-50%) scale(1.08);
+        box-shadow: 0 6px 20px rgba(167,139,250,0.3);
+      }
+
+      .sp-arrow:active {
+        transform: translateY(-50%) scale(0.96);
+      }
+
+      .sp-arrow-left { left: 10px; }
+      .sp-arrow-right { right: 10px; }
 
       /* --- Card sponsor --- */
       .sp-card {
@@ -401,6 +439,13 @@
         object-fit: cover;
         display: block;
         transition: transform 0.5s ease;
+      }
+
+      /* Variante para banners horizontales (ej: IEC, Sancor) */
+      .sp-card-img--contain {
+        object-fit: contain;
+        padding: 14px;
+        background: #ffffff;
       }
 
       .sp-card:hover .sp-card-img {
@@ -457,6 +502,28 @@
         background: rgba(255,255,255,0.06);
         padding: 4px 10px;
         border-radius: 20px;
+      }
+
+      /* Pill de beneficio/código descuento destacado */
+      .sp-card-code {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 10px;
+        margin-left: 6px;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        color: #0f0c29;
+        background: linear-gradient(90deg, #a78bfa, #34d399);
+        padding: 5px 12px;
+        border-radius: 20px;
+        box-shadow: 0 2px 10px rgba(167,139,250,0.25);
+      }
+
+      /* Badge "Aliado" (sin código, solo partnership) */
+      .sp-card-badge--ally {
+        background: linear-gradient(90deg, #34d399, #10b981);
       }
 
       /* --- Video card --- */
@@ -583,96 +650,81 @@
       <p class="sponsors-sub reveal">Empresas que confian en Toori y respaldan a nuestros profesionales</p>
     </div>
 
-    <!-- Carrusel infinito -->
+    <!-- Carrusel con flechas + auto-play -->
     <div class="sponsor-carousel-wrapper">
+      <button class="sp-arrow sp-arrow-left" id="sp-arrow-left" aria-label="Sponsor anterior">
+        <i class="bi bi-chevron-left"></i>
+      </button>
+      <button class="sp-arrow sp-arrow-right" id="sp-arrow-right" aria-label="Sponsor siguiente">
+        <i class="bi bi-chevron-right"></i>
+      </button>
       <div class="sponsor-carousel-track" id="sponsor-track">
 
-        <!-- Sponsor 1: Ferreteria -->
+        <!-- Sponsor: Escuelas IADE -->
         <div class="sp-card">
           <div class="sp-card-img-wrap">
-            <span class="sp-card-badge">Sponsor</span>
-            <img class="sp-card-img" src="https://images.pexels.com/photos/1029243/pexels-photo-1029243.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Ferreteria El Tornillo">
+            <span class="sp-card-badge">Aliado</span>
+            <img class="sp-card-img" src="assets/sponsors/iade-card.png" alt="Escuelas IADE - Oficios, Tecnologia y Diseno">
           </div>
           <div class="sp-card-body">
-            <div class="sp-card-name">Ferreteria El Tornillo</div>
-            <p class="sp-card-desc">Materiales y herramientas de calidad al mejor precio para tu hogar</p>
-            <span class="sp-card-cat"><i class="bi bi-tools"></i> Materiales & Herramientas</span>
+            <div class="sp-card-name">Escuelas IADE</div>
+            <p class="sp-card-desc">Medio siglo de liderazgo en educacion a distancia. Aprende un oficio y ofrecelo en Toori.</p>
+            <span class="sp-card-cat"><i class="bi bi-mortarboard"></i> Educacion & Oficios</span>
+            <span class="sp-card-code"><i class="bi bi-tag-fill"></i> TOORI777</span>
           </div>
         </div>
 
-        <!-- Sponsor 2: Automotores -->
+        <!-- Sponsor: El Sotano -->
         <div class="sp-card">
           <div class="sp-card-img-wrap">
-            <span class="sp-card-badge">Sponsor</span>
-            <img class="sp-card-img" src="https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Automotores Catamarca">
+            <span class="sp-card-badge">Aliado</span>
+            <img class="sp-card-img" src="assets/sponsors/elsotano-card.png" alt="El Sotano Ferreteria y Cerrajeria">
           </div>
           <div class="sp-card-body">
-            <div class="sp-card-name">Automotores Catamarca</div>
-            <p class="sp-card-desc">Financiacion inmediata, sin tramites complicados</p>
-            <span class="sp-card-cat"><i class="bi bi-car-front"></i> Automotores</span>
+            <div class="sp-card-name">El Sotano</div>
+            <p class="sp-card-desc">Ferreteria y cerrajeria con beneficios exclusivos para la comunidad Toori.</p>
+            <span class="sp-card-cat"><i class="bi bi-tools"></i> Ferreteria & Cerrajeria</span>
+            <span class="sp-card-code"><i class="bi bi-tag-fill"></i> TOORISERVI</span>
           </div>
         </div>
 
-        <!-- Sponsor 3: Farmacia -->
+        <!-- Sponsor: IEC Instituto de Ensenanza de la Construccion -->
         <div class="sp-card">
           <div class="sp-card-img-wrap">
-            <span class="sp-card-badge">Sponsor</span>
-            <img class="sp-card-img" src="https://images.pexels.com/photos/3683098/pexels-photo-3683098.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Farmacia Central">
+            <span class="sp-card-badge sp-card-badge--ally">Aliado</span>
+            <img class="sp-card-img sp-card-img--contain" src="assets/sponsors/iec-card.png" alt="IEC Instituto de Ensenanza de la Construccion">
           </div>
           <div class="sp-card-body">
-            <div class="sp-card-name">Farmacia Central</div>
-            <p class="sp-card-desc">Medicamentos, cosmeticos y atencion personalizada 24hs</p>
-            <span class="sp-card-cat"><i class="bi bi-heart-pulse"></i> Salud & Bienestar</span>
+            <div class="sp-card-name">IEC Construccion</div>
+            <p class="sp-card-desc">Instituto de Ensenanza de la Construccion. Capacitacion tecnica para nuestros profesionales.</p>
+            <span class="sp-card-cat"><i class="bi bi-building"></i> Capacitacion Tecnica</span>
           </div>
         </div>
 
-        <!-- VIDEO SPONSOR -->
-        <div class="sp-card-video">
-          <div class="sp-video-wrap" id="sp-video-container" onclick="playSpVideo(this)">
-            <img class="sp-card-img" src="https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Video Toori" id="sp-video-thumb" style="height:100%;min-height:280px;">
-            <div class="sp-video-overlay" id="sp-video-overlay">
-              <div class="sp-video-play"><i class="bi bi-play-fill"></i></div>
-              <span class="sp-video-label">Ver video institucional</span>
-            </div>
+        <!-- Sponsor: DARSIE -->
+        <div class="sp-card">
+          <div class="sp-card-img-wrap">
+            <span class="sp-card-badge">Aliado</span>
+            <img class="sp-card-img" src="assets/sponsors/darsie-card.png" alt="Darsie - Aliado Toori">
+          </div>
+          <div class="sp-card-body">
+            <div class="sp-card-name">Darsie</div>
+            <p class="sp-card-desc">Aliado de la comunidad Toori con descuentos exclusivos para profesionales y clientes.</p>
+            <span class="sp-card-cat"><i class="bi bi-shop"></i> Beneficio Exclusivo</span>
+            <span class="sp-card-code"><i class="bi bi-tag-fill"></i> TOORI777</span>
           </div>
         </div>
 
-        <!-- Sponsor 4: Corralon -->
+        <!-- Sponsor: Sancor Seguros -->
         <div class="sp-card">
           <div class="sp-card-img-wrap">
-            <span class="sp-card-badge">Sponsor</span>
-            <img class="sp-card-img" src="https://images.pexels.com/photos/2760243/pexels-photo-2760243.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Corralon del Norte">
+            <span class="sp-card-badge sp-card-badge--ally">Aliado</span>
+            <img class="sp-card-img" src="assets/sponsors/sancor-card.png" alt="Sancor Seguros - Accidentes Personales">
           </div>
           <div class="sp-card-body">
-            <div class="sp-card-name">Corralon del Norte</div>
-            <p class="sp-card-desc">Arena, cemento, ladrillos y todo para tu obra</p>
-            <span class="sp-card-cat"><i class="bi bi-bricks"></i> Construccion</span>
-          </div>
-        </div>
-
-        <!-- Sponsor 5: Electrica -->
-        <div class="sp-card">
-          <div class="sp-card-img-wrap">
-            <span class="sp-card-badge">Sponsor</span>
-            <img class="sp-card-img" src="https://images.pexels.com/photos/257736/pexels-photo-257736.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Electrica San Martin">
-          </div>
-          <div class="sp-card-body">
-            <div class="sp-card-name">Electrica San Martin</div>
-            <p class="sp-card-desc">Cables, llaves termicas, tableros y materiales electricos</p>
-            <span class="sp-card-cat"><i class="bi bi-lightning"></i> Electricidad</span>
-          </div>
-        </div>
-
-        <!-- Sponsor 6: Pintureria -->
-        <div class="sp-card">
-          <div class="sp-card-img-wrap">
-            <span class="sp-card-badge">Sponsor</span>
-            <img class="sp-card-img" src="https://images.pexels.com/photos/1749900/pexels-photo-1749900.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Pintureria Colores">
-          </div>
-          <div class="sp-card-body">
-            <div class="sp-card-name">Pintureria Colores</div>
-            <p class="sp-card-desc">Pinturas, rodillos, esmaltes y accesorios para renovar tu hogar</p>
-            <span class="sp-card-cat"><i class="bi bi-palette"></i> Pintura & Deco</span>
+            <div class="sp-card-name">Sancor Seguros</div>
+            <p class="sp-card-desc">Tu seguro de Accidentes Personales. Respaldo para cada profesional de la red Toori.</p>
+            <span class="sp-card-cat"><i class="bi bi-shield-check"></i> Cobertura & Seguros</span>
           </div>
         </div>
 
@@ -689,39 +741,62 @@
   </div>
 </section>
 
-<!-- Script para duplicar items y crear loop infinito + video -->
+<!-- Carrusel: flechas manuales + auto-play con pausa en hover -->
 <script>
 (function() {
   document.addEventListener('DOMContentLoaded', () => {
-    // Duplicar cards para loop infinito
     const track = document.getElementById('sponsor-track');
-    if (track) {
-      const items = track.innerHTML;
-      track.innerHTML = items + items;
-    }
+    const leftBtn = document.getElementById('sp-arrow-left');
+    const rightBtn = document.getElementById('sp-arrow-right');
+    if (!track || !leftBtn || !rightBtn) return;
+
+    const scrollStep = () => {
+      const firstCard = track.querySelector('.sp-card');
+      if (!firstCard) return 320;
+      return firstCard.offsetWidth + 28; // card width + gap
+    };
+
+    leftBtn.addEventListener('click', () => {
+      track.scrollBy({ left: -scrollStep(), behavior: 'smooth' });
+      pauseAutoplay();
+    });
+
+    rightBtn.addEventListener('click', () => {
+      track.scrollBy({ left: scrollStep(), behavior: 'smooth' });
+      pauseAutoplay();
+    });
+
+    // Auto-play: avanza cada 4s, reinicia al final
+    let autoInterval = null;
+    let pausedUntil = 0;
+
+    const tick = () => {
+      if (Date.now() < pausedUntil) return;
+      const atEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
+      if (atEnd) {
+        track.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        track.scrollBy({ left: scrollStep(), behavior: 'smooth' });
+      }
+    };
+
+    const startAutoplay = () => {
+      if (autoInterval) return;
+      autoInterval = setInterval(tick, 4000);
+    };
+
+    const pauseAutoplay = () => {
+      pausedUntil = Date.now() + 8000; // pausa 8s tras interaccion manual
+    };
+
+    track.addEventListener('mouseenter', () => { pausedUntil = Date.now() + 999999; });
+    track.addEventListener('mouseleave', () => { pausedUntil = 0; });
+
+    // Respeta prefers-reduced-motion
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reduceMotion) startAutoplay();
   });
 })();
-
-function playSpVideo(container) {
-    // Reemplazar thumbnail con iframe de video
-    // CAMBIAR esta URL por el video real del sponsor/empresa
-    const videoUrl = 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1';
-    const thumb = document.getElementById('sp-video-thumb');
-    const overlay = document.getElementById('sp-video-overlay');
-
-    if (thumb) thumb.style.display = 'none';
-    if (overlay) overlay.style.display = 'none';
-
-    const iframe = document.createElement('iframe');
-    iframe.src = videoUrl;
-    iframe.allow = 'autoplay; encrypted-media';
-    iframe.allowFullscreen = true;
-    container.appendChild(iframe);
-
-    // Pausar carrusel cuando se reproduce video
-    const track = document.getElementById('sponsor-track');
-    if (track) track.style.animationPlayState = 'paused';
-}
 </script>
 
     <!-- ===================== COMO FUNCIONA ===================== -->
@@ -1013,41 +1088,10 @@ function playSpVideo(container) {
                     </div>
                 </div>
 
-                <!-- Phone Mockup -->
+                <!-- Phone Mockup con screenshot real del app -->
                 <div class="reveal-right" style="display:flex;justify-content:center;">
                     <div class="app-mockup">
-                        <div class="app-mockup-screen">
-                            <img src="assets/logo.png" alt="Toori" style="border-radius:14px;background:white;padding:4px;">
-                            <div class="app-title">Toori ServiciosYa</div>
-                            <div class="app-mockup-item">
-                                <div class="item-icon"><i class="bi bi-stars"></i></div>
-                                <div>
-                                    <div class="item-text">Limpieza del hogar</div>
-                                    <div class="item-sub">3 profesionales disponibles</div>
-                                </div>
-                            </div>
-                            <div class="app-mockup-item">
-                                <div class="item-icon"><i class="bi bi-wrench"></i></div>
-                                <div>
-                                    <div class="item-text">Plomeria urgente</div>
-                                    <div class="item-sub">5 profesionales disponibles</div>
-                                </div>
-                            </div>
-                            <div class="app-mockup-item">
-                                <div class="item-icon"><i class="bi bi-lightbulb"></i></div>
-                                <div>
-                                    <div class="item-text">Instalacion electrica</div>
-                                    <div class="item-sub">2 profesionales disponibles</div>
-                                </div>
-                            </div>
-                            <div class="app-mockup-item">
-                                <div class="item-icon"><i class="bi bi-brush"></i></div>
-                                <div>
-                                    <div class="item-text">Pintura interior</div>
-                                    <div class="item-sub">4 profesionales disponibles</div>
-                                </div>
-                            </div>
-                        </div>
+                        <img class="app-mockup-img" src="assets/app-screenshot.jpeg" alt="App Toori ServiciosYa - Pantalla principal" loading="lazy">
                     </div>
                 </div>
 
