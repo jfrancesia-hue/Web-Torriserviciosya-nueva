@@ -44,6 +44,85 @@ function descargarMediaTwilio($url) {
     return ['base64' => $b64, 'mime' => $mime, 'data_url' => "data:$mime;base64,$b64"];
 }
 
+function descargarMediaTwilioArchivo($url, string $extension = 'ogg'): ?string {
+    $sid   = env('TWILIO_SID');
+    $token = env('TWILIO_TOKEN');
+    if (!$sid || !$token) return null;
+
+    $tmp = tempnam(sys_get_temp_dir(), 'mica_audio_');
+    $path = $tmp . '.' . preg_replace('/[^a-z0-9]/i', '', $extension ?: 'ogg');
+    @rename($tmp, $path);
+
+    $fh = fopen($path, 'wb');
+    if (!$fh) return null;
+
+    $ch = curl_init($url);
+    curl_setopt_array($ch, [
+        CURLOPT_FILE           => $fh,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_USERPWD        => "$sid:$token",
+        CURLOPT_TIMEOUT        => 45,
+    ]);
+    curl_exec($ch);
+    $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    $err  = curl_error($ch);
+    curl_close($ch);
+    fclose($fh);
+
+    if ($err || $code !== 200 || !file_exists($path) || filesize($path) <= 0) {
+        @unlink($path);
+        _log("Audio download failed HTTP=$code err=$err");
+        return null;
+    }
+    return $path;
+}
+
+function transcribirAudioTwilio($url, string $contentType = ''): ?string {
+    $apiKey = env('OPENAI_KEY') ?: env('OPENAI_API_KEY');
+    if (!$apiKey) {
+        _log('Audio transcription skipped: OPENAI_KEY faltante');
+        return null;
+    }
+
+    $extension = 'ogg';
+    if (stripos($contentType, 'mpeg') !== false || stripos($contentType, 'mp3') !== false) $extension = 'mp3';
+    if (stripos($contentType, 'wav') !== false) $extension = 'wav';
+    if (stripos($contentType, 'mp4') !== false || stripos($contentType, 'm4a') !== false) $extension = 'm4a';
+
+    $path = descargarMediaTwilioArchivo($url, $extension);
+    if (!$path) return null;
+
+    $ch = curl_init('https://api.openai.com/v1/audio/transcriptions');
+    $post = [
+        'model' => 'whisper-1',
+        'language' => 'es',
+        'file' => new CURLFile($path, $contentType ?: 'audio/ogg', basename($path)),
+    ];
+    curl_setopt_array($ch, [
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_POST           => true,
+        CURLOPT_HTTPHEADER     => ['Authorization: Bearer ' . $apiKey],
+        CURLOPT_POSTFIELDS     => $post,
+        CURLOPT_TIMEOUT        => 60,
+    ]);
+    $resp = curl_exec($ch);
+    $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    $err  = curl_error($ch);
+    curl_close($ch);
+    @unlink($path);
+
+    if ($err || $code !== 200 || !$resp) {
+        _log("Audio transcription failed HTTP=$code err=$err resp=" . substr((string)$resp, 0, 250));
+        return null;
+    }
+
+    $decoded = json_decode($resp, true);
+    $text = trim($decoded['text'] ?? '');
+    if ($text === '') return null;
+    _log('Audio transcription OK len=' . strlen($text));
+    return $text;
+}
+
 // ─────────────────────────────────────────────
 //  LLAMADA A OPENAI (SIN CAMBIOS - fallback)
 // ─────────────────────────────────────────────
@@ -253,10 +332,11 @@ function procesarConversacion(string $mensaje, array $oferta, array $mediaUrls =
     $tieneImagen       = false;
     $videosRecibidos   = [];
     $imagenesRecibidas = [];
+    $audiosRecibidos   = [];
+    $audioTranscripciones = [];
     $contenidoUsuario  = [];
 
-    $textoUsuario = $mensaje ?: 'El usuario envió una imagen/video.';
-    $contenidoUsuario[] = ['type' => 'text', 'text' => $textoUsuario];
+    $textoUsuario = $mensaje ?: 'El usuario envió un archivo por WhatsApp.';
 
     foreach ($mediaUrls as $url) {
         $sid   = env('TWILIO_SID');
@@ -272,6 +352,18 @@ function procesarConversacion(string $mensaje, array $oferta, array $mediaUrls =
         curl_exec($ch);
         $ctype = curl_getinfo($ch, CURLINFO_CONTENT_TYPE);
         curl_close($ch);
+
+        if (strpos($ctype, 'audio') !== false || strpos($ctype, 'ogg') !== false) {
+            $audiosRecibidos[] = $url;
+            $transcripcion = transcribirAudioTwilio($url, $ctype ?: 'audio/ogg');
+            if ($transcripcion) {
+                $audioTranscripciones[] = $transcripcion;
+                $textoUsuario .= "\n\n[Audio transcripto del cliente]: " . $transcripcion;
+            } else {
+                $textoUsuario .= "\n\n[El cliente envió un audio, pero no pude transcribirlo automáticamente.]";
+            }
+            continue;
+        }
 
         if (strpos($ctype, 'video') !== false) {
             $videosRecibidos[] = $url;
@@ -290,6 +382,8 @@ function procesarConversacion(string $mensaje, array $oferta, array $mediaUrls =
         }
     }
 
+    $contenidoUsuario[] = ['type' => 'text', 'text' => $textoUsuario];
+
     if (!empty($videosRecibidos) && !$tieneImagen) {
         return [
             'respuesta'          => "📹 ¡Recibí tu video! Los profesionales podrán verlo.\n\n¿Podés enviar también una foto para que pueda darte más detalle?",
@@ -297,6 +391,8 @@ function procesarConversacion(string $mensaje, array $oferta, array $mediaUrls =
             'completo'           => false,
             'videos_recibidos'   => $videosRecibidos,
             'imagenes_recibidas' => [],
+            'audios_recibidos'   => $audiosRecibidos,
+            'audio_transcripciones' => $audioTranscripciones,
         ];
     }
 
@@ -321,6 +417,8 @@ function procesarConversacion(string $mensaje, array $oferta, array $mediaUrls =
             'completo'           => false,
             'videos_recibidos'   => $videosRecibidos,
             'imagenes_recibidas' => $imagenesRecibidas,
+            'audios_recibidos'   => $audiosRecibidos,
+            'audio_transcripciones' => $audioTranscripciones,
         ];
     }
 
@@ -358,6 +456,8 @@ function procesarConversacion(string $mensaje, array $oferta, array $mediaUrls =
         'completo'           => $completo,
         'videos_recibidos'   => $videosRecibidos,
         'imagenes_recibidas' => $imagenesRecibidas,
+        'audios_recibidos'   => $audiosRecibidos,
+        'audio_transcripciones' => $audioTranscripciones,
     ];
 }
 

@@ -79,6 +79,7 @@ $pausaGlobal = env('PAUSA_GLOBAL') == '1';
 if ($pausaGlobal && $ofertaId) {
     guardarEnHistorial($ofertaId, 'user', $mensaje ?: '[Envió imagen/video]');
     $res = procesarConversacion($mensaje, $oferta, $mediaUrls);
+    registrarTranscripcionesAudio($ofertaId, $res);
 
     $videosRecibidos   = $res['videos_recibidos']   ?? [];
     $imagenesRecibidas = $res['imagenes_recibidas'] ?? [];
@@ -137,6 +138,7 @@ if (!$oferta) {
         $ofertaNueva = $ofertaNueva[0] ?? null;
         if ($ofertaNueva) {
             $res = procesarConversacion($mensaje, $ofertaNueva, $mediaUrls);
+            registrarTranscripcionesAudio($nuevoId, $res);
             guardarCamposEnBD($nuevoId, $res['campos'] ?? [], $res['videos_recibidos'] ?? [], $res['imagenes_recibidas'] ?? []);
             if (!empty($mediaUrls) && count($mediaUrls) > 0) {
                 supabaseRequest('PATCH', "nuevaOferta?id=eq.$nuevoId", [
@@ -166,6 +168,7 @@ if ($paso >= 4) {
 guardarEnHistorial($ofertaId, 'user', $mensaje ?: '[Envió imagen/video]');
 
 $res = procesarConversacion($mensaje, $oferta, $mediaUrls);
+registrarTranscripcionesAudio($ofertaId, $res);
 
 _log("Resultado IA | completo=" . ($res['completo'] ? 'SI' : 'NO') . " | respuesta=" . substr($res['respuesta'] ?? '', 0, 80));
 
@@ -319,6 +322,16 @@ function notificarProfesionales(string $ofertaId, array $camposNuevos, array $of
 
         enviarWhatsApp($wa, $msg);
         _log("  -> Notificado: " . ($prof['nombre'] ?? '') . " | $wa");
+    }
+}
+
+function registrarTranscripcionesAudio(string $ofertaId, array $res): void {
+    $transcripciones = $res['audio_transcripciones'] ?? [];
+    if (!is_array($transcripciones) || count($transcripciones) === 0) return;
+    foreach ($transcripciones as $txt) {
+        $txt = trim((string)$txt);
+        if ($txt === '') continue;
+        guardarEnHistorial($ofertaId, 'user', '[Audio transcripto] ' . $txt);
     }
 }
 
