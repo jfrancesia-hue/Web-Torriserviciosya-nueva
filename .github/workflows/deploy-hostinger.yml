@@ -18,7 +18,7 @@ jobs:
       DEPLOY_SERVER: ${{ secrets.HOSTINGER_FTP_SERVER || secrets.FTP_SERVER }}
       DEPLOY_USERNAME: ${{ secrets.HOSTINGER_FTP_USERNAME || secrets.FTP_USERNAME }}
       DEPLOY_PASSWORD: ${{ secrets.HOSTINGER_FTP_PASSWORD || secrets.FTP_PASSWORD }}
-      DEPLOY_TARGET_DIR: /domains/tooriserviciosya.com/public_html/
+      DEPLOY_TARGET_DIR: /public_html/
 
     steps:
       - name: Checkout repository
