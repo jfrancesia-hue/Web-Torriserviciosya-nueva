@@ -25,9 +25,63 @@
     <link rel="stylesheet" href="./assets/toori-design-refresh.css">
 </head>
 
-<body>
+<body class="home-page">
 
     <?php include 'header.php'; ?>
+
+    <style>
+      /* Home: menú transparente sobre hero, con color al interactuar/scroll */
+      .home-page .navbar.navbar--sticky {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: rgba(8, 13, 28, 0.08) !important;
+        border-bottom: 1px solid rgba(255,255,255,0.12) !important;
+        box-shadow: none !important;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        transition: background 0.28s ease, box-shadow 0.28s ease, height 0.28s ease;
+      }
+      .home-page .navbar:not(.navbar--scrolled) .logo span,
+      .home-page .navbar:not(.navbar--scrolled) .nav-link,
+      .home-page .navbar:not(.navbar--scrolled) .menu-toggle {
+        color: #fff;
+        text-shadow: 0 2px 14px rgba(0,0,0,0.35);
+      }
+      .home-page .navbar:not(.navbar--scrolled) .nav-link {
+        padding: 9px 14px;
+        border-radius: 999px;
+      }
+      .home-page .navbar:not(.navbar--scrolled) .nav-link:hover,
+      .home-page .navbar:not(.navbar--scrolled) .nav-link:focus,
+      .home-page .navbar:not(.navbar--scrolled) .nav-link:active {
+        background: rgba(255,255,255,0.18);
+        color: #fff;
+      }
+      .nav-soluciones {
+        background: linear-gradient(135deg, #2DB5A0, #4A2C82) !important;
+        color: #fff !important;
+        padding: 10px 18px !important;
+        border-radius: 999px !important;
+        box-shadow: 0 12px 28px rgba(45,181,160,0.28);
+      }
+      .nav-soluciones:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 16px 34px rgba(45,181,160,0.38);
+      }
+      .home-page .navbar.navbar--scrolled {
+        background: rgba(255,255,255,0.98) !important;
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1) !important;
+      }
+      @media (max-width: 768px) {
+        .home-page .navbar.navbar--sticky { background: rgba(255,255,255,0.96) !important; }
+        .home-page .navbar .nav-link,
+        .home-page .navbar .logo span,
+        .home-page .navbar .menu-toggle { color: var(--toori-dark) !important; text-shadow: none !important; }
+        .home-page .navbar .nav-soluciones { color: #fff !important; }
+      }
+    </style>
 
     <!-- ===================== HERO - Slideshow con Ken Burns ===================== -->
     <style>
@@ -213,6 +267,7 @@
           <div class="hero-cta-bar">
             <a href="https://wa.me/5493512139046" class="btn btn-primary btn-ripple">Buscar un servicio</a>
             <a href="registro.php" class="btn btn-ripple" style="background: #f1f8e9; color: #558b2f; font-weight: 600;">Ofrecer servicios</a>
+            <a href="#solucionesya" class="btn btn-ripple" style="background: linear-gradient(135deg,#2DB5A0,#4A2C82); color: #fff; font-weight: 700; box-shadow: 0 10px 26px rgba(45,181,160,0.34);">SolucionesYa B2B</a>
           </div>
         </div>
 
@@ -272,6 +327,60 @@
 
     <!-- Mesh divider -->
     <div class="mesh-divider"></div>
+
+    <!-- ===================== SOLUCIONESYA B2B - MÓDULO ILUSTRATIVO ===================== -->
+    <section class="section soluciones-preview" style="background: linear-gradient(180deg,#ffffff 0%,#f6fbfa 100%); padding: 90px 0;">
+      <style>
+        .soluciones-preview-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:42px;align-items:center;}
+        .soluciones-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(45,181,160,.1);color:#1E9A87;border:1px solid rgba(45,181,160,.18);padding:7px 16px;border-radius:999px;font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;margin-bottom:18px;}
+        .soluciones-preview h2{font-size:2.35rem;line-height:1.12;margin-bottom:16px;color:#2d3559;}
+        .soluciones-preview h2 span{background:linear-gradient(135deg,#2DB5A0,#4A2C82);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+        .soluciones-preview p{color:#667085;font-size:1.05rem;line-height:1.7;margin-bottom:22px;}
+        .soluciones-flow{display:grid;gap:12px;margin:24px 0;}
+        .soluciones-flow-item{display:flex;gap:14px;align-items:flex-start;background:white;border:1px solid rgba(45,181,160,.12);border-radius:16px;padding:15px 16px;box-shadow:0 12px 34px rgba(45,181,160,.08);}
+        .soluciones-flow-item i{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#2DB5A0,#4A2C82);color:white;flex:none;}
+        .soluciones-flow-item strong{display:block;color:#1f2937;font-size:.95rem;margin-bottom:2px;}
+        .soluciones-flow-item span{color:#667085;font-size:.88rem;}
+        .soluciones-visual{position:relative;background:linear-gradient(145deg,#111827,#24243e);border-radius:28px;padding:26px;box-shadow:0 28px 70px rgba(17,24,39,.24);overflow:hidden;}
+        .soluciones-visual::before{content:'';position:absolute;inset:-30%;background:radial-gradient(circle at 20% 20%,rgba(45,181,160,.34),transparent 32%),radial-gradient(circle at 80% 70%,rgba(74,44,130,.42),transparent 36%);pointer-events:none;}
+        .sy-card{position:relative;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.13);border-radius:18px;padding:16px;margin-bottom:14px;color:white;backdrop-filter:blur(12px);}
+        .sy-card-top{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:10px;}
+        .sy-pill{font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;border-radius:999px;padding:5px 9px;background:rgba(52,211,153,.16);color:#86efac;}
+        .sy-title{font-weight:800;font-size:1rem;}
+        .sy-muted{color:rgba(255,255,255,.62);font-size:.82rem;line-height:1.5;}
+        .sy-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;position:relative;}
+        .sy-mini{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);border-radius:15px;padding:14px;color:white;}
+        .sy-mini i{color:#34d399;margin-right:6px;}
+        .sy-mini strong{display:block;font-size:.86rem;margin-bottom:3px;}
+        .sy-mini span{font-size:.76rem;color:rgba(255,255,255,.6);}
+        @media(max-width:900px){.soluciones-preview-grid{grid-template-columns:1fr}.soluciones-preview h2{font-size:1.85rem}.sy-grid{grid-template-columns:1fr}}
+      </style>
+      <div class="container soluciones-preview-grid">
+        <div class="reveal-left">
+          <div class="soluciones-eyebrow"><i class="bi bi-buildings"></i> SolucionesYa para empresas</div>
+          <h2>Un solo sistema para <span>ordenar la operación</span> de tu empresa</h2>
+          <p>Para inmobiliarias, administradoras, consorcios y equipos que hoy trabajan con WhatsApp, planillas, facturación y cobranzas separadas. SolucionesYa une todo el circuito en una misma pantalla.</p>
+          <div class="soluciones-flow">
+            <div class="soluciones-flow-item"><i class="bi bi-whatsapp"></i><div><strong>Reclamos y consultas por WhatsApp</strong><span>El mensaje entra, se ordena y se convierte en gestión accionable.</span></div></div>
+            <div class="soluciones-flow-item"><i class="bi bi-kanban"></i><div><strong>Tickets, proveedores y seguimiento</strong><span>Asignás responsables, pedís presupuestos y ves el estado de cada caso.</span></div></div>
+            <div class="soluciones-flow-item"><i class="bi bi-receipt"></i><div><strong>Facturación ARCA, cobranzas y reportes</strong><span>Menos herramientas sueltas, menos errores y más control del negocio.</span></div></div>
+          </div>
+          <a href="https://wa.me/5493512139046?text=Hola!%20Quiero%20conocer%20SolucionesYa%20para%20mi%20empresa" class="btn btn-primary btn-ripple" style="background:linear-gradient(135deg,#2DB5A0,#4A2C82);box-shadow:0 12px 30px rgba(45,181,160,.28);">Quiero conocer SolucionesYa</a>
+        </div>
+        <div class="soluciones-visual reveal-right">
+          <div class="sy-card">
+            <div class="sy-card-top"><div class="sy-title">Reclamo nuevo: pérdida en departamento</div><span class="sy-pill">WhatsApp</span></div>
+            <div class="sy-muted">Inquilino escribe → se crea ticket → se asigna proveedor → queda trazabilidad.</div>
+          </div>
+          <div class="sy-grid">
+            <div class="sy-mini"><strong><i class="bi bi-tools"></i>Mantenimiento</strong><span>Tickets, estados y proveedores.</span></div>
+            <div class="sy-mini"><strong><i class="bi bi-cash-coin"></i>Cobranzas</strong><span>Links de pago y seguimiento.</span></div>
+            <div class="sy-mini"><strong><i class="bi bi-file-earmark-check"></i>Facturación</strong><span>ARCA, comprobantes y control.</span></div>
+            <div class="sy-mini"><strong><i class="bi bi-graph-up-arrow"></i>Dashboard</strong><span>Indicadores claros para decidir.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- ===================== SPONSORS - Carrusel Profesional ===================== -->
 <section class="section" id="sponsors">

@@ -171,7 +171,7 @@
       <a href="ofertas.php" class="nav-link">Ofertas</a>
       <a href="registro.php" class="nav-link" id="nav-worker-link">Soy Trabajador</a>
       <a href="PerfileProfesionales.php" class="nav-link">Profesionales</a>
-      <a href="index.php#solucionesya" class="nav-link">SolucionesYa B2B</a>
+      <a href="index.php#solucionesya" class="nav-link nav-soluciones">SolucionesYa B2B</a>
       <a href="login.php" class="nav-link" id="nav-login-link" style="background:var(--toori-blue);color:white;padding:10px 24px;border-radius:50px;font-weight:600;transition:all 0.3s;">Ingresá</a>
 
       <!-- Usuario logueado -->
