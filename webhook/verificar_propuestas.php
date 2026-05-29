@@ -17,6 +17,7 @@
 require_once 'config.php';
 require_once 'db.php';
 require_once 'whatsapp.php';
+require_once 'provider_outreach.php';
 
 // ═══════════════════════════════════════════════════════════
 //  SISTEMA DE LOGS
@@ -288,10 +289,13 @@ if (!is_array($ofertas_paso4) || count($ofertas_paso4) === 0) {
                 }
             }
         } else if ($cantidad === 0) {
-            foreach ([1800, 3600, 5400] as $threshold) {
-                if ($segundos >= $threshold) {
-                    notificarProfesionalesRecordatorio($oferta, $threshold);
-                }
+            if ($segundos >= 600) {
+                $sentReminder = po_send_reminder_nonresponders($oferta);
+                if ($sentReminder > 0) log_msg('SEND', "  Minuto 10: recordatorio enviado a $sentReminder prestadores sin respuesta");
+            }
+            if ($segundos >= 1200) {
+                $sentExpansion = po_send_expansion($oferta, 15);
+                if ($sentExpansion > 0) log_msg('SEND', "  Minuto 20: búsqueda ampliada a $sentExpansion nuevos prestadores");
             }
         } else {
             log_msg('INFO', "  Esperando más presupuestos. Skipping.");

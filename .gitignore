@@ -6,3 +6,4 @@ webhook/*.zip
 
 # Estado interno
 .omc/
+webhook/*.log

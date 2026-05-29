@@ -13,6 +13,7 @@ require_once 'whatsapp.php';
 require_once 'ia_conversacional.php';
 require_once 'ranking.php';
 require_once 'crear_pago.php';
+require_once 'provider_outreach.php';
 
 ignore_user_abort(true);
 
@@ -215,6 +216,11 @@ exit;
 // ═════════════════════════════════════════════
 function notificarProfesionales(string $ofertaId, array $camposNuevos, array $ofertaOriginal): void {
 
+    $ofertaParaOutreach = array_merge($ofertaOriginal, $camposNuevos, ['id' => $ofertaId]);
+    $enviados = po_send_initial($ofertaParaOutreach, 10);
+    _log("notificarProfesionales | outreach inicial enviados=$enviados oferta=$ofertaId");
+    return;
+
     $categoria = $camposNuevos['categoria'] ?? $ofertaOriginal['categoria'] ?? null;
     $zonaRaw   = $camposNuevos['zona']      ?? $ofertaOriginal['zona']      ?? null;
 
@@ -392,22 +398,23 @@ function manejarRespuestaProfesional(string $telefono, string $mensaje): bool {
     $texto = trim($mensaje);
     if ($texto === '') return false;
 
-    $prof = buscarUsuarioPorTelefono($telefono);
+    $prof = po_find_provider_by_phone($telefono);
     if (!$prof || empty($prof['id'])) return false;
 
-    $oferta = obtenerOfertaParaProfesional($prof, $texto);
+    $oferta = po_find_offer_for_provider($prof, $texto);
     if (!$oferta || empty($oferta['id'])) return false;
 
     $ofertaId = $oferta['id'];
     $nombre = trim(($prof['nombre'] ?? '') . ' ' . ($prof['apellido'] ?? ''));
 
     if (preg_match('/^\s*(no|no puedo|no estoy|ocupado|ocupada|paso|rechazo)\b/iu', $texto)) {
+        po_mark_response((string)$ofertaId, $prof, 'declined');
         _log("Prestador {$prof['id']} descartó oferta $ofertaId por WhatsApp");
         enviarWhatsApp($telefono, "Gracias $nombre, te marco como no disponible para este pedido. Te avisamos en el próximo 🙌");
         return true;
     }
 
-    $monto = extraerMontoPresupuesto($texto);
+    $monto = po_extract_budget_amount($texto);
     if (!$monto) {
         enviarWhatsApp($telefono, "Para cargar tu presupuesto del pedido #$ofertaId, respondé con monto y horario. Ejemplo: *$25000 hoy 18hs*. Si no podés, respondé *NO*.");
         return true;
@@ -431,6 +438,7 @@ function manejarRespuestaProfesional(string $telefono, string $mensaje): bool {
         supabaseRequest('POST', 'presupuestos', $payload);
     }
 
+    po_mark_response((string)$ofertaId, $prof, 'budget', $monto);
     _log("Prestador {$prof['id']} presupuestó oferta $ofertaId por WhatsApp monto=$monto");
     enviarWhatsApp($telefono, "Listo $nombre, cargué tu presupuesto para el pedido #$ofertaId: $" . number_format($monto, 0, ',', '.') . ". Si el cliente te elige, te avisamos por acá ✅");
     return true;
