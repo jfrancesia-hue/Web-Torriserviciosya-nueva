@@ -52,6 +52,7 @@ jobs:
           echo "Deploying to configured Hostinger directory: ${DEPLOY_TARGET_DIR}"
           lftp -u "${DEPLOY_USERNAME}","${DEPLOY_PASSWORD}" "${DEPLOY_SERVER}" <<EOF
           set ftp:ssl-allow true
+          set ssl:verify-certificate no
           set ftp:passive-mode true
           set net:max-retries 2
           set net:timeout 30
