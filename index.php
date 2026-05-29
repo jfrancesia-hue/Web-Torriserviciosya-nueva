@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" crossorigin href="./assets/main-D3W1u2cc.css">
     <link rel="stylesheet" href="./assets/toori-enhanced.css">
-    <link rel="stylesheet" href="./assets/toori-design-refresh.css">
+    <link rel="stylesheet" href="./assets/toori-design-refresh.css?v=20260529-2038">
 </head>
 
 <body class="home-page">
@@ -89,12 +89,43 @@
         background: rgba(255,255,255,0.16);
         color: #fff;
       }
+      /* Override fuerte: badges del hero limpios, sin pastillas marcadas */
+      .home-page .hero-slideshow .trust-badges {
+        gap: 24px !important;
+        padding: 0 !important;
+        margin-top: 14px !important;
+      }
+      .home-page .hero-slideshow .trust-badge {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        padding: 0 !important;
+        border-radius: 0 !important;
+        color: rgba(255,255,255,0.82) !important;
+        font-size: 0.9rem !important;
+        font-weight: 500 !important;
+        text-shadow: 0 2px 10px rgba(0,0,0,0.36) !important;
+      }
+      .home-page .hero-slideshow .trust-badge i {
+        width: auto !important;
+        height: auto !important;
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        color: #aecd5a !important;
+        font-size: 1rem !important;
+        margin-right: 2px !important;
+      }
       @media (max-width: 768px) {
         .home-page .navbar.navbar--sticky { background: rgba(255,255,255,0.96) !important; }
         .home-page .navbar .nav-link,
         .home-page .navbar .logo span,
         .home-page .navbar .menu-toggle { color: var(--toori-dark) !important; text-shadow: none !important; }
         .home-page .navbar .nav-soluciones { color: #fff !important; }
+        .home-page .hero-slideshow .trust-badges { gap: 12px !important; }
+        .home-page .hero-slideshow .trust-badge { font-size: 0.78rem !important; }
       }
     </style>
 
