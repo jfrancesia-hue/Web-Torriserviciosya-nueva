@@ -14,18 +14,41 @@ jobs:
   deploy:
     name: Upload public site files
     runs-on: ubuntu-latest
+    env:
+      DEPLOY_SERVER: ${{ secrets.HOSTINGER_FTP_SERVER || secrets.FTP_SERVER }}
+      DEPLOY_USERNAME: ${{ secrets.HOSTINGER_FTP_USERNAME || secrets.FTP_USERNAME }}
+      DEPLOY_PASSWORD: ${{ secrets.HOSTINGER_FTP_PASSWORD || secrets.FTP_PASSWORD }}
+      DEPLOY_TARGET_DIR: ${{ secrets.HOSTINGER_FTP_TARGET_DIR || secrets.FTP_TARGET_DIR || '/public_html/' }}
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Deploy via FTP/SFTP
+      - name: Missing FTP server secret
+        if: ${{ env.DEPLOY_SERVER == '' }}
+        run: |
+          echo "::error::Missing secret HOSTINGER_FTP_SERVER or FTP_SERVER"
+          exit 1
+
+      - name: Missing FTP username secret
+        if: ${{ env.DEPLOY_USERNAME == '' }}
+        run: |
+          echo "::error::Missing secret HOSTINGER_FTP_USERNAME or FTP_USERNAME"
+          exit 1
+
+      - name: Missing FTP password secret
+        if: ${{ env.DEPLOY_PASSWORD == '' }}
+        run: |
+          echo "::error::Missing secret HOSTINGER_FTP_PASSWORD or FTP_PASSWORD"
+          exit 1
+
+      - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          server: ${{ secrets.HOSTINGER_FTP_SERVER || secrets.FTP_SERVER }}
-          username: ${{ secrets.HOSTINGER_FTP_USERNAME || secrets.FTP_USERNAME }}
-          password: ${{ secrets.HOSTINGER_FTP_PASSWORD || secrets.FTP_PASSWORD }}
-          server-dir: ${{ secrets.HOSTINGER_FTP_TARGET_DIR || secrets.FTP_TARGET_DIR || '/public_html/' }}
+          server: ${{ env.DEPLOY_SERVER }}
+          username: ${{ env.DEPLOY_USERNAME }}
+          password: ${{ env.DEPLOY_PASSWORD }}
+          server-dir: ${{ env.DEPLOY_TARGET_DIR }}
           local-dir: ./
           exclude: |
             **/.git*
