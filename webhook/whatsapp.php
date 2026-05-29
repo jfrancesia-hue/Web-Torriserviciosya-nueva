@@ -70,3 +70,53 @@ function enviarWhatsApp($to, $mensaje) {
     }
     return $http_code == 201;
 }
+
+function enviarWhatsAppTemplate($to, string $contentSid, array $variables, string $fallbackMensaje = '') {
+    $sid = env('TWILIO_SID');
+    $token = env('TWILIO_TOKEN');
+    if (!$sid || !$token) {
+        file_put_contents("debug.txt", "[TEMPLATE_ERROR] Credenciales de Twilio faltando\n", FILE_APPEND);
+        return false;
+    }
+
+    $url = "https://api.twilio.com/2010-04-01/Accounts/" . $sid . "/Messages.json";
+    $post = [
+        'To' => $to,
+        'ContentSid' => $contentSid,
+        'ContentVariables' => json_encode((object)$variables, JSON_UNESCAPED_UNICODE),
+    ];
+
+    $messagingServiceSid = env('TWILIO_MESSAGING_SERVICE_SID');
+    if ($messagingServiceSid) {
+        $post['MessagingServiceSid'] = $messagingServiceSid;
+    } else {
+        $post['From'] = env('TWILIO_WHATSAPP_FROM');
+    }
+
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_USERPWD, $sid . ":" . $token);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+    curl_setopt($ch, CURLOPT_HEADER, false);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/x-www-form-urlencoded']);
+    $response = curl_exec($ch);
+    $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    $curl_error = curl_error($ch);
+    curl_close($ch);
+
+    if ($http_code === 201) {
+        file_put_contents("debug.txt", "[TEMPLATE_OK] ContentSid=$contentSid enviado a $to\n", FILE_APPEND);
+        return true;
+    }
+
+    file_put_contents("debug.txt", "[TEMPLATE_ERROR] HTTP $http_code | Error: $curl_error | Response: " . substr((string)$response, 0, 700) . "\n", FILE_APPEND);
+
+    // Fallback solo para conversaciones con ventana abierta. Si el contacto es frío,
+    // WhatsApp lo rechazará con 63016, pero mantiene compatibilidad en sesiones activas.
+    if (trim($fallbackMensaje) !== '') {
+        return enviarWhatsApp($to, $fallbackMensaje);
+    }
+    return false;
+}

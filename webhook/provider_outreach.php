@@ -251,7 +251,18 @@ function po_send_to_professionals(array $oferta, array $profesionales, string $s
     foreach ($profesionales as $prof) {
         $wa = po_wa_from_celular($prof['celular'] ?? '');
         if (!$wa) continue;
-        if (enviarWhatsApp($wa, $msg)) {
+        $templateSid = env('TWILIO_PROVIDER_TEMPLATE_SID') ?: 'HX4243c5b61969e03597f42ab230a11b62';
+        $nombre = trim($prof['nombre'] ?? '') ?: 'profesional';
+        $templateVars = [
+            '1' => mb_substr($nombre, 0, 40),
+            '2' => mb_substr(trim($oferta['categoria'] ?? 'servicio'), 0, 60),
+            '3' => mb_substr(trim($oferta['zona'] ?? 'tu zona'), 0, 80),
+            '4' => mb_substr(trim($oferta['descripcion'] ?? 'pedido de servicio'), 0, 120),
+        ];
+        $sent = function_exists('enviarWhatsAppTemplate')
+            ? enviarWhatsAppTemplate($wa, $templateSid, $templateVars, $msg)
+            : enviarWhatsApp($wa, $msg);
+        if ($sent) {
             $ok++;
             po_mark_notified($ofertaId, $prof, $stage, $wa);
         }
