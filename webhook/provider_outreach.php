@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Provider Outreach - Toori ServiciosYa
  *
@@ -41,6 +41,22 @@ function po_norm(string $s): string {
     return trim(preg_replace('/[^a-z0-9\s]/', ' ', $s));
 }
 
+function po_normalize_zone_aliases(string $s): string {
+    $n = po_norm($s);
+    $aliases = [
+        'cba' => 'cordoba',
+        'cordoba capital' => 'cordoba capital',
+        'capital cordoba' => 'cordoba capital',
+        'nueva cordoba' => 'cordoba capital nueva cordoba',
+        'buenos aires capital' => 'ciudad autonoma de buenos aires',
+        'caba' => 'ciudad autonoma de buenos aires',
+    ];
+    foreach ($aliases as $from => $to) {
+        if (strpos($n, $from) !== false && strpos($n, $to) === false) $n .= ' ' . $to;
+    }
+    return $n;
+}
+
 function po_digits(string $telefono): string {
     return preg_replace('/\D/', '', $telefono);
 }
@@ -52,8 +68,10 @@ function po_wa_from_celular(string $celular): ?string {
 }
 
 function po_provider_key(array $prof): string {
-    if (!empty($prof['id'])) return (string)$prof['id'];
-    return po_digits($prof['celular'] ?? 'unknown');
+    $phone = po_digits($prof['celular'] ?? '');
+    if ($phone) return 'phone:' . substr($phone, -10);
+    if (!empty($prof['id'])) return 'id:' . (string)$prof['id'];
+    return 'unknown';
 }
 
 function po_get_offer_state(array &$state, string $ofertaId): array {
@@ -135,14 +153,15 @@ function po_provider_responded(array $offerState, array $prof): bool {
 
 function po_provider_score(array $prof, array $oferta, array $globalState): int {
     $score = 0;
-    $zona = po_norm($oferta['zona'] ?? '');
-    $ciudad = po_norm($prof['ciudad'] ?? '');
-    $prov = po_norm($prof['provincia'] ?? '');
+    $zona = po_normalize_zone_aliases($oferta['zona'] ?? '');
+    $ciudad = po_normalize_zone_aliases($prof['ciudad'] ?? '');
+    $prov = po_normalize_zone_aliases($prof['provincia'] ?? '');
     if ($ciudad && strpos($zona, $ciudad) !== false) $score += 50;
     if ($prov && strpos($zona, $prov) !== false) $score += 20;
     if (!empty($prof['celular'])) $score += 10;
     if (!empty($prof['categoria'])) $score += 10;
     if (!empty($prof['nombre'])) $score += 5;
+    if (!empty($prof['apellido'])) $score += 3;
 
     $providerKey = po_provider_key($prof);
     $responses = 0;
@@ -153,8 +172,8 @@ function po_provider_score(array $prof, array $oferta, array $globalState): int 
         if (!empty($p['budget_sent'])) $responses += 1;
         if (!empty($p['declined'])) $declines += 1;
     }
-    $score += min(30, $responses * 10);
-    $score -= min(20, $declines * 5);
+    $score += min(50, $responses * 12);
+    $score -= min(35, $declines * 7);
     return $score;
 }
 
@@ -178,14 +197,15 @@ function po_find_professionals(array $oferta, int $limit = 10, int $offset = 0, 
 
     $dedupe = [];
     foreach ($profesionales as $p) {
-        if (!empty($p['id'])) $dedupe[$p['id']] = $p;
+        $key = po_provider_key($p);
+        if ($key !== 'unknown') $dedupe[$key] = $p;
     }
     $profesionales = array_values($dedupe);
 
-    $zonaNorm = po_norm($zonaRaw);
+    $zonaNorm = po_normalize_zone_aliases($zonaRaw);
     $profesionales = array_values(array_filter($profesionales, function($p) use ($zonaNorm) {
-        $ciudad = po_norm($p['ciudad'] ?? '');
-        $prov = po_norm($p['provincia'] ?? '');
+        $ciudad = po_normalize_zone_aliases($p['ciudad'] ?? '');
+        $prov = po_normalize_zone_aliases($p['provincia'] ?? '');
         return (($ciudad && strpos($zonaNorm, $ciudad) !== false) || ($prov && strpos($zonaNorm, $prov) !== false)) && !empty($p['celular']);
     }));
 
@@ -356,4 +376,25 @@ function po_extract_budget_amount(string $mensaje): ?float {
         if (is_numeric($raw) && (float)$raw > 0) return (float)$raw;
     }
     return null;
+}
+
+function po_offer_status(string $ofertaId): array {
+    $state = po_load_state();
+    $offerState = $state['offers'][$ofertaId] ?? ['providers' => [], 'stages' => []];
+    $providers = array_values($offerState['providers'] ?? []);
+    $summary = [
+        'notified' => 0,
+        'responded' => 0,
+        'declined' => 0,
+        'budget_sent' => 0,
+        'stages' => $offerState['stages'] ?? [],
+        'providers' => $providers,
+    ];
+    foreach ($providers as $p) {
+        if (!empty($p['notify_count'])) $summary['notified']++;
+        if (!empty($p['responded'])) $summary['responded']++;
+        if (!empty($p['declined'])) $summary['declined']++;
+        if (!empty($p['budget_sent'])) $summary['budget_sent']++;
+    }
+    return $summary;
 }

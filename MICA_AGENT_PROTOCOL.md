@@ -57,7 +57,8 @@ Ejemplo:
 2. Servicio/categoría.
 3. Descripción breve del problema.
 4. Provincia y ciudad.
-5. Foto opcional si ayuda.
+5. Urgencia aproximada si surge: hoy / esta semana / cuando se pueda.
+6. Foto opcional si ayuda.
 
 La foto ayuda, pero no debe bloquear si el cliente no puede enviarla.
 
@@ -69,6 +70,7 @@ Si el cliente manda audio, la transcripción debe guardarse en historial como `[
 - No decir que ya hay profesionales si todavía no hubo presupuestos.
 - Decir “voy a buscar profesionales” o “te aviso cuando entren propuestas”.
 - Si no hay respuesta de prestadores, ser honesta sin cortar la ayuda.
+- En urgencias reales, contener y dar recomendación segura básica sin reemplazar emergencias: gas → cerrar llave/ventilar/no fuego; agua → cerrar llave de paso; electricidad → bajar térmica si es seguro.
 
 ## Búsqueda de prestadores
 
@@ -82,7 +84,21 @@ Por eso el flujo debe usar templates aprobados cuando el prestador no tiene vent
 - Minuto 10: recordar solo a los notificados que no respondieron.
 - Minuto 20: ampliar a otros prestadores compatibles.
 - Hasta 2 horas: seguir buscando sin avisar fracaso temprano al cliente.
-- Luego de 2 horas sin respuesta: avisar con honestidad y opcionalmente escalar a humano/admin.
+- Luego de 2 horas sin respuesta: avisar con honestidad y escalar a humano/admin (`modo_agente=true`).
+- El panel/admin debe poder consultar estado por pedido: fase, prestadores notificados, respuestas, NO, presupuestos y etapa.
+
+### Ranking de prestadores
+
+Priorizar por:
+
+- Coincidencia de ciudad/provincia, con alias comunes como CBA/Córdoba Capital/CABA.
+- Categoría compatible.
+- Teléfono válido.
+- Perfil más completo.
+- Historial de presupuestos enviados.
+- Menos rechazos previos.
+
+La deduplicación debe hacerse principalmente por teléfono para evitar contactar dos veces al mismo prestador con distinto ID.
 
 ### Mensaje a prestadores
 
@@ -110,6 +126,7 @@ Guardar/medir:
 - Quién presupuestó.
 - Tiempo de respuesta.
 - Si Twilio entregó o falló.
+- Estado resumido para panel/admin vía `api_panel.php?action=estado_pedido&id=...`.
 
 No repetir mensajes al mismo prestador para la misma oferta salvo recordatorio programado.
 
@@ -131,3 +148,6 @@ Antes de declarar cambios listos:
 - Content SID: `HX4243c5b61969e03597f42ab230a11b62`.
 - Estado al momento de documentación: pendiente de aprobación WhatsApp.
 - Hasta aprobación, mensajes fríos pueden fallar con Twilio/WhatsApp error `63016`.
+- Se agregó endpoint de estado `api_panel.php?action=estado_pedido&id=...`.
+- Se agregó escalamiento automático `modo_agente=true` cuando pasan 2h sin propuestas.
+- Mica transcribe audios con Whisper/OpenAI y los usa como mensaje del cliente.

@@ -59,6 +59,7 @@ log_debug('[DEBUG] require_once db.php');
 require_once 'db.php';
 log_debug('[DEBUG] require_once whatsapp.php');
 require_once 'whatsapp.php';
+require_once 'provider_outreach.php';
 //error_log('[DEBUG] require_once OK');
 
 $action = $_GET['action'] ?? $_POST['action'] ?? '';
@@ -110,6 +111,14 @@ try {
         $id = $_GET['id'] ?? null;
         if ($id) {
             obtenerNotifProfesionales($id);
+        } else {
+            responderError('Falta el ID');
+        }
+        break;
+    case 'estado_pedido':
+        $id = $_GET['id'] ?? $_POST['id'] ?? null;
+        if ($id) {
+            obtenerEstadoPedido($id);
         } else {
             responderError('Falta el ID');
         }
@@ -221,6 +230,52 @@ function obtenerChat($id) {
         'descripcion' => $oferta['descripcion'] ?? '',
         'media_url' => $oferta['media_url'] ?? '',
         'mensajes' => $historial
+    ]);
+}
+
+function obtenerEstadoPedido($id) {
+    $oferta = supabaseRequest("GET", "nuevaOferta?id=eq.$id");
+    if (!is_array($oferta) || count($oferta) === 0) {
+        responderError('Pedido no encontrado');
+        return;
+    }
+
+    $oferta = $oferta[0];
+    $presupuestos = supabaseRequest("GET", "presupuestos?oferta_id=eq.$id&select=id,monto,estado,trabajador_uuid,created_at,horarios_disponibles&order=created_at.asc");
+    if (!is_array($presupuestos)) $presupuestos = [];
+    $outreach = function_exists('po_offer_status') ? po_offer_status((string)$id) : [];
+
+    $fase = 'recolectando_datos';
+    $paso = intval($oferta['paso'] ?? 0);
+    if (($oferta['estado'] ?? '') === 'cancelada') $fase = 'cancelado';
+    else if ($paso >= 999) $fase = 'esperando_pago';
+    else if ($paso >= 996) $fase = 'esperando_domicilio_o_confirmacion';
+    else if ($paso >= 995) $fase = 'esperando_fecha_hora';
+    else if ($paso >= 99) $fase = 'cliente_debe_elegir_presupuesto';
+    else if ($paso >= 4) $fase = count($presupuestos) > 0 ? 'presupuestos_recibidos' : 'buscando_prestadores';
+
+    responderOK([
+        'id' => $oferta['id'] ?? $id,
+        'fase' => $fase,
+        'estado' => $oferta['estado'] ?? '',
+        'paso' => $paso,
+        'modo_agente' => (bool)($oferta['modo_agente'] ?? false),
+        'cliente' => [
+            'nombre' => $oferta['nombre_cliente'] ?? '',
+            'telefono' => $oferta['cliente_telefono'] ?? '',
+        ],
+        'pedido' => [
+            'categoria' => $oferta['categoria'] ?? '',
+            'zona' => $oferta['zona'] ?? '',
+            'descripcion' => $oferta['descripcion'] ?? '',
+            'media_url' => $oferta['media_url'] ?? '',
+            'video_urls' => $oferta['video_urls'] ?? '',
+        ],
+        'prestadores' => $outreach,
+        'presupuestos' => [
+            'count' => count($presupuestos),
+            'items' => $presupuestos,
+        ],
     ]);
 }
 

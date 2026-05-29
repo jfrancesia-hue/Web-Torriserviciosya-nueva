@@ -223,8 +223,9 @@ Ayudar al cliente a encontrar un profesional disponible en ServiciosYa. Necesit�
 1. Nombre del cliente, si no lo tenés.
 2. Qué servicio necesita + descripción breve del problema.
 3. Provincia Y ciudad donde se necesita (ambos obligatorios).
+4. Urgencia aproximada: hoy / esta semana / cuando se pueda, solo si surge natural o cambia la prioridad.
 
-Una vez que tenés los 3 datos, pedí una foto si ayuda. Si el cliente no tiene foto o está apurado, aceptá seguir sin foto.
+Una vez que tenés los datos principales, pedí una foto si ayuda. Si el cliente no tiene foto o está apurado, aceptá seguir sin foto.
 
 # CATEGORÍA DEL SERVICIO
 - La categoría debe ser el nombre GENÉRICO de la profesión o servicio en singular
@@ -273,6 +274,12 @@ Si todavía no mandó foto:
 ## Cliente manda una urgencia
 - Reconocé la urgencia y pedí el dato que falta.
 - Ejemplo: "Dale, vamos rápido. ¿En qué ciudad estás?"
+- Si hay riesgo físico, agregá una recomendación segura sin alarmar:
+  - Olor a gas: "si podés, cerrá la llave de gas y ventilá; no prendas luces ni fuego".
+  - Pérdida/inundación: "si podés, cerrá la llave de paso mientras buscamos profesional".
+  - Problema eléctrico/chispas: "si es seguro, bajá la térmica y no manipules cables".
+  - Cerradura/persona afuera: priorizá cerrajero y zona.
+- No reemplazás emergencias: si hay peligro real, sugerí contactar servicio de emergencia/local además de buscar profesional.
 
 # DATOS DE CONTEXTO
 DATOS YA RECOLECTADOS:
@@ -289,6 +296,7 @@ DATOS QUE FALTAN:
 - No prometas disponibilidad garantizada. Decí "voy a buscar profesionales" o "te aviso cuando entren propuestas".
 - No digas que ya hay profesionales disponibles si todavía no llegaron presupuestos.
 - No culpes al cliente ni a los prestadores.
+- Cuando completes la solicitud, dejá una ficha mental clara: servicio, problema, zona, urgencia, foto/audio si hubo.
 
 # LÓGICA DE LA FOTO
 - Una vez que tenés nombre + categoría + descripción + zona, pedí UNA foto del problema si suma al presupuesto.
@@ -315,6 +323,7 @@ DATOS QUE FALTAN:
   },
   "foto_recibida": false,
   "foto_rechazada": false,
+  "urgencia": "hoy / esta semana / cuando se pueda / null",
   "presupuesto_estimado": "Entre \$X.000 y \$X.000",
   "recoleccion_completa": false
 }
@@ -443,6 +452,14 @@ function procesarConversacion(string $mensaje, array $oferta, array $mediaUrls =
     $presupuestoEstimado = trim($parsed['presupuesto_estimado'] ?? '');
     if ($presupuestoEstimado && $presupuestoEstimado !== 'null') {
         $campos['presupuesto_estimado'] = $presupuestoEstimado;
+    }
+
+    $urgencia = trim((string)($parsed['urgencia'] ?? ''));
+    if ($urgencia !== '' && strtolower($urgencia) !== 'null') {
+        $descActual = trim((string)($campos['descripcion'] ?? $oferta['descripcion'] ?? ''));
+        if ($descActual && stripos($descActual, 'urgencia:') === false) {
+            $campos['descripcion'] = $descActual . "\nUrgencia: " . $urgencia;
+        }
     }
 
     $fotoYaResuelta = $fotoRecibida || $fotoRechazada || !empty($oferta['media_url']);

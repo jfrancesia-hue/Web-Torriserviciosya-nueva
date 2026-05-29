@@ -282,9 +282,10 @@ if (!is_array($ofertas_paso4) || count($ofertas_paso4) === 0) {
                     if ($enviado) {
                         supabaseRequest("PATCH", "nuevaOferta?id=eq.$ofertaId", [
                             "paso"       => 98,
+                            "modo_agente" => true,
                             "created_at" => date('Y-m-d H:i:s'), // Reset timer para los 30 min
                         ]);
-                        log_msg('OK', "  Oferta $ofertaId → Paso 98 (segunda espera 30 min, created_at reseteado)");
+                        log_msg('OK', "  Oferta $ofertaId → Paso 98 + modo_agente (segunda espera 30 min, created_at reseteado)");
                     }
                 }
             }
