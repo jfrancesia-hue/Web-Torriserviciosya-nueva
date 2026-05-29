@@ -24,13 +24,12 @@
         </ul>
       </div>
 
-      <!-- Plataforma -->
+      <!-- Soluciones -->
       <div class="footer-col">
-        <h4>Plataforma</h4>
+        <h4>Soluciones</h4>
         <ul>
-          <li><a href="toori360.php" style="color:var(--toori-green);">Toori360 <i class="bi bi-arrow-up-right"></i></a></li>
-          <li><a href="crm.php">Toori CRM <span style="font-size:0.6rem;background:rgba(255,255,255,0.12);padding:2px 8px;border-radius:10px;margin-left:4px;">Pronto</span></a></li>
-          <li><a href="facturacion.php">FacturaIA <span style="font-size:0.6rem;background:rgba(255,255,255,0.12);padding:2px 8px;border-radius:10px;margin-left:4px;">Pronto</span></a></li>
+          <li><a href="index.php#solucionesya" style="color:var(--toori-green);">SolucionesYa B2B <i class="bi bi-arrow-up-right"></i></a></li>
+          <li><a href="https://wa.me/5493512139046?text=Hola!%20Quiero%20conocer%20SolucionesYa%20para%20mi%20empresa" target="_blank" rel="noopener">Consultar demo</a></li>
         </ul>
       </div>
 

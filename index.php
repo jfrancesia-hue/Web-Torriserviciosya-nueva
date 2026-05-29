@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Toori ServiciosYa - Gestión humana con respaldo total</title>
     <meta name="description"
-        content="Pedí el servicio que necesitás. Nosotros nos ocupamos del resto. Gestión profesional y respaldo para tu hogar.">
+        content="Toori ServiciosYa para clientes y prestadores. SolucionesYa para empresas, inmobiliarias y administradoras: mantenimiento, facturación, cobranzas y WhatsApp en un solo lugar.">
 
     <!-- OpenGraph / WhatsApp -->
     <meta property="og:title" content="Toori ServiciosYa - Gestión humana con respaldo total">
     <meta property="og:description"
-        content="Pedí el servicio que necesitás. Nosotros nos ocupamos del resto. Gestión profesional y respaldo para tu hogar.">
+        content="Toori ServiciosYa para clientes y prestadores. SolucionesYa para empresas, inmobiliarias y administradoras: mantenimiento, facturación, cobranzas y WhatsApp en un solo lugar.">
     <meta property="og:image" content="assets/logo.png">
     <meta property="og:url" content="https://tooriserviciosya.com">
     <meta property="og:type" content="website">
@@ -1100,16 +1100,16 @@
         </div>
     </section>
 
-    <!-- ===================== PLATAFORMA TOORI ===================== -->
-    <section class="platform-section" style="background: linear-gradient(135deg, #0f0c29, #1a1a3e, #24243e); padding: 90px 0; overflow: hidden; position: relative;">
+    <!-- ===================== ECOSISTEMA TOORI / SOLUCIONESYA ===================== -->
+    <section class="platform-section" id="solucionesya" style="background: linear-gradient(135deg, #0f0c29, #1a1a3e, #24243e); padding: 90px 0; overflow: hidden; position: relative;">
         <style>
             .platform-section::before {
                 content: '';
                 position: absolute;
                 inset: 0;
                 background:
-                    radial-gradient(ellipse 50% 50% at 20% 30%, rgba(59,168,224,0.1) 0%, transparent 60%),
-                    radial-gradient(ellipse 40% 50% at 80% 70%, rgba(52,211,153,0.08) 0%, transparent 60%),
+                    radial-gradient(ellipse 50% 50% at 20% 30%, rgba(59,168,224,0.12) 0%, transparent 60%),
+                    radial-gradient(ellipse 40% 50% at 80% 70%, rgba(52,211,153,0.1) 0%, transparent 60%),
                     radial-gradient(ellipse 30% 40% at 50% 50%, rgba(129,140,248,0.08) 0%, transparent 60%);
                 pointer-events: none;
             }
@@ -1148,29 +1148,32 @@
                 background-clip: text;
             }
             .platform-header p {
-                color: rgba(255,255,255,0.55);
+                color: rgba(255,255,255,0.62);
                 font-size: 1.05rem;
-                max-width: 620px;
+                max-width: 760px;
                 margin: 0 auto;
+                line-height: 1.65;
             }
-
             .platform-grid {
                 display: grid;
-                grid-template-columns: repeat(3, 1fr);
-                gap: 24px;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 26px;
                 position: relative;
                 z-index: 2;
+                max-width: 1040px;
+                margin: 0 auto;
             }
             .platform-card {
-                background: linear-gradient(145deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
-                border: 1px solid rgba(255,255,255,0.1);
-                border-radius: 20px;
-                padding: 32px 28px;
+                background: linear-gradient(145deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.025) 100%);
+                border: 1px solid rgba(255,255,255,0.11);
+                border-radius: 24px;
+                padding: 34px 30px;
                 transition: all 0.4s cubic-bezier(.22,1,.36,1);
                 position: relative;
                 overflow: hidden;
                 display: flex;
                 flex-direction: column;
+                min-height: 420px;
                 backdrop-filter: blur(14px);
                 -webkit-backdrop-filter: blur(14px);
             }
@@ -1178,195 +1181,172 @@
                 content: '';
                 position: absolute;
                 inset: 0;
-                opacity: 0.08;
+                opacity: 0.09;
                 pointer-events: none;
                 transition: opacity 0.3s;
             }
             .platform-card:hover {
                 transform: translateY(-6px);
-                border-color: rgba(255,255,255,0.2);
-                box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+                border-color: rgba(255,255,255,0.22);
+                box-shadow: 0 20px 50px rgba(0,0,0,0.48);
             }
-            .platform-card:hover::before { opacity: 0.14; }
-
-            .platform-card.toori360::before { background: radial-gradient(circle at 0% 0%, #3ba8e0, transparent 70%); }
-            .platform-card.crm::before { background: radial-gradient(circle at 0% 0%, #818cf8, transparent 70%); }
-            .platform-card.fact::before { background: radial-gradient(circle at 0% 0%, #34d399, transparent 70%); }
-
+            .platform-card:hover::before { opacity: 0.16; }
+            .platform-card.servicios::before { background: radial-gradient(circle at 0% 0%, #3ba8e0, transparent 70%); }
+            .platform-card.b2b::before { background: radial-gradient(circle at 0% 0%, #34d399, transparent 70%); }
             .platform-card-icon {
-                width: 56px;
-                height: 56px;
-                border-radius: 14px;
+                width: 58px;
+                height: 58px;
+                border-radius: 16px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 color: white;
-                font-size: 1.5rem;
+                font-size: 1.55rem;
                 margin-bottom: 22px;
-                box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+                box-shadow: 0 8px 24px rgba(0,0,0,0.22);
             }
-            .platform-card.toori360 .platform-card-icon { background: linear-gradient(135deg, #3ba8e0, #aecd5a); }
-            .platform-card.crm .platform-card-icon { background: linear-gradient(135deg, #3ba8e0, #818cf8); }
-            .platform-card.fact .platform-card-icon { background: linear-gradient(135deg, #34d399, #fcd34d); }
-
+            .platform-card.servicios .platform-card-icon { background: linear-gradient(135deg, #3ba8e0, #aecd5a); }
+            .platform-card.b2b .platform-card-icon { background: linear-gradient(135deg, #2DB5A0, #4A2C82); }
+            .platform-card-kicker {
+                color: rgba(255,255,255,0.52);
+                text-transform: uppercase;
+                letter-spacing: 0.09em;
+                font-weight: 800;
+                font-size: 0.72rem;
+                margin-bottom: 8px;
+            }
             .platform-card-title {
                 display: flex;
                 align-items: center;
                 gap: 10px;
-                margin-bottom: 10px;
+                margin-bottom: 12px;
+                flex-wrap: wrap;
             }
             .platform-card h3 {
                 color: white;
-                font-size: 1.4rem;
+                font-size: 1.55rem;
                 margin: 0;
                 font-weight: 800;
             }
             .platform-soon {
-                font-size: 0.6rem;
-                padding: 3px 9px;
+                font-size: 0.62rem;
+                padding: 4px 10px;
                 border-radius: 10px;
-                background: rgba(252,211,77,0.15);
-                color: #fcd34d;
+                background: rgba(52,211,153,0.14);
+                color: #86efac;
                 font-weight: 800;
                 letter-spacing: 0.05em;
                 text-transform: uppercase;
             }
-
             .platform-card-desc {
-                color: rgba(255,255,255,0.6);
-                font-size: 0.95rem;
-                line-height: 1.6;
-                margin-bottom: 20px;
+                color: rgba(255,255,255,0.66);
+                font-size: 0.98rem;
+                line-height: 1.65;
+                margin-bottom: 22px;
             }
-
             .platform-features {
                 list-style: none;
                 padding: 0;
-                margin: 0 0 26px 0;
+                margin: 0 0 28px 0;
                 flex: 1;
             }
             .platform-features li {
                 display: flex;
                 align-items: center;
                 gap: 10px;
-                color: rgba(255,255,255,0.7);
-                font-size: 0.88rem;
-                padding: 6px 0;
+                color: rgba(255,255,255,0.76);
+                font-size: 0.9rem;
+                padding: 7px 0;
             }
             .platform-features li i {
                 font-size: 0.95rem;
                 flex-shrink: 0;
             }
-            .platform-card.toori360 .platform-features li i { color: #aecd5a; }
-            .platform-card.crm .platform-features li i { color: #818cf8; }
-            .platform-card.fact .platform-features li i { color: #34d399; }
-
+            .platform-card.servicios .platform-features li i { color: #aecd5a; }
+            .platform-card.b2b .platform-features li i { color: #34d399; }
             .platform-card-btn {
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
                 gap: 8px;
-                padding: 12px 22px;
-                border-radius: 12px;
-                font-weight: 700;
+                padding: 13px 22px;
+                border-radius: 14px;
+                font-weight: 800;
                 text-decoration: none;
-                font-size: 0.92rem;
+                font-size: 0.93rem;
                 transition: all 0.3s;
-                border: 1px solid rgba(255,255,255,0.15);
+                border: 1px solid rgba(255,255,255,0.16);
                 color: white;
-                background: rgba(255,255,255,0.05);
+                background: rgba(255,255,255,0.06);
             }
             .platform-card:hover .platform-card-btn {
                 background: rgba(255,255,255,0.12);
                 border-color: rgba(255,255,255,0.25);
             }
-            .platform-card.toori360:hover .platform-card-btn {
+            .platform-card.servicios:hover .platform-card-btn {
                 background: var(--toori-blue);
                 border-color: var(--toori-blue);
             }
-            .platform-card.crm:hover .platform-card-btn {
-                background: linear-gradient(135deg, #3ba8e0, #818cf8);
+            .platform-card.b2b:hover .platform-card-btn {
+                background: linear-gradient(135deg, #2DB5A0, #4A2C82);
                 border-color: transparent;
             }
-            .platform-card.fact:hover .platform-card-btn {
-                background: linear-gradient(135deg, #34d399, #fcd34d);
-                border-color: transparent;
-                color: #0c1a12;
-            }
-
             @media (max-width: 900px) {
                 .platform-grid { grid-template-columns: 1fr; gap: 18px; }
                 .platform-header h2 { font-size: 1.8rem; }
                 .platform-section { padding: 70px 0; }
+                .platform-card { min-height: auto; }
             }
         </style>
 
         <div class="container" style="position:relative;z-index:2;">
             <div class="platform-header">
                 <div class="platform-header-eyebrow reveal">
-                    <i class="bi bi-stars"></i> La plataforma Toori
+                    <i class="bi bi-diagram-3"></i> Ecosistema Toori
                 </div>
-                <h2 class="reveal">Todo lo que necesitás, en <span>un solo lugar</span></h2>
-                <p class="reveal">Tres productos integrados para que gestiones, vendas y factures sin cambiar de herramienta.</p>
+                <h2 class="reveal">Dos soluciones, <span>un mismo respaldo operativo</span></h2>
+                <p class="reveal">Toori atiende servicios para hogares y prestadores. SolucionesYa lleva esa misma l&oacute;gica operativa al mundo B2B: propiedades, reclamos, facturaci&oacute;n, cobranzas y WhatsApp en un solo sistema.</p>
             </div>
 
             <div class="platform-grid">
-                <!-- Toori360 -->
-                <div class="platform-card toori360 reveal">
+                <div class="platform-card servicios reveal">
+                    <div class="platform-card-icon"><i class="bi bi-house-heart"></i></div>
+                    <div class="platform-card-kicker">Para personas y prestadores</div>
+                    <div class="platform-card-title">
+                        <h3>Toori ServiciosYa</h3>
+                    </div>
+                    <p class="platform-card-desc">
+                        La central de servicios para pedir profesionales de confianza por WhatsApp, recibir presupuestos y coordinar trabajos con seguimiento.
+                    </p>
+                    <ul class="platform-features">
+                        <li><i class="bi bi-check-circle-fill"></i> Pedidos por WhatsApp</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Prestadores verificados por zona</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Presupuestos y se&ntilde;a segura</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Oportunidades para trabajadores</li>
+                    </ul>
+                    <a href="https://wa.me/5493512139046?text=Hola!%20Necesito%20un%20servicio" class="platform-card-btn">
+                        Pedir un servicio <i class="bi bi-whatsapp"></i>
+                    </a>
+                </div>
+
+                <div class="platform-card b2b reveal">
                     <div class="platform-card-icon"><i class="bi bi-buildings"></i></div>
+                    <div class="platform-card-kicker">Para empresas, inmobiliarias y administradoras</div>
                     <div class="platform-card-title">
-                        <h3>Toori360</h3>
+                        <h3>SolucionesYa</h3>
+                        <span class="platform-soon">B2B</span>
                     </div>
                     <p class="platform-card-desc">
-                        Gestión de mantenimiento, incidencias y proveedores para inmobiliarias y consorcios con trazabilidad total.
+                        Un software todo-en-uno para gestionar mantenimiento, tickets, proveedores, facturaci&oacute;n ARCA, cobranzas, clientes y seguimiento por WhatsApp.
                     </p>
                     <ul class="platform-features">
-                        <li><i class="bi bi-check-circle-fill"></i> Tickets inteligentes</li>
-                        <li><i class="bi bi-check-circle-fill"></i> WhatsApp + IA integrados</li>
-                        <li><i class="bi bi-check-circle-fill"></i> Multi-tenant</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Reclamos &rarr; tickets &rarr; proveedores</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Facturaci&oacute;n ARCA y cobranzas</li>
+                        <li><i class="bi bi-check-circle-fill"></i> CRM, propiedades y dashboard</li>
+                        <li><i class="bi bi-check-circle-fill"></i> WhatsApp e IA como respaldo operativo</li>
                     </ul>
-                    <a href="toori360.php" class="platform-card-btn">
-                        Conocer más <i class="bi bi-arrow-right"></i>
-                    </a>
-                </div>
-
-                <!-- CRM -->
-                <div class="platform-card crm reveal">
-                    <div class="platform-card-icon"><i class="bi bi-people-fill"></i></div>
-                    <div class="platform-card-title">
-                        <h3>Toori CRM</h3>
-                        <span class="platform-soon">Pronto</span>
-                    </div>
-                    <p class="platform-card-desc">
-                        Pipeline visual, WhatsApp integrado y automatizaciones para equipos comerciales que quieren vender más.
-                    </p>
-                    <ul class="platform-features">
-                        <li><i class="bi bi-check-circle-fill"></i> Pipeline Kanban</li>
-                        <li><i class="bi bi-check-circle-fill"></i> Reportes en tiempo real</li>
-                        <li><i class="bi bi-check-circle-fill"></i> Multi-usuario</li>
-                    </ul>
-                    <a href="crm.php" class="platform-card-btn">
-                        Reservar acceso <i class="bi bi-arrow-right"></i>
-                    </a>
-                </div>
-
-                <!-- FacturaIA -->
-                <div class="platform-card fact reveal">
-                    <div class="platform-card-icon"><i class="bi bi-receipt"></i></div>
-                    <div class="platform-card-title">
-                        <h3>FacturaIA</h3>
-                        <span class="platform-soon">Pronto</span>
-                    </div>
-                    <p class="platform-card-desc">
-                        Facturación electrónica AFIP con asistente IA. Emite comprobantes A, B, C y notas en segundos.
-                    </p>
-                    <ul class="platform-features">
-                        <li><i class="bi bi-check-circle-fill"></i> Conexión directa AFIP</li>
-                        <li><i class="bi bi-check-circle-fill"></i> Asistente IA integrado</li>
-                        <li><i class="bi bi-check-circle-fill"></i> PDF + envío automático</li>
-                    </ul>
-                    <a href="facturacion.php" class="platform-card-btn">
-                        Reservar acceso <i class="bi bi-arrow-right"></i>
+                    <a href="https://wa.me/5493512139046?text=Hola!%20Quiero%20conocer%20SolucionesYa%20para%20mi%20empresa" class="platform-card-btn">
+                        Consultar por SolucionesYa <i class="bi bi-arrow-right"></i>
                     </a>
                 </div>
             </div>
@@ -1406,7 +1386,7 @@
                         <i class="bi bi-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>Para los clientes, el uso de la plataforma es completamente gratuito. Solo pagas el costo del servicio acordado con el profesional. Para los trabajadores, el registro tambien es gratis y sin comisiones ocultas.</p>
+                        <p>Para los clientes, pedir presupuestos no tiene costo. Para confirmar un servicio se abona una seña segura y el resto se paga directo al profesional. Para los trabajadores, el registro es gratuito.</p>
                     </div>
                 </div>
 

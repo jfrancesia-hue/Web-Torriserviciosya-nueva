@@ -171,42 +171,7 @@
       <a href="ofertas.php" class="nav-link">Ofertas</a>
       <a href="registro.php" class="nav-link" id="nav-worker-link">Soy Trabajador</a>
       <a href="PerfileProfesionales.php" class="nav-link">Profesionales</a>
-      <!-- Plataforma dropdown -->
-      <div class="platform-menu" id="platform-menu">
-        <button type="button" class="platform-trigger nav-link" id="platform-trigger" aria-haspopup="true" aria-expanded="false">
-          Plataforma <i class="bi bi-chevron-down"></i>
-        </button>
-        <div class="platform-dropdown" id="platform-dropdown" role="menu">
-          <a href="toori360.php" class="platform-item" role="menuitem">
-            <div class="platform-item-icon t360"><i class="bi bi-buildings"></i></div>
-            <div>
-              <div class="platform-item-title">Toori360</div>
-              <div class="platform-item-desc">Mantenimiento y tickets para inmobiliarias y consorcios</div>
-            </div>
-          </a>
-          <a href="crm.php" class="platform-item" role="menuitem">
-            <div class="platform-item-icon crm"><i class="bi bi-people-fill"></i></div>
-            <div>
-              <div class="platform-item-title">
-                Toori CRM
-                <span class="platform-soon-tag">Pronto</span>
-              </div>
-              <div class="platform-item-desc">Gestión de clientes, ventas y equipo comercial</div>
-            </div>
-          </a>
-          <a href="facturacion.php" class="platform-item" role="menuitem">
-            <div class="platform-item-icon fact"><i class="bi bi-receipt"></i></div>
-            <div>
-              <div class="platform-item-title">
-                FacturaIA
-                <span class="platform-soon-tag">Pronto</span>
-              </div>
-              <div class="platform-item-desc">Facturación electrónica AFIP con inteligencia artificial</div>
-            </div>
-          </a>
-        </div>
-      </div>
-
+      <a href="index.php#solucionesya" class="nav-link">SolucionesYa B2B</a>
       <a href="login.php" class="nav-link" id="nav-login-link" style="background:var(--toori-blue);color:white;padding:10px 24px;border-radius:50px;font-weight:600;transition:all 0.3s;">Ingresá</a>
 
       <!-- Usuario logueado -->
