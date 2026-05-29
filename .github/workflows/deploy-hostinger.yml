@@ -42,24 +42,35 @@ jobs:
           echo "::error::Missing secret HOSTINGER_FTP_PASSWORD or FTP_PASSWORD"
           exit 1
 
-      - name: Deploy via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ env.DEPLOY_SERVER }}
-          username: ${{ env.DEPLOY_USERNAME }}
-          password: ${{ env.DEPLOY_PASSWORD }}
-          server-dir: ${{ env.DEPLOY_TARGET_DIR }}
-          local-dir: ./
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/.github/**
-            **/node_modules/**
-            **/.pnpm-store/**
-            **/.env
-            **/.env.*
-            webhook/.env
-            webhook/*.txt
-            webhook/*.json
-            webhook/*.zip
-            DEPLOY_INSTRUCTIONS.txt
+      - name: Install lftp
+        run: sudo apt-get update && sudo apt-get install -y lftp
+
+      - name: Deploy via lftp without remote deletes
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "Deploying to configured Hostinger directory: ${DEPLOY_TARGET_DIR}"
+          lftp -u "${DEPLOY_USERNAME}","${DEPLOY_PASSWORD}" "${DEPLOY_SERVER}" <<EOF
+          set ftp:ssl-allow true
+          set ftp:passive-mode true
+          set net:max-retries 2
+          set net:timeout 30
+          set xfer:clobber true
+          mirror -R --verbose=1 --parallel=2 \
+            --exclude-glob .git/ \
+            --exclude-glob .git/** \
+            --exclude-glob .github/ \
+            --exclude-glob .github/** \
+            --exclude-glob node_modules/ \
+            --exclude-glob node_modules/** \
+            --exclude-glob .pnpm-store/ \
+            --exclude-glob .pnpm-store/** \
+            --exclude-glob .env \
+            --exclude-glob .env.* \
+            --exclude-glob webhook/.env \
+            --exclude-glob webhook/*.txt \
+            --exclude-glob webhook/*.json \
+            --exclude-glob webhook/*.zip \
+            ./ "${DEPLOY_TARGET_DIR}"
+          bye
+          EOF
