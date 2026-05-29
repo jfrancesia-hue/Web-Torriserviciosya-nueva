@@ -7,3 +7,5 @@ webhook/*.zip
 # Estado interno
 .omc/
 webhook/*.log
+
+Toori360/config-solucionesya.php
