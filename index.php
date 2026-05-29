@@ -71,8 +71,23 @@
         box-shadow: 0 16px 34px rgba(45,181,160,0.38);
       }
       .home-page .navbar.navbar--scrolled {
-        background: rgba(255,255,255,0.98) !important;
-        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1) !important;
+        background: rgba(8, 13, 28, 0.28) !important;
+        border-bottom: 1px solid rgba(255,255,255,0.16) !important;
+        box-shadow: 0 10px 34px rgba(0, 0, 0, 0.14) !important;
+        backdrop-filter: blur(18px) saturate(140%);
+        -webkit-backdrop-filter: blur(18px) saturate(140%);
+      }
+      .home-page .navbar.navbar--scrolled .logo span,
+      .home-page .navbar.navbar--scrolled .nav-link,
+      .home-page .navbar.navbar--scrolled .menu-toggle {
+        color: #fff;
+        text-shadow: 0 2px 14px rgba(0,0,0,0.34);
+      }
+      .home-page .navbar.navbar--scrolled .nav-link:hover,
+      .home-page .navbar.navbar--scrolled .nav-link:focus,
+      .home-page .navbar.navbar--scrolled .nav-link:active {
+        background: rgba(255,255,255,0.16);
+        color: #fff;
       }
       @media (max-width: 768px) {
         .home-page .navbar.navbar--sticky { background: rgba(255,255,255,0.96) !important; }
