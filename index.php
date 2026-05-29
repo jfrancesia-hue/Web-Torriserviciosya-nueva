@@ -164,7 +164,7 @@
       /* Indicadores de slide */
       .hero-indicators {
         position: absolute;
-        bottom: 100px;
+        bottom: 54px;
         left: 50%;
         transform: translateX(-50%);
         display: flex;
@@ -191,7 +191,7 @@
       /* Etiqueta de la foto actual */
       .hero-slide-label {
         position: absolute;
-        bottom: 120px;
+        bottom: 76px;
         left: 50%;
         transform: translateX(-50%);
         color: rgba(255,255,255,0.5);
@@ -229,8 +229,8 @@
       @media (max-width: 768px) {
         .hero-slideshow { min-height: 90vh; }
         .hero-slideshow .hero-main-content { padding-top: 16vh; }
-        .hero-indicators { bottom: 80px; }
-        .hero-slide-label { bottom: 100px; font-size: 0.7rem; }
+        .hero-indicators { bottom: 38px; }
+        .hero-slide-label { bottom: 58px; font-size: 0.7rem; }
       }
     </style>
 
@@ -272,7 +272,7 @@
         </div>
 
         <!-- Trust badges -->
-        <div class="trust-badges" style="margin-top: 20px;">
+        <div class="trust-badges" style="margin-top: 12px;">
           <div class="trust-badge">
             <i class="bi bi-shield-check"></i>
             <span>Prestadores verificados</span>
