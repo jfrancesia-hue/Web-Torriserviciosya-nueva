@@ -1,0 +1,339 @@
+/* ============================================
+   TOORI SERVICIOSYA - Design Refresh seguro
+   Capa visual progresiva: no toca lógica ni flujos.
+   Se carga al final para poder revertirse quitando este archivo.
+   ============================================ */
+
+:root {
+  --refresh-ink: #20243a;
+  --refresh-muted: #657083;
+  --refresh-line: rgba(32, 36, 58, 0.08);
+  --refresh-glass: rgba(255, 255, 255, 0.78);
+  --refresh-shadow-sm: 0 10px 30px rgba(32, 36, 58, 0.08);
+  --refresh-shadow-md: 0 18px 55px rgba(32, 36, 58, 0.12);
+  --refresh-shadow-blue: 0 18px 45px rgba(59, 168, 224, 0.18);
+}
+
+html { scroll-padding-top: 96px; }
+
+body {
+  background:
+    radial-gradient(circle at top left, rgba(59, 168, 224, 0.08), transparent 28rem),
+    radial-gradient(circle at 85% 12%, rgba(174, 205, 90, 0.09), transparent 24rem),
+    #fff;
+}
+
+body::selection { background: rgba(59, 168, 224, 0.22); }
+
+.container,
+.container-header {
+  width: min(100%, 1200px);
+}
+
+/* Navbar más limpia y estable */
+.navbar.navbar--sticky {
+  min-height: 82px;
+  background: rgba(255, 255, 255, 0.88);
+  border-bottom: 1px solid rgba(32, 36, 58, 0.07);
+  box-shadow: 0 8px 32px rgba(32, 36, 58, 0.06);
+}
+
+.logo img,
+.navbar .logo img {
+  max-height: 64px !important;
+  width: auto;
+  object-fit: contain;
+}
+
+.logo span {
+  letter-spacing: -0.02em;
+}
+
+.nav-link {
+  color: var(--refresh-ink);
+  font-weight: 650;
+}
+
+.nav-link:hover { color: var(--toori-blue); }
+
+#nav-login-link,
+.nav-menu a[href="login.php"] {
+  box-shadow: 0 10px 24px rgba(59, 168, 224, 0.22);
+}
+
+#nav-login-link:hover,
+.nav-menu a[href="login.php"]:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 30px rgba(59, 168, 224, 0.28);
+}
+
+/* Hero: más contraste, foco y confianza */
+.hero-slideshow {
+  isolation: isolate;
+  background: #111827;
+}
+
+.hero-slide-overlay {
+  background:
+    linear-gradient(90deg, rgba(13, 18, 32, 0.78) 0%, rgba(13, 18, 32, 0.56) 42%, rgba(13, 18, 32, 0.35) 100%),
+    radial-gradient(circle at 50% 42%, rgba(59, 168, 224, 0.22), transparent 30rem) !important;
+}
+
+.hero-main-content {
+  width: 100%;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.hero-content {
+  margin-inline: auto;
+}
+
+.hero-content h1,
+.hero h1 {
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+
+.hero-content p,
+.hero p {
+  text-wrap: pretty;
+}
+
+.hero-cta-bar {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.78);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.26);
+}
+
+.trust-badges {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.trust-badge {
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  color: white;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.16);
+}
+
+/* Secciones: ritmo visual consistente */
+.section {
+  position: relative;
+}
+
+.section-title,
+.section h2,
+.faq-section h2,
+.testimonials-section h2 {
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 74px;
+  height: 4px;
+  border-radius: 999px;
+  margin: 16px auto 0;
+  background: linear-gradient(90deg, var(--toori-blue), var(--toori-green));
+}
+
+.card-premium,
+.category-card,
+.testimonial-card,
+.step-card,
+.feature-card,
+.app-card,
+.security-item,
+.profile-card,
+.offer-card,
+.login-card,
+.register-card,
+.form-card,
+.dashboard-mockup,
+.platform-card {
+  border: 1px solid var(--refresh-line);
+  box-shadow: var(--refresh-shadow-sm);
+}
+
+.card-premium:hover,
+.category-card:hover,
+.testimonial-card:hover,
+.feature-card:hover,
+.profile-card:hover,
+.offer-card:hover,
+.platform-card:hover {
+  box-shadow: var(--refresh-shadow-md);
+}
+
+/* Categorías y cards públicas */
+.category-card {
+  border-radius: 24px;
+}
+
+.category-card-body h4 {
+  letter-spacing: -0.01em;
+}
+
+.category-card-body .btn,
+.whatsapp-btn {
+  min-height: 40px;
+}
+
+/* Botones más consistentes */
+.btn,
+.btn-primary,
+.btn-secondary,
+.btn-360-primary,
+.btn-360-secondary,
+button,
+input[type="submit"] {
+  transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease, color 0.22s ease, border-color 0.22s ease;
+}
+
+.btn:hover,
+.btn-primary:hover,
+.btn-secondary:hover,
+.btn-360-primary:hover,
+.btn-360-secondary:hover,
+button:hover,
+input[type="submit"]:hover {
+  transform: translateY(-1px);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--toori-blue), #188bc5);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #188bc5, var(--toori-green));
+}
+
+/* Forms */
+input,
+select,
+textarea {
+  border-radius: 14px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--toori-blue) !important;
+  box-shadow: 0 0 0 4px rgba(59, 168, 224, 0.12) !important;
+}
+
+/* Footer */
+.footer-enhanced {
+  background:
+    radial-gradient(circle at top left, rgba(59, 168, 224, 0.16), transparent 24rem),
+    linear-gradient(135deg, #171a2f, #101223 65%, #0b1020);
+}
+
+.footer-enhanced a:hover {
+  color: var(--toori-green) !important;
+}
+
+/* Toori360 landing: mantiene look oscuro, mejora lectura */
+.hero-360 h1,
+.hero-360-desc { text-wrap: balance; }
+
+.dashboard-mockup {
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.42), 0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+}
+
+/* CTA flotante: evitar superposición agresiva */
+.floating-wa {
+  box-shadow: 0 14px 34px rgba(37, 211, 102, 0.32);
+}
+
+.fixed-mobile-cta .btn,
+.fixed-mobile-cta a {
+  width: 100%;
+}
+
+@media (max-width: 992px) {
+  .hero-content h1,
+  .hero h1 {
+    font-size: clamp(2.35rem, 9vw, 3.5rem) !important;
+  }
+
+  .hero-content p,
+  .hero p {
+    font-size: 1.08rem !important;
+  }
+
+  .hero-cta-bar {
+    max-width: 560px;
+  }
+}
+
+@media (max-width: 768px) {
+  html { scroll-padding-top: 78px; }
+
+  .navbar.navbar--sticky {
+    min-height: 72px;
+  }
+
+  .navbar .logo img,
+  .logo img {
+    max-height: 52px !important;
+  }
+
+  .hero-slideshow {
+    min-height: 92vh !important;
+  }
+
+  .hero-main-content {
+    padding-top: 14vh !important;
+  }
+
+  .hero-cta-bar {
+    flex-direction: column;
+    border-radius: 24px;
+    padding: 12px;
+  }
+
+  .hero-cta-bar .btn {
+    width: 100%;
+    border-radius: 18px;
+  }
+
+  .trust-badges {
+    gap: 8px;
+  }
+
+  .trust-badge {
+    font-size: 0.82rem;
+    padding: 8px 12px;
+  }
+
+  .section-title::after {
+    margin-top: 12px;
+  }
+
+  .floating-wa {
+    width: 54px;
+    height: 54px;
+    right: 18px;
+    bottom: 82px;
+    font-size: 28px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Toori CRM - Gestion integral de clientes y ventas | Proximamente</title>
-    <meta name="description" content="CRM inteligente para gestionar clientes, oportunidades, ventas y equipo. Integrado con todo el ecosistema Toori. Proximamente.">
-    <meta property="og:title" content="Toori CRM - Proximamente">
-    <meta property="og:description" content="CRM inteligente para gestionar clientes, ventas y equipo comercial.">
+    <title>Toori CRM - Gestión integral de clientes y ventas | Próximamente</title>
+    <meta name="description" content="CRM inteligente para gestiónar clientes, oportunidades, ventas y equipo. Integrado con todo el ecosistema Toori. Próximamente.">
+    <meta property="og:title" content="Toori CRM - Próximamente">
+    <meta property="og:description" content="CRM inteligente para gestiónar clientes, ventas y equipo comercial.">
     <meta property="og:image" content="assets/logo.png">
     <meta property="og:type" content="website">
     <link rel="icon" type="image/png" href="assets/logo.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" crossorigin href="./assets/main-D3W1u2cc.css">
     <link rel="stylesheet" href="./assets/toori-enhanced.css">
+    <link rel="stylesheet" href="./assets/toori-design-refresh.css">
 
     <style>
         /* ===== Hero CRM ===== */
@@ -406,10 +407,10 @@
         <div class="container hero-crm-content">
             <div class="grid" style="grid-template-columns: 1.1fr 1fr; gap: 60px; align-items: center;">
                 <div class="reveal-left">
-                    <div class="soon-badge">Proximamente</div>
+                    <div class="soon-badge">Próximamente</div>
                     <h1>El <span>CRM inteligente</span> de Toori</h1>
                     <p class="hero-crm-desc">
-                        Gestiona tus clientes, oportunidades y equipo comercial en un solo lugar. Pipeline visual, seguimiento automatico, integracion con WhatsApp y reportes en tiempo real. Estamos afinando los ultimos detalles.
+                        Gestióna tus clientes, oportunidades y equipo comercial en un solo lugar. Pipeline visual, seguimiento automatico, integracion con WhatsApp y reportes en tiempo real. Estamos afinando los ultimos detalles.
                     </p>
 
                     <form class="notify-form" onsubmit="notifyMe(event, 'crm')">
@@ -489,7 +490,7 @@
         <div class="container">
             <div class="features-title reveal">
                 <h2>Pensado para <span>equipos comerciales</span> modernos</h2>
-                <p>Todo lo que necesitas para vender mas y mejor</p>
+                <p>Todo lo que necesitás para vender más y mejor</p>
             </div>
 
             <div class="feature-grid">
@@ -519,7 +520,7 @@
 
                 <div class="feature-card reveal">
                     <div class="feature-icon"><i class="bi bi-people-fill"></i></div>
-                    <h4>Gestion de equipo</h4>
+                    <h4>Gestión de equipo</h4>
                     <p>Roles, permisos y metricas por vendedor. Asignacion inteligente de leads.</p>
                 </div>
 

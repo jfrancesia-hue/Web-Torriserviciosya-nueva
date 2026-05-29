@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagina no encontrada - Toori ServiciosYa</title>
+    <title>Página no encontrada - Toori ServiciosYa</title>
     <link rel="icon" type="image/png" href="assets/logo.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" crossorigin href="./assets/main-D3W1u2cc.css">
     <link rel="stylesheet" href="./assets/toori-enhanced.css">
+    <link rel="stylesheet" href="./assets/toori-design-refresh.css">
     <style>
         body {
             min-height: 100vh;
@@ -136,14 +137,14 @@
             <i class="bi bi-brush error-icon"></i>
         </div>
 
-        <h1 class="error-title">Esta pagina no existe</h1>
-        <p class="error-desc">Parece que la pagina que buscas fue movida, eliminada o nunca existio. Pero no te preocupes, podemos ayudarte a encontrar lo que necesitas.</p>
+        <h1 class="error-title">Esta página no existe</h1>
+        <p class="error-desc">Parece que la página que buscas fue movida, eliminada o nunca existio. Pero no te preocupes, podemos ayudarte a encontrar lo que necesitás.</p>
 
         <div class="error-buttons">
             <a href="./" class="btn btn-primary btn-ripple">
                 <i class="bi bi-house me-2"></i> Ir al inicio
             </a>
-            <a href="categorias.php" class="btn btn-secondary btn-ripple">
+            <a href="categorías.php" class="btn btn-secondary btn-ripple">
                 <i class="bi bi-grid me-2"></i> Ver servicios
             </a>
             <a href="https://wa.me/5493512139046" target="_blank" class="btn" style="background:rgba(37,211,102,0.1);color:#25d366;border:2px solid rgba(37,211,102,0.2);">

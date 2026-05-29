@@ -7,12 +7,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ingresar - Toori ServiciosYa</title>
-    <meta name="description" content="Inicia sesion en tu cuenta de Toori para gestionar tus servicios o tu perfil profesional.">
+    <meta name="description" content="Inicia sesion en tu cuenta de Toori para gestiónar tus servicios o tu perfil profesional.">
     <link rel="icon" type="image/png" href="assets/logo.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" crossorigin href="./assets/main-D3W1u2cc.css">
     <link rel="stylesheet" href="./assets/toori-enhanced.css">
+    <link rel="stylesheet" href="./assets/toori-design-refresh.css">
 
     <style>
         body { margin: 0; }
@@ -344,7 +345,7 @@
         <div class="login-visual-bg" style="background-image: url('https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop');"></div>
         <div class="login-visual-content">
             <h2>La plataforma que conecta hogares con profesionales</h2>
-            <p>Ingresa a tu cuenta y gestiona tus servicios de manera simple y segura.</p>
+            <p>Ingresá a tu cuenta y gestióna tus servicios de manera simple y segura.</p>
             <div class="login-visual-features">
                 <div class="login-visual-feature">
                     <i class="bi bi-shield-check"></i>
@@ -368,7 +369,7 @@
             <div class="login-logo">
                 <a href="./"><img src="assets/logo.png" alt="Toori Logo"></a>
                 <h1>Bienvenido de vuelta</h1>
-                <p>Ingresa a tu cuenta de Toori ServiciosYa</p>
+                <p>Ingresá a tu cuenta de Toori ServiciosYa</p>
             </div>
 
             <div class="login-card">
@@ -444,7 +445,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         e.preventDefault();
         loginError.classList.remove('show');
         loginBtn.disabled = true;
-        loginBtn.innerHTML = '<i class="bi bi-arrow-repeat spin" style="display:inline-block;animation:spin 1s linear infinite;"></i> Ingresando...';
+        loginBtn.innerHTML = '<i class="bi bi-arrow-repeat spin" style="display:inline-block;animation:spin 1s linear infinite;"></i> Ingresándo...';
 
         const email = document.getElementById('login-email').value;
         const password = document.getElementById('login-password').value;

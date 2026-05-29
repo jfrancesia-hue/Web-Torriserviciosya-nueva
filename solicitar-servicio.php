@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solicitar Servicio - Toori ServiciosYa</title>
+    <title>Solicitar servicio - Toori ServiciosYa</title>
     <meta name="description"
         content="Completá tu solicitud de servicio y conectá con un profesional verificado por Toori.">
     <!-- Favicon -->
@@ -89,8 +89,8 @@ window.supabase = window.supabase.createClient(supabaseUrl, supabaseKey)
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
-        .loc-suggestions,
-        .cat-suggestions {
+        .loc-suggestións,
+        .cat-suggestións {
             position: absolute;
             background: white;
             width: 100%;
@@ -121,6 +121,7 @@ window.supabase = window.supabase.createClient(supabaseUrl, supabaseKey)
   <link rel="modulepreload" crossorigin href="./assets/supabase-1haNsgbs.js">
 <script src="script.js"></script>
   <link rel="stylesheet" crossorigin href="./assets/main-D3W1u2cc.css">
+    <link rel="stylesheet" href="./assets/toori-design-refresh.css">
 </head>
 
 <body class="bg-light">
@@ -186,7 +187,7 @@ window.supabase = window.supabase.createClient(supabaseUrl, supabaseKey)
                                     <div style="position: relative;">
                                         <input type="text" id="search-profesion" class="form-control"
                                             placeholder="Ej: Plomero, Electricista..." autocomplete="off" required>
-                                        <div id="category-suggestions" class="cat-suggestions"></div>
+                                        <div id="category-suggestións" class="cat-suggestións"></div>
                                         <input type="hidden" id="reg-profesion" required>
                                     </div>
                                 </div>
@@ -200,7 +201,7 @@ window.supabase = window.supabase.createClient(supabaseUrl, supabaseKey)
                                         <input type="text" id="reg-ciudad" class="form-control"
                                             placeholder="¿Dónde necesitás el servicio?" autocomplete="off" required>
                                     </div>
-                                    <div id="loc-suggestions" class="loc-suggestions"></div>
+                                    <div id="loc-suggestións" class="loc-suggestións"></div>
                                     <input type="hidden" id="reg-lat">
                                     <input type="hidden" id="reg-lon">
                                 </div>

@@ -4,7 +4,7 @@
       <!-- Brand -->
       <div class="footer-brand">
         <img src="assets/logo.png" alt="Toori Logo">
-        <p>Gestion profesional de servicios para tu hogar. Conectamos personas con los mejores prestadores verificados.</p>
+        <p>Gestión profesional de servicios para tu hogar. Conectamos personas con los mejores prestadores verificados.</p>
         <div class="footer-social">
           <a href="https://www.instagram.com/serviciosyaoficial/" target="_blank" rel="noopener" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
           <a href="https://www.facebook.com/serviciosyaoficial/" target="_blank" rel="noopener" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
@@ -17,7 +17,7 @@
       <div class="footer-col">
         <h4>Servicios</h4>
         <ul>
-          <li><a href="categorias.php">Todas las categorias</a></li>
+          <li><a href="categorias.php">Todas las categorías</a></li>
           <li><a href="PerfileProfesionales.php">Profesionales</a></li>
           <li><a href="ofertas.php">Ofertas disponibles</a></li>
           <li><a href="registro.php">Ofrecer servicios</a></li>
@@ -38,9 +38,9 @@
       <div class="footer-col">
         <h4>Empresa</h4>
         <ul>
-          <li><a href="index.php#como-funciona">Como funciona</a></li>
-          <li><a href="Terminos-y-condiciones.php">Terminos y condiciones</a></li>
-          <li><a href="politicas-de-privacidad.php">Politica de privacidad</a></li>
+          <li><a href="index.php#como-funciona">Cómo funciona</a></li>
+          <li><a href="Terminos-y-condiciones.php">Términos y condiciones</a></li>
+          <li><a href="politicas-de-privacidad.php">Política de privacidad</a></li>
         </ul>
       </div>
 

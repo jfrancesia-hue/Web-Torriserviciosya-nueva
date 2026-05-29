@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Soporte y Ayuda - Toori ServiciosYa</title>
+  <title>Soporte y ayuda - Toori ServiciosYa</title>
   <meta name="description"
     content="¿Necesitás ayuda con Toori? Encontrá respuestas a tus dudas o contactate con nuestro equipo de soporte técnico.">
   <!-- Bootstrap CSS -->
@@ -81,6 +81,7 @@ window.supabase = window.supabase.createClient(supabaseUrl, supabaseKey)
   <script type="module" crossorigin src="./assets/supabase-1haNsgbs.js"></script>
 <script src="script.js"></script>
   <link rel="stylesheet" crossorigin href="./assets/main-D3W1u2cc.css">
+    <link rel="stylesheet" href="./assets/toori-design-refresh.css">
 </head>
 
 <body class="bg-light">

@@ -167,7 +167,7 @@
     </div>
     <nav class="nav-menu" id="nav-menu">
       <a href="index.php" class="nav-link">Inicio</a>
-      <a href="index.php#como-funciona" class="nav-link">Como funciona</a>
+      <a href="index.php#como-funciona" class="nav-link">Cómo funciona</a>
       <a href="ofertas.php" class="nav-link">Ofertas</a>
       <a href="registro.php" class="nav-link" id="nav-worker-link">Soy Trabajador</a>
       <a href="PerfileProfesionales.php" class="nav-link">Profesionales</a>
@@ -191,7 +191,7 @@
                 Toori CRM
                 <span class="platform-soon-tag">Pronto</span>
               </div>
-              <div class="platform-item-desc">Gestion de clientes, ventas y equipo comercial</div>
+              <div class="platform-item-desc">Gestión de clientes, ventas y equipo comercial</div>
             </div>
           </a>
           <a href="facturacion.php" class="platform-item" role="menuitem">
@@ -201,20 +201,20 @@
                 FacturaIA
                 <span class="platform-soon-tag">Pronto</span>
               </div>
-              <div class="platform-item-desc">Facturacion electronica AFIP con inteligencia artificial</div>
+              <div class="platform-item-desc">Facturación electrónica AFIP con inteligencia artificial</div>
             </div>
           </a>
         </div>
       </div>
 
-      <a href="login.php" class="nav-link" id="nav-login-link" style="background:var(--toori-blue);color:white;padding:10px 24px;border-radius:50px;font-weight:600;transition:all 0.3s;">Ingresa</a>
+      <a href="login.php" class="nav-link" id="nav-login-link" style="background:var(--toori-blue);color:white;padding:10px 24px;border-radius:50px;font-weight:600;transition:all 0.3s;">Ingresá</a>
 
       <!-- Usuario logueado -->
       <div id="user-menu" class="user-menu">
         <button id="user-button" class="user-button"></button>
         <div id="user-dropdown" class="user-dropdown">
           <a href="perfil.php"><i class="bi bi-person"></i> Perfil</a>
-          <a href="#" id="logout-btn" style="color:#ef4444;"><i class="bi bi-box-arrow-right"></i> Cerrar sesion</a>
+          <a href="#" id="logout-btn" style="color:#ef4444;"><i class="bi bi-box-arrow-right"></i> Cerrar sesión</a>
         </div>
       </div>
     </nav>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalle de Oferta - Toori ServiciosYa</title>
+    <title>Detalle de oferta - Toori ServiciosYa</title>
     <meta name="description" content="Conocé los detalles de esta oferta de trabajo en Toori.">
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="assets/logo.png">
@@ -20,6 +20,7 @@ window.supabase = window.supabase.createClient(supabaseUrl, supabaseKey)
   <script type="module" crossorigin src="./assets/oferta-CZS6BMOg.js"></script>
   <link rel="modulepreload" crossorigin href="./assets/supabase-1haNsgbs.js">
   <link rel="stylesheet" crossorigin href="./assets/main-D3W1u2cc.css">
+    <link rel="stylesheet" href="./assets/toori-design-refresh.css">
 </head>
 
 <body style="background-color: var(--bg-soft); min-height: 100vh;">

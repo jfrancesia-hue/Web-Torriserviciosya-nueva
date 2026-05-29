@@ -4,12 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todas las Categorias - Toori ServiciosYa</title>
-    <meta name="description" content="Explora todas las categorias de servicios disponibles en Toori ServiciosYa.">
+    <title>Todas las categorías - Toori ServiciosYa</title>
+    <meta name="description" content="Explora todas las categorías de servicios disponibles en Toori ServiciosYa.">
     <link rel="icon" type="image/png" href="assets/logo.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" crossorigin href="./assets/main-D3W1u2cc.css">
     <link rel="stylesheet" href="./assets/toori-enhanced.css">
+    <link rel="stylesheet" href="./assets/toori-design-refresh.css">
 
     <style>
         /* Buscador */
@@ -105,7 +106,7 @@
             color: #aaa;
         }
 
-        /* Grid de categorias */
+        /* Grid de categorías */
         .cat-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -195,14 +196,14 @@
 
     <section class="section" style="background-color: var(--bg-soft); min-height: 80vh; padding-top: 120px;">
         <div class="container text-center">
-            <h2 class="section-title reveal">Todas las Categorias</h2>
-            <p class="section-subtitle reveal">Elegi el servicio que necesitas y empeza tu gestion</p>
+            <h2 class="section-title reveal">Todas las categorías</h2>
+            <p class="section-subtitle reveal">Elegí el servicio que necesitás y empezá tu gestión</p>
 
             <!-- Buscador -->
             <div class="search-wrapper reveal">
                 <i class="bi bi-search search-icon"></i>
-                <input type="text" class="search-input" id="cat-search" placeholder="Buscar categoria... ej: plomeria, electricidad" autocomplete="off">
-                <button class="search-clear" id="search-clear" title="Limpiar busqueda">
+                <input type="text" class="search-input" id="cat-search" placeholder="Buscar categoría... ej: plomería, electricidad" autocomplete="off">
+                <button class="search-clear" id="search-clear" title="Limpiar búsqueda">
                     <i class="bi bi-x-circle"></i>
                 </button>
             </div>
@@ -280,7 +281,7 @@
             return 'bi-star';
         }
 
-        // Mapeo EXHAUSTIVO - Pexels IDs unicos para TODAS las 90+ categorias de Supabase
+        // Mapeo EXHAUSTIVO - Pexels IDs únicos para todas las categorías de Supabase
         function getImage(nombre) {
             const c = nombre.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
             const px = (id) => `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop`;
@@ -412,14 +413,14 @@
                 container.innerHTML = `
                     <div class="no-results" style="grid-column: 1/-1;">
                         <i class="bi bi-search"></i>
-                        <p>No se encontraron categorias</p>
-                        <small>Proba con otro termino de busqueda</small>
+                        <p>No se encontraron categorías</p>
+                        <small>Probá con otro término de búsqueda</small>
                     </div>`;
                 resultsCount.textContent = '';
                 return;
             }
 
-            resultsCount.textContent = categories.length + ' categoria' + (categories.length !== 1 ? 's' : '') + ' encontrada' + (categories.length !== 1 ? 's' : '');
+            resultsCount.textContent = categories.length + ' categoría' + (categories.length !== 1 ? 's' : '') + ' encontrada' + (categories.length !== 1 ? 's' : '');
 
             container.innerHTML = categories.map((cat, i) => {
                 const icon = getIcon(cat.nombre);
@@ -434,7 +435,7 @@
                             <i class="bi ${icon} icon-hover-bounce"></i>
                             <h4>${cat.nombre}</h4>
                             <button class="btn btn-primary btn-ripple whatsapp-btn" data-category="${cat.nombre}">
-                                Iniciar gestion
+                                Iniciar gestión
                             </button>
                         </div>
                     </div>`;
@@ -473,11 +474,11 @@
                     });
                     renderCategories(allCategories);
                 } else {
-                    container.innerHTML = '<p class="text-center" style="grid-column:1/-1;color:#666;">No hay categorias disponibles en este momento.</p>';
+                    container.innerHTML = '<p class="text-center" style="grid-column:1/-1;color:#666;">No hay categorías disponibles en este momento.</p>';
                 }
             } catch (err) {
                 console.error('Error loading categories:', err);
-                container.innerHTML = '<p class="text-center" style="grid-column:1/-1;color:red;">Error al cargar las categorias. Recarga la pagina.</p>';
+                container.innerHTML = '<p class="text-center" style="grid-column:1/-1;color:red;">Error al cargar las categorías. Recargá la página.</p>';
             }
         }
 

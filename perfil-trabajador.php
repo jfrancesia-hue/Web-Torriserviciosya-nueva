@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil Profesional - Toori ServiciosYa</title>
+    <title>Perfil profesional - Toori ServiciosYa</title>
     <meta name="description"
         content="Conocé el perfil de nuestro profesional verificado. Reputación, reseñas y especialidades.">
     <!-- Favicon -->
@@ -113,6 +113,7 @@ window.supabase = window.supabase.createClient(supabaseUrl, supabaseKey)
   <link rel="modulepreload" crossorigin href="./assets/supabase-1haNsgbs.js">
 <script src="script.js"></script>
   <link rel="stylesheet" crossorigin href="./assets/main-D3W1u2cc.css">
+    <link rel="stylesheet" href="./assets/toori-design-refresh.css">
 </head>
 
 <body class="bg-light">
@@ -200,7 +201,7 @@ window.supabase = window.supabase.createClient(supabaseUrl, supabaseKey)
                         <div class="mt-5">
                             <button class="btn btn-solicitar w-100 py-3 rounded-pill fw-bold text-white shadow-sm"
                                 id="btn-contratar">
-                                <i class="bi bi-whatsapp me-2"></i> Solicitar Servicio
+                                <i class="bi bi-whatsapp me-2"></i> Solicitar servicio
                             </button>
                             <p class="text-center text-muted small mt-3 mb-0">Gestión segura a través de Toori</p>
                         </div>

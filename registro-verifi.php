@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Completar Perfil Profesional - Toori ServiciosYa</title>
+    <title>Completar perfil profesional - Toori ServiciosYa</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <script type="module" crossorigin src="./assets/registroverifi-QdnXR535.js"></script>
@@ -17,6 +17,7 @@ window.supabase = window.supabase.createClient(supabaseUrl, supabaseKey)
 </script>
 
   <link rel="stylesheet" crossorigin href="./assets/main-D3W1u2cc.css">
+    <link rel="stylesheet" href="./assets/toori-design-refresh.css">
 </head>
 
 <body style="background-color: var(--bg-soft); min-height: 100vh;">
@@ -109,7 +110,7 @@ window.supabase = window.supabase.createClient(supabaseUrl, supabaseKey)
                                 Ver todas <i class="bi bi-chevron-down ms-1"></i>
                             </button>
                         </div>
-                        <div id="category-suggestions" class="loc-suggestions">
+                        <div id="category-suggestións" class="loc-suggestións">
                             <div class="p-3 text-center text-muted small">
                                 <div class="spinner-border spinner-border-sm mb-1" role="status"></div><br>Cargando
                                 categorías...
@@ -129,7 +130,7 @@ window.supabase = window.supabase.createClient(supabaseUrl, supabaseKey)
                                     <i class="bi bi-crosshairs"></i>
                                 </button>
                             </div>
-                            <div id="loc-suggestions" class="loc-suggestions"></div>
+                            <div id="loc-suggestións" class="loc-suggestións"></div>
                             <input type="hidden" id="reg-lat">
                             <input type="hidden" id="reg-lon">
                         </div>
@@ -244,7 +245,7 @@ window.supabase = window.supabase.createClient(supabaseUrl, supabaseKey)
             accent-color: var(--toori-blue);
         }
 
-        .loc-suggestions {
+        .loc-suggestións {
             position: absolute;
             top: 100%;
             left: 0;

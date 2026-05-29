@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Toori360 - Gestion Integral de Mantenimiento para Inmobiliarias</title>
-    <meta name="description" content="Plataforma B2B de gestion de mantenimiento, incidencias y servicios para inmobiliarias, consorcios y empresas. Tickets, presupuestos, reportes y mas.">
+    <title>Toori360 - Gestión integral de Mantenimiento para Inmobiliarias</title>
+    <meta name="description" content="Plataforma B2B de gestión de mantenimiento, incidencias y servicios para inmobiliarias, consorcios y empresas. Tickets, presupuestos, reportes y más.">
     <link rel="icon" type="image/png" href="assets/logo.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" crossorigin href="./assets/main-D3W1u2cc.css">
     <link rel="stylesheet" href="./assets/toori-enhanced.css">
+    <link rel="stylesheet" href="./assets/toori-design-refresh.css">
 
     <style>
         /* Hero 360 */
@@ -377,7 +378,7 @@
                 <div class="hero-360-badge">
                     <i class="bi bi-building"></i> Plataforma B2B
                 </div>
-                <h1>Gestion de mantenimiento <span>360 grados</span></h1>
+                <h1>Gestión de mantenimiento <span>360 grados</span></h1>
                 <p class="hero-360-desc">
                     El sistema operativo para inmobiliarias, consorcios y empresas que necesitan orden, trazabilidad y control total sobre sus propiedades y servicios.
                 </p>
@@ -455,8 +456,8 @@
 <!-- ===================== FEATURES ===================== -->
 <section class="features-360" id="features">
     <div class="container text-center">
-        <h2 class="section-title reveal">Todo lo que necesitas en un solo lugar</h2>
-        <p class="section-subtitle reveal">Funcionalidades diseñadas para simplificar la gestion de propiedades</p>
+        <h2 class="section-title reveal">Todo lo que necesitás en un solo lugar</h2>
+        <p class="section-subtitle reveal">Funcionalidades diseñadas para simplificar la gestión de propiedades</p>
 
         <div class="grid stagger-children" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px;">
 
@@ -473,7 +474,7 @@
                     <i class="bi bi-building"></i>
                 </div>
                 <h3>Propiedades</h3>
-                <p>Gestiona edificios, unidades, areas comunes. Asocia tickets e inquilinos a cada propiedad con historial completo.</p>
+                <p>Gestióna edificios, unidades, areas comunes. Asocia tickets e inquilinos a cada propiedad con historial completo.</p>
             </div>
 
             <div class="feature-360-card reveal">
@@ -533,7 +534,7 @@
                     <i class="bi bi-headset"></i>
                 </div>
                 <h4>Operador</h4>
-                <p>Gestiona tickets, asigna proveedores y coordina servicios</p>
+                <p>Gestióna tickets, asigna proveedores y coordina servicios</p>
             </div>
 
             <div class="role-card reveal">
@@ -567,9 +568,9 @@
 <!-- ===================== CTA ===================== -->
 <section class="cta-360">
     <div class="container" style="position:relative;z-index:2;">
-        <h2 class="reveal" style="color:white;font-size:2.2rem;margin-bottom:16px;">Lleva tu gestion al siguiente nivel</h2>
+        <h2 class="reveal" style="color:white;font-size:2.2rem;margin-bottom:16px;">Lleva tu gestión al siguiente nivel</h2>
         <p class="reveal" style="color:rgba(255,255,255,0.6);font-size:1.1rem;max-width:500px;margin:0 auto 36px;line-height:1.6;">
-            Unite a las inmobiliarias y empresas que ya gestionan sus propiedades con Toori360.
+            Unite a las inmobiliarias y empresas que ya gestionán sus propiedades con Toori360.
         </p>
         <div class="reveal" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
             <a href="https://toori360-app.vercel.app/login" target="_blank" class="btn-360-primary">

@@ -4,10 +4,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Perfile Profesionales - Toori ServiciosYa</title>
-  <meta name="description" content="Perfile Profesionales - Toori ServiciosYa">
-  <meta property="og:title" content="Perfile Profesionales - Toori ServiciosYa">
-  <meta property="og:description" content="Perfile Profesionales - Toori ServiciosYa">
+  <title>Profesionales - Toori ServiciosYa</title>
+  <meta name="description" content="Profesionales - Toori ServiciosYa">
+  <meta property="og:title" content="Profesionales - Toori ServiciosYa">
+  <meta property="og:description" content="Profesionales - Toori ServiciosYa">
   <meta property="og:image" content="assets/logo.png">
   <meta property="og:url" content="https://tooriserviciosya.com">
   <meta property="og:type" content="website">
@@ -15,6 +15,7 @@
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" crossorigin href="./assets/main-D3W1u2cc.css">
+    <link rel="stylesheet" href="./assets/toori-design-refresh.css">
 </head>
 
 <body>
@@ -23,7 +24,7 @@
 
   <main style="padding:40px;text-align:center;">
     <div class="container">
-      <h1 style="margin-bottom:16px;">Perfile Profesionales</h1>
+      <h1 style="margin-bottom:16px;">Profesionales</h1>
       <p style="color:#555;">Esta página muestra los profesionales (usuarios con rol <code>worker</code>) registrados.</p>
 
       <div id="workers-area" style="margin-top:24px;">
@@ -141,7 +142,7 @@
           return;
         }
 
-        // Priorizar: primero los que tienen categoria no vacía
+        // Priorizar: primero los que tienen categoría no vacía
         function hasCategory(u) {
   if (!u) return false;
   let c = u.categoria;

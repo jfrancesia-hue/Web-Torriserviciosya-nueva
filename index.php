@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Toori ServiciosYa - Gestion Humana con Respaldo Total</title>
+    <title>Toori ServiciosYa - Gestión humana con respaldo total</title>
     <meta name="description"
-        content="Pedi el servicio que necesitas. Nosotros nos ocupamos del resto. Gestion profesional y respaldo para tu hogar.">
+        content="Pedí el servicio que necesitás. Nosotros nos ocupamos del resto. Gestión profesional y respaldo para tu hogar.">
 
     <!-- OpenGraph / WhatsApp -->
-    <meta property="og:title" content="Toori ServiciosYa - Gestion Humana con Respaldo Total">
+    <meta property="og:title" content="Toori ServiciosYa - Gestión humana con respaldo total">
     <meta property="og:description"
-        content="Pedi el servicio que necesitas. Nosotros nos ocupamos del resto. Gestion profesional y respaldo para tu hogar.">
+        content="Pedí el servicio que necesitás. Nosotros nos ocupamos del resto. Gestión profesional y respaldo para tu hogar.">
     <meta property="og:image" content="assets/logo.png">
     <meta property="og:url" content="https://tooriserviciosya.com">
     <meta property="og:type" content="website">
@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" crossorigin href="./assets/main-D3W1u2cc.css">
     <link rel="stylesheet" href="./assets/toori-enhanced.css">
+    <link rel="stylesheet" href="./assets/toori-design-refresh.css">
 </head>
 
 <body>
@@ -204,14 +205,14 @@
       <div class="hero-main-content">
         <div class="hero-content animate-in" style="max-width: 800px;">
           <h1 style="font-size: 3.8rem; margin-bottom: 1rem; line-height: 1.1; color: white; text-shadow: 0 4px 24px rgba(0,0,0,0.4);">
-            Hace tu vida mas facil
+            Hacé tu vida más fácil
           </h1>
           <p style="font-size: 1.35rem; color: rgba(255,255,255,0.92); margin-bottom: 2rem; text-shadow: 0 2px 12px rgba(0,0,0,0.4); font-weight: 400; max-width: 550px; margin-left: auto; margin-right: auto; line-height: 1.5;">
-            Disfruta de cualquier servicio profesional, en la comodidad de tu propio hogar.
+            Disfrutá de cualquier servicio profesional, en la comodidad de tu propio hogar.
           </p>
           <div class="hero-cta-bar">
-            <a href="https://wa.me/5493512139046" class="btn btn-primary btn-ripple">Buscar un Servicio</a>
-            <a href="registro.php" class="btn btn-ripple" style="background: #f1f8e9; color: #558b2f; font-weight: 600;">Ofrecer Servicios</a>
+            <a href="https://wa.me/5493512139046" class="btn btn-primary btn-ripple">Buscar un servicio</a>
+            <a href="registro.php" class="btn btn-ripple" style="background: #f1f8e9; color: #558b2f; font-weight: 600;">Ofrecer servicios</a>
           </div>
         </div>
 
@@ -227,7 +228,7 @@
           </div>
           <div class="trust-badge">
             <i class="bi bi-star"></i>
-            <span>Garantia de calidad</span>
+            <span>Garantía de calidad</span>
           </div>
         </div>
       </div>
@@ -259,11 +260,11 @@
                 </div>
                 <div class="stat-item">
                     <div class="stat-number" data-target="4.8" data-suffix="" data-decimal="true">0</div>
-                    <div class="stat-label">Valoracion promedio</div>
+                    <div class="stat-label">Valoración promedio</div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-number" data-target="15" data-suffix="+">0</div>
-                    <div class="stat-label">Categorias de servicio</div>
+                    <div class="stat-label">Categorías de servicio</div>
                 </div>
             </div>
         </div>
@@ -376,7 +377,7 @@
         scroll-snap-align: start;
       }
 
-      /* Flechas de navegacion manual */
+      /* Flechas de navegación manual */
       .sp-arrow {
         position: absolute;
         top: 50%;
@@ -802,8 +803,8 @@
     <!-- ===================== COMO FUNCIONA ===================== -->
     <section class="section mesh-bg-soft" id="como-funciona" style="background-color: var(--bg-white);">
         <div class="container text-center">
-            <h2 class="section-title reveal">Como funciona?</h2>
-            <p class="section-subtitle reveal">En 3 simples pasos conseguis el profesional que necesitas</p>
+            <h2 class="section-title reveal">¿Cómo funciona?</h2>
+            <p class="section-subtitle reveal">En 3 simples pasos conseguís el profesional que necesitás</p>
 
             <div class="grid steps-grid stagger-children"
                 style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; align-items: start; margin-bottom: 50px;">
@@ -844,7 +845,7 @@
     <!-- ===================== CATEGORIAS CON IMAGENES REALES ===================== -->
     <section class="section" id="categorias" style="background-color: var(--bg-soft);">
         <div class="container text-center">
-            <h2 class="section-title reveal">Que servicio estas buscando?</h2>
+            <h2 class="section-title reveal">¿Qué servicio estás buscando?</h2>
             <p class="section-subtitle reveal">Elegimos al profesional ideal para cada trabajo en tu hogar</p>
 
             <div class="grid categories-grid-enhanced stagger-children"
@@ -857,18 +858,18 @@
                     <div class="category-card-body">
                         <i class="bi bi-stars icon-hover-bounce"></i>
                         <h4>Limpieza</h4>
-                        <button class="btn btn-primary btn-ripple whatsapp-btn" data-category="Limpieza">Iniciar gestion</button>
+                        <button class="btn btn-primary btn-ripple whatsapp-btn" data-category="Limpieza">Iniciar gestión</button>
                     </div>
                 </div>
 
                 <div class="category-card reveal">
                     <div class="category-card-img-wrapper">
-                        <img class="category-card-img" src="https://images.pexels.com/photos/6419128/pexels-photo-6419128.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Plomeria" loading="lazy">
+                        <img class="category-card-img" src="https://images.pexels.com/photos/6419128/pexels-photo-6419128.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Plomería" loading="lazy">
                     </div>
                     <div class="category-card-body">
                         <i class="bi bi-wrench icon-hover-bounce"></i>
-                        <h4>Plomeria</h4>
-                        <button class="btn btn-primary btn-ripple whatsapp-btn" data-category="Plomeria">Iniciar gestion</button>
+                        <h4>Plomería</h4>
+                        <button class="btn btn-primary btn-ripple whatsapp-btn" data-category="Plomeria">Iniciar gestión</button>
                     </div>
                 </div>
 
@@ -879,7 +880,7 @@
                     <div class="category-card-body">
                         <i class="bi bi-lightbulb icon-hover-bounce"></i>
                         <h4>Electricidad</h4>
-                        <button class="btn btn-primary btn-ripple whatsapp-btn" data-category="Electricidad">Iniciar gestion</button>
+                        <button class="btn btn-primary btn-ripple whatsapp-btn" data-category="Electricidad">Iniciar gestión</button>
                     </div>
                 </div>
 
@@ -890,7 +891,7 @@
                     <div class="category-card-body">
                         <i class="bi bi-fire icon-hover-bounce"></i>
                         <h4>Gas</h4>
-                        <button class="btn btn-primary btn-ripple whatsapp-btn" data-category="Gas">Iniciar gestion</button>
+                        <button class="btn btn-primary btn-ripple whatsapp-btn" data-category="Gas">Iniciar gestión</button>
                     </div>
                 </div>
 
@@ -901,29 +902,29 @@
                     <div class="category-card-body">
                         <i class="bi bi-brush icon-hover-bounce"></i>
                         <h4>Pintura</h4>
-                        <button class="btn btn-primary btn-ripple whatsapp-btn" data-category="Pintura">Iniciar gestion</button>
+                        <button class="btn btn-primary btn-ripple whatsapp-btn" data-category="Pintura">Iniciar gestión</button>
                     </div>
                 </div>
 
                 <div class="category-card reveal">
                     <div class="category-card-img-wrapper">
-                        <img class="category-card-img" src="https://images.pexels.com/photos/1301856/pexels-photo-1301856.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Jardineria" loading="lazy">
+                        <img class="category-card-img" src="https://images.pexels.com/photos/1301856/pexels-photo-1301856.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Jardinería" loading="lazy">
                     </div>
                     <div class="category-card-body">
                         <i class="bi bi-tree icon-hover-bounce"></i>
-                        <h4>Jardineria</h4>
-                        <button class="btn btn-primary btn-ripple whatsapp-btn" data-category="Jardineria">Iniciar gestion</button>
+                        <h4>Jardinería</h4>
+                        <button class="btn btn-primary btn-ripple whatsapp-btn" data-category="Jardineria">Iniciar gestión</button>
                     </div>
                 </div>
 
                 <div class="category-card reveal">
                     <div class="category-card-img-wrapper">
-                        <img class="category-card-img" src="https://images.pexels.com/photos/2219024/pexels-photo-2219024.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Albanileria" loading="lazy">
+                        <img class="category-card-img" src="https://images.pexels.com/photos/2219024/pexels-photo-2219024.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Albañilería" loading="lazy">
                     </div>
                     <div class="category-card-body">
                         <i class="bi bi-bricks icon-hover-bounce"></i>
-                        <h4>Albanileria</h4>
-                        <button class="btn btn-primary btn-ripple whatsapp-btn" data-category="Albanileria">Iniciar gestion</button>
+                        <h4>Albañilería</h4>
+                        <button class="btn btn-primary btn-ripple whatsapp-btn" data-category="Albanileria">Iniciar gestión</button>
                     </div>
                 </div>
 
@@ -934,7 +935,7 @@
                     <div class="category-card-body" style="color:white;">
                         <i class="bi bi-arrow-right-circle icon-hover-bounce" style="color:white;"></i>
                         <h4 style="color:white;">Ver todas</h4>
-                        <a href="categorias.php" class="btn btn-ripple" style="background:rgba(255,255,255,0.2);color:white;border:1px solid rgba(255,255,255,0.3);padding:8px 20px;font-size:0.85rem;border-radius:50px;">Explorar mas</a>
+                        <a href="categorias.php" class="btn btn-ripple" style="background:rgba(255,255,255,0.2);color:white;border:1px solid rgba(255,255,255,0.3);padding:8px 20px;font-size:0.85rem;border-radius:50px;">Explorar más</a>
                     </div>
                 </div>
 
@@ -979,7 +980,7 @@
                         <i class="bi bi-star-fill"></i>
                         <i class="bi bi-star-fill"></i>
                     </div>
-                    <p class="testimonial-text">"Me registre como electricista y en la primera semana ya tenia 3 trabajos. La plataforma es muy facil de usar y los pagos son rapidos."</p>
+                    <p class="testimonial-text">"Me registré como electricista y en la primera semana ya tenía 3 trabajos. La plataforma es muy fácil de usar y los pagos son rápidos."</p>
                     <div class="testimonial-author">
                         <img class="testimonial-avatar" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&q=80" alt="Carlos R.">
                         <div style="text-align:left;">
@@ -1014,17 +1015,17 @@
     <!-- ===================== CTA REGISTRO ===================== -->
     <section class="section" style="padding-bottom: 80px;">
         <div class="container text-center">
-            <h2 class="section-title reveal" style="margin-bottom: 32px;">Queres ofrecer servicios en Toori?</h2>
+            <h2 class="section-title reveal" style="margin-bottom: 32px;">¿Querés ofrecer servicios en Toori?</h2>
 
             <div class="grid cta-register reveal"
                 style="grid-template-columns: 1fr 1.2fr; gap: 0; align-items: stretch; text-align: left;">
                 <div class="cta-register-content">
-                    <h3 style="font-size: 2rem; margin-bottom: 0.2rem; color: #2C2C2C; font-weight: 700;">Registrate facilisimo y</h3>
-                    <h3 style="font-size: 2rem; margin-bottom: 1.5rem; color: #2C2C2C; font-weight: 700;">empeza <span style="color: var(--toori-green);">hoy mismo</span></h3>
+                    <h3 style="font-size: 2rem; margin-bottom: 0.2rem; color: #2C2C2C; font-weight: 700;">Registrate facilísimo y</h3>
+                    <h3 style="font-size: 2rem; margin-bottom: 1.5rem; color: #2C2C2C; font-weight: 700;">empezá <span style="color: var(--toori-green);">hoy mismo</span></h3>
                     <p style="color: #555; font-size: 1.05rem; margin-bottom: 2rem; max-width: 380px; line-height: 1.7;">
                         Hay miles de usuarios esperando contratarte. Unite a la red de profesionales verificados de Toori.</p>
                     <div style="display:flex;gap:12px;flex-wrap:wrap;">
-                        <a href="registro.php" class="btn btn-primary btn-ripple" style="padding: 14px 32px; font-size: 1rem; border-radius: 50px;">Ofrecer Servicios</a>
+                        <a href="registro.php" class="btn btn-primary btn-ripple" style="padding: 14px 32px; font-size: 1rem; border-radius: 50px;">Ofrecer servicios</a>
                     </div>
                     <div style="margin-top:20px;display:flex;gap:24px;flex-wrap:wrap;">
                         <div style="display:flex;align-items:center;gap:8px;color:#666;font-size:0.9rem;">
@@ -1049,7 +1050,7 @@
 
                 <div class="app-content reveal-left">
                     <h2>Tu hogar en la palma de tu mano</h2>
-                    <p>Descarga la app de Toori y gestiona todos tus servicios desde cualquier lugar. Rapido, seguro y siempre disponible.</p>
+                    <p>Descargá la app de Toori y gestioná todos tus servicios desde cualquier lugar. Rápido, seguro y siempre disponible.</p>
 
                     <div class="app-features">
                         <div class="app-feature">
@@ -1081,7 +1082,7 @@
                         <a href="#" class="app-download-btn" style="opacity:0.5;pointer-events:none;">
                             <i class="bi bi-apple"></i>
                             <div>
-                                <div style="font-size:0.7rem;opacity:0.7;">Proximamente</div>
+                                <div style="font-size:0.7rem;opacity:0.7;">Próximamente</div>
                                 <div>App Store</div>
                             </div>
                         </a>
@@ -1305,7 +1306,7 @@
                 <div class="platform-header-eyebrow reveal">
                     <i class="bi bi-stars"></i> La plataforma Toori
                 </div>
-                <h2 class="reveal">Todo lo que necesitas, en <span>un solo lugar</span></h2>
+                <h2 class="reveal">Todo lo que necesitás, en <span>un solo lugar</span></h2>
                 <p class="reveal">Tres productos integrados para que gestiones, vendas y factures sin cambiar de herramienta.</p>
             </div>
 
@@ -1317,7 +1318,7 @@
                         <h3>Toori360</h3>
                     </div>
                     <p class="platform-card-desc">
-                        Gestion de mantenimiento, incidencias y proveedores para inmobiliarias y consorcios con trazabilidad total.
+                        Gestión de mantenimiento, incidencias y proveedores para inmobiliarias y consorcios con trazabilidad total.
                     </p>
                     <ul class="platform-features">
                         <li><i class="bi bi-check-circle-fill"></i> Tickets inteligentes</li>
@@ -1325,7 +1326,7 @@
                         <li><i class="bi bi-check-circle-fill"></i> Multi-tenant</li>
                     </ul>
                     <a href="toori360.php" class="platform-card-btn">
-                        Conocer mas <i class="bi bi-arrow-right"></i>
+                        Conocer más <i class="bi bi-arrow-right"></i>
                     </a>
                 </div>
 
@@ -1337,7 +1338,7 @@
                         <span class="platform-soon">Pronto</span>
                     </div>
                     <p class="platform-card-desc">
-                        Pipeline visual, WhatsApp integrado y automatizaciones para equipos comerciales que quieren vender mas.
+                        Pipeline visual, WhatsApp integrado y automatizaciones para equipos comerciales que quieren vender más.
                     </p>
                     <ul class="platform-features">
                         <li><i class="bi bi-check-circle-fill"></i> Pipeline Kanban</li>
@@ -1357,12 +1358,12 @@
                         <span class="platform-soon">Pronto</span>
                     </div>
                     <p class="platform-card-desc">
-                        Facturacion electronica AFIP con asistente IA. Emite comprobantes A, B, C y notas en segundos.
+                        Facturación electrónica AFIP con asistente IA. Emite comprobantes A, B, C y notas en segundos.
                     </p>
                     <ul class="platform-features">
-                        <li><i class="bi bi-check-circle-fill"></i> Conexion directa AFIP</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Conexión directa AFIP</li>
                         <li><i class="bi bi-check-circle-fill"></i> Asistente IA integrado</li>
-                        <li><i class="bi bi-check-circle-fill"></i> PDF + envio automatico</li>
+                        <li><i class="bi bi-check-circle-fill"></i> PDF + envío automático</li>
                     </ul>
                     <a href="facturacion.php" class="platform-card-btn">
                         Reservar acceso <i class="bi bi-arrow-right"></i>
@@ -1376,7 +1377,7 @@
     <section class="faq-section">
         <div class="container text-center">
             <h2 class="section-title reveal">Preguntas frecuentes</h2>
-            <p class="section-subtitle reveal">Todo lo que necesitas saber sobre Toori</p>
+            <p class="section-subtitle reveal">Todo lo que necesitás saber sobre Toori</p>
 
             <div class="faq-container">
                 <div class="faq-item reveal">
@@ -1385,7 +1386,7 @@
                         <i class="bi bi-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>Es muy simple: elegi la categoria del servicio que necesitas, envianos un mensaje por WhatsApp describiendo tu necesidad y nosotros nos encargamos de encontrar al mejor profesional para vos. En minutos recibis presupuestos.</p>
+                        <p>Es muy simple: elegí la categoría del servicio que necesitás, envianos un mensaje por WhatsApp describiendo tu necesidad y nosotros nos encargamos de encontrar al mejor profesional para vos. En minutos recibís presupuestos.</p>
                     </div>
                 </div>
 
@@ -1415,7 +1416,7 @@
                         <i class="bi bi-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>Actualmente operamos en San Fernando del Valle de Catamarca y alrededores. Estamos expandiendonos a mas ciudades de Argentina. Si queres que lleguemos a tu ciudad, contactanos!</p>
+                        <p>Actualmente operamos en San Fernando del Valle de Catamarca y alrededores. Estamos expandiéndonos a más ciudades de Argentina. Si querés que lleguemos a tu ciudad, contactanos!</p>
                     </div>
                 </div>
 
@@ -1425,7 +1426,7 @@
                         <i class="bi bi-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>Hace click en "Ofrecer Servicios", completa el formulario con tus datos y especialidad. Si tenes matricula y certificado de antecedentes, subilos para obtener el badge de verificado y tener mayor visibilidad.</p>
+                        <p>Hacé click en "Ofrecer servicios", completá el formulario con tus datos y especialidad. Si tenés matrícula y certificado de antecedentes, subilos para obtener el badge de verificado y tener mayor visibilidad.</p>
                     </div>
                 </div>
             </div>

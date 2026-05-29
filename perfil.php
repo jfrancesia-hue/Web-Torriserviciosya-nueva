@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Perfil - Toori ServiciosYa</title>
-    <meta name="description" content="Gestioná tu información personal y profesional en Toori.">
+    <title>Mi perfil - Toori ServiciosYa</title>
+    <meta name="description" content="Gestióná tu información personal y profesional en Toori.">
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="assets/logo.png">
     <!-- Bootstrap CSS -->
@@ -144,6 +144,7 @@
         }
     </style>
   <link rel="stylesheet" crossorigin href="./assets/main-D3W1u2cc.css">
+    <link rel="stylesheet" href="./assets/toori-design-refresh.css">
 
   <script src="perfil-checker.js"></script>
 </head>
@@ -209,10 +210,10 @@
                                 <!-- Campos adicionales del perfil -->
                                 <div class="col-md-6">
     <label class="form-label">Profesión / Categoría</label>
-    <select id="input-categoria-select" class="form-control" style="width:100%">
+    <select id="input-categoría-select" class="form-control" style="width:100%">
         <option value="">Cargando categorías...</option>
     </select>
-    <div id="categorias-seleccionadas" class="d-flex flex-wrap gap-2 mt-2"></div>
+    <div id="categorías-seleccionadas" class="d-flex flex-wrap gap-2 mt-2"></div>
 </div>
                                
                                 <div class="col-md-3">
@@ -371,7 +372,7 @@
         const inputTelefono = document.getElementById('input-telefono');
         const inputEmail = document.getElementById('input-email');
         const inputCiudad = document.getElementById('input-ciudad');
-        const inputCategoria = document.getElementById('input-categoria');
+        const inputCategoría = document.getElementById('input-categoría');
         const inputMatricula = document.getElementById('input-matricula');
         const inputAntecedentes = document.getElementById('input-antecedentes');
         const profileImg = document.getElementById('profile-img');
@@ -399,7 +400,7 @@
             alertDiv.textContent = '';
         }
 
-let categoriasElegidas = [];
+let categoríasElegídas = [];
 
 let matriculasGuardadas = [];
 let antecedentesGuardados = [];
@@ -432,23 +433,23 @@ window.quitarArchivo = function(tipo, index) {
     }
 }
 
-function renderCategoriasElegidas() {
-    const cont = document.getElementById('categorias-seleccionadas');
+function renderCategoríasElegídas() {
+    const cont = document.getElementById('categorías-seleccionadas');
     if (!cont) return;
-    cont.innerHTML = categoriasElegidas.map(cat => `
+    cont.innerHTML = categoríasElegídas.map(cat => `
         <span class="badge bg-primary d-flex align-items-center gap-1" style="font-size:0.9rem;padding:6px 10px;">
             ${cat}
-            <i class="bi bi-x-circle" style="cursor:pointer;" onclick="quitarCategoria('${cat}')"></i>
+            <i class="bi bi-x-circle" style="cursor:pointer;" onclick="quitarCategoría('${cat}')"></i>
         </span>
     `).join('');
 }
 
-window.quitarCategoria = function(cat) {
-    categoriasElegidas = categoriasElegidas.filter(c => c !== cat);
-    renderCategoriasElegidas();
+window.quitarCategoría = function(cat) {
+    categoríasElegídas = categoríasElegídas.filter(c => c !== cat);
+    renderCategoríasElegídas();
 }
 
-async function cargarCategorias() {
+async function cargarCategorías() {
     try {
         const { data, error } = await supabase
             .from('categorias')
@@ -457,7 +458,7 @@ async function cargarCategorias() {
 
         if (error) throw error;
 
-        const select = document.getElementById('input-categoria-select');
+        const select = document.getElementById('input-categoría-select');
         if (select) {
             select.innerHTML = '<option value="">Agregar categoría...</option>';
             data.forEach(cat => {
@@ -470,14 +471,14 @@ async function cargarCategorias() {
             // Al elegir una opción, agregarla al array
             select.addEventListener('change', () => {
     const val = select.value;
-    if (val && !categoriasElegidas.includes(val)) {
-        if (categoriasElegidas.length >= 3) {
+    if (val && !categoríasElegídas.includes(val)) {
+        if (categoríasElegídas.length >= 3) {
             alert('Podés agregar un máximo de 3 categorías.');
             select.value = '';
             return;
         }
-        categoriasElegidas.push(val);
-        renderCategoriasElegidas();
+        categoríasElegídas.push(val);
+        renderCategoríasElegídas();
     }
     select.value = '';
 });
@@ -492,7 +493,7 @@ async function cargarCategorias() {
                         
             try {
                 // Cargar categorías en el select
-                        await cargarCategorias();
+                        await cargarCategorías();
                 // Obtener sesión actual
                 const { data: { session }, error: sessionError } = await supabase.auth.getSession();
                 if (sessionError || !session) {
@@ -556,8 +557,8 @@ async function cargarCategorias() {
                     }
                     // Campos adicionales
                     const cat = data.categoria;
-categoriasElegidas = Array.isArray(cat) ? cat : (cat ? [cat] : []);
-renderCategoriasElegidas();
+categoríasElegídas = Array.isArray(cat) ? cat : (cat ? [cat] : []);
+renderCategoríasElegídas();
 
                     const mat = data.matricula;
 matriculasGuardadas = Array.isArray(mat) ? mat : (mat ? [mat] : []);
@@ -684,7 +685,7 @@ if (inputAnt?.files?.[0]) {
                     edad: document.getElementById('input-edad')?.value?.trim() || null,
                     matricula: matriculasGuardadas.length > 0 ? matriculasGuardadas : null,
 antecedentes: antecedentesGuardados.length > 0 ? antecedentesGuardados : null,
-                    categoria: categoriasElegidas.length > 0 ? categoriasElegidas : null
+                    categoría: categoríasElegídas.length > 0 ? categoríasElegídas : null
                 };
 
                 // Verificar si es trabajador

@@ -376,7 +376,7 @@ if ($propiedad) {
     <div class="welcome-banner">
         <div>
             <h1>¡Hola, <?= htmlspecialchars(explode(' ', $inquilino_nombre)[0]) ?>! 👋</h1>
-            <p>Este es tu portal de inquilino. Gestioná todo desde acá.</p>
+            <p>Este es tu portal de inquilino. Gestióná todo desde acá.</p>
         </div>
         <?php if ($inquilino): ?>
         <div class="badge-estado">

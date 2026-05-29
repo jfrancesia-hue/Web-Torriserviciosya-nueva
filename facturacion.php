@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FacturaIA - Facturacion electronica AFIP con inteligencia artificial | Proximamente</title>
-    <meta name="description" content="Facturacion electronica AFIP simplificada con IA. Emite facturas A, B, C, notas de credito y debito en segundos. Proximamente.">
-    <meta property="og:title" content="FacturaIA - Proximamente">
-    <meta property="og:description" content="Facturacion electronica AFIP con inteligencia artificial integrada.">
+    <title>FacturaIA - Facturación electrónica AFIP con inteligencia artificial | Próximamente</title>
+    <meta name="description" content="Facturación electrónica AFIP simplificada con IA. Emite facturas A, B, C, notas de credito y debito en segundos. Próximamente.">
+    <meta property="og:title" content="FacturaIA - Próximamente">
+    <meta property="og:description" content="Facturación electrónica AFIP con inteligencia artificial integrada.">
     <meta property="og:image" content="assets/logo.png">
     <meta property="og:type" content="website">
     <link rel="icon" type="image/png" href="assets/logo.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" crossorigin href="./assets/main-D3W1u2cc.css">
     <link rel="stylesheet" href="./assets/toori-enhanced.css">
+    <link rel="stylesheet" href="./assets/toori-design-refresh.css">
 
     <style>
         /* ===== Hero FacturaIA ===== */
@@ -435,8 +436,8 @@
         <div class="container hero-fact-content">
             <div class="grid" style="grid-template-columns: 1.1fr 1fr; gap: 60px; align-items: center;">
                 <div class="reveal-left">
-                    <div class="soon-badge-f">Proximamente</div>
-                    <h1><span>FacturaIA</span> Facturacion electronica con inteligencia artificial</h1>
+                    <div class="soon-badge-f">Próximamente</div>
+                    <h1><span>FacturaIA</span> Facturación electrónica con inteligencia artificial</h1>
                     <p class="hero-fact-desc">
                         Emite facturas A, B, C, notas de credito y debito en segundos. Conectada directo con AFIP, con asistente IA que completa los campos por vos y envia el PDF al cliente automaticamente.
                     </p>
@@ -514,7 +515,7 @@
         <div class="container">
             <div class="features-fact-title reveal">
                 <h2>Pensado para que <span>factures sin friccion</span></h2>
-                <p>Menos clicks, menos errores, mas tiempo para tu negocio</p>
+                <p>Menos clicks, menos errores, más tiempo para tu negocio</p>
             </div>
 
             <div class="feat-grid-f">
@@ -526,7 +527,7 @@
 
                 <div class="feat-card-f reveal">
                     <div class="feat-icon-f"><i class="bi bi-shield-check"></i></div>
-                    <h4>Conexion directa AFIP</h4>
+                    <h4>Conexión directa AFIP</h4>
                     <p>Validacion automatica con WSFEv1. CAE en segundos sin intermediarios.</p>
                 </div>
 
@@ -545,7 +546,7 @@
                 <div class="feat-card-f reveal">
                     <div class="feat-icon-f"><i class="bi bi-bar-chart"></i></div>
                     <h4>Reportes fiscales</h4>
-                    <p>Libro IVA, ventas por periodo, exportacion a Excel y mas. Listo para tu contador.</p>
+                    <p>Libro IVA, ventas por periodo, exportacion a Excel y más. Listo para tu contador.</p>
                 </div>
 
                 <div class="feat-card-f reveal">

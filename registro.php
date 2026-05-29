@@ -9,12 +9,13 @@ if (isset($_SESSION['user_id'])) {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Registro de Trabajador - Toori ServiciosYa</title>
+    <title>Registro de trabajador - Toori ServiciosYa</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="assets/logo.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="./assets/main-D3W1u2cc.css">
     <link rel="stylesheet" href="./assets/toori-enhanced.css">
+    <link rel="stylesheet" href="./assets/toori-design-refresh.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -660,9 +661,9 @@ if (isset($_SESSION['user_id'])) {
                 <div class="step-desc">Selecciona tu especialidad y subi documentacion para ser verificado</div>
 
                 <div class="form-group">
-                    <label>En que te especializas?</label>
+                    <label>¿En qué te especializás?</label>
                     <select id="reg-profesion" class="form-control" required>
-                        <option value="">Cargando categorias...</option>
+                        <option value="">Cargando categorías...</option>
                     </select>
                 </div>
 
@@ -754,7 +755,7 @@ function nextStep(step) {
             return;
         }
         if (pass.length < 6) {
-            showAlert('La contrasena debe tener al menos 6 caracteres.', 'error');
+            showAlert('La contraseña debe tener al menos 6 caracteres.', 'error');
             return;
         }
     }
@@ -815,11 +816,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         .order('nombre', { ascending: true });
 
     if (error) {
-        select.innerHTML = '<option value="">Error al cargar categorias</option>';
+        select.innerHTML = '<option value="">Error al cargar categorías</option>';
         return;
     }
 
-    select.innerHTML = '<option value="">Selecciona una opcion...</option>';
+    select.innerHTML = '<option value="">Seleccioná una opción...</option>';
     categorias.forEach(cat => {
         const option = document.createElement('option');
         option.value = cat.nombre;
@@ -860,10 +861,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         function traducirError(mensaje) {
             if (!mensaje) return '';
             if (mensaje.includes('User already registered')) return 'El email ya esta registrado.';
-            if (mensaje.includes('Invalid login credentials')) return 'Credenciales invalidas.';
-            if (mensaje.includes('Password should be at least')) return 'La contrasena debe tener al menos 6 caracteres.';
-            if (mensaje.includes('invalid email')) return 'El email no es valido.';
-            if (mensaje.includes('malformed array literal')) return 'Error interno: formato de categoria incorrecto.';
+            if (mensaje.includes('Invalid login credentials')) return 'Credenciales inválidas.';
+            if (mensaje.includes('Password should be at least')) return 'La contraseña debe tener al menos 6 caracteres.';
+            if (mensaje.includes('invalid email')) return 'El email no es válido.';
+            if (mensaje.includes('malformed array literal')) return 'Error interno: formato de categoría incorrecto.';
             return mensaje;
         }
 

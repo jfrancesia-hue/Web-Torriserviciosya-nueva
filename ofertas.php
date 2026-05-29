@@ -4,13 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ofertas de Trabajo - Toori ServiciosYa</title>
+    <title>Ofertas de trabajo - Toori ServiciosYa</title>
     <meta name="description"
         content="Explorá las ofertas de trabajo disponibles en Toori. Oportunidades para profesionales verificados.">
     <link rel="icon" type="image/png" href="assets/logo.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" crossorigin href="./assets/main-D3W1u2cc.css">
     <link rel="stylesheet" href="./assets/toori-enhanced.css">
+    <link rel="stylesheet" href="./assets/toori-design-refresh.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .justify-center { justify-content: center; }
@@ -182,8 +183,8 @@
     <!-- Hero mini -->
     <div class="ofertas-hero">
         <div class="container text-center">
-            <h1><i class="bi bi-briefcase me-2"></i> Ofertas de Trabajo</h1>
-            <p>Encontra oportunidades y envia tu presupuesto hoy mismo</p>
+            <h1><i class="bi bi-briefcase me-2"></i> Ofertas de trabajo</h1>
+            <p>Encontrá oportunidades y enviá tu presupuesto hoy mismo</p>
         </div>
     </div>
 
@@ -206,7 +207,7 @@
             <h2 style="font-family:var(--font-body);font-size:1.4rem;font-weight:700;color:var(--text-main);margin-bottom:4px;">
                 <i class="bi bi-lightning me-2" style="color:var(--toori-green);"></i> Ofertas disponibles para vos
             </h2>
-            <p class="text-muted" style="font-size:0.92rem;margin-bottom:20px;">Ofertas que coinciden con tu categoria profesional</p>
+            <p class="text-muted" style="font-size:0.92rem;margin-bottom:20px;">Ofertas que coinciden con tu categoría profesional</p>
         </div>
         <div id="loading-ofertas">
             <div class="grid" style="grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px;">
@@ -473,9 +474,9 @@
                 const descripcion = document.getElementById('descripcionPresupuesto').value;
                 const horarios   = document.getElementById('horariosPresupuesto').value;
                 if (!oferta_id || !trabajadorId || !monto || !descripcion || !horarios) {
-                    let msg = 'Completa todos los campos.';
+                    let msg = 'Completá todos los campos.';
                     if (!trabajadorId || !trabajadorUuid) {
-                        msg = 'No se pudo obtener la información del trabajador. Por favor, revisa tu perfil.';
+                        msg = 'No se pudo obtener la información del trabajador. Por favor, revisá tu perfil.';
                     }
                     alert(msg);
                     return;

@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
             }
         }
     } else {
-        $register_error = 'Completa todos los campos obligatorios.';
+        $register_error = 'Completá todos los campos obligatorios.';
     }
 }
 
@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
             $login_error = 'Email o contraseña incorrectos.';
         }
     } else {
-        $login_error = 'Completa todos los campos.';
+        $login_error = 'Completá todos los campos.';
     }
 }
 
@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['loginInquilino'])) {
             $login_inquilino_error = 'DNI o ID de propiedad incorrectos.';
         }
     } else {
-        $login_inquilino_error = 'Completa todos los campos.';
+        $login_inquilino_error = 'Completá todos los campos.';
     }
 }
 ?>
@@ -313,10 +313,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['loginInquilino'])) {
                     <input type="text" class="form-control" id="loginInquilinoDni" name="loginInquilinoDni" required>
                 </div>
                 <div class="form-group">
-                    <label for="loginInquilinoPropiedad">ID de Propiedad</label>
+                    <label for="loginInquilinoPropiedad">ID de propiedad</label>
                     <input type="number" class="form-control" id="loginInquilinoPropiedad" name="loginInquilinoPropiedad" required>
                 </div>
-                <button type="submit" class="btn" name="loginInquilino">Ingresar como Inquilino</button>
+                <button type="submit" class="btn" name="loginInquilino">Ingresar como inquilino</button>
                 <span class="toggle-link" id="toggleLoginPropietario" style="margin-top:10px;">¿Sos propietario? Iniciá sesión acá</span>
             </form>
             <form id="registerForm" method="post" style="display:none;">
