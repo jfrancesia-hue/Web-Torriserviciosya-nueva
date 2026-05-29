@@ -6,10 +6,10 @@
  *   * * * * * php /ruta/absoluta/verificar_propuestas.php
  *
  * FLUJO:
- *   paso=4  → Esperando propuestas (30 min máx)
+ *   paso=4  → Esperando propuestas (2 horas máx)
  *              Si hay 3+ propuestas → envía top 3, paso=99
  *              Si pasa timeout sin propuestas → avisa "seguimos buscando", paso=98
- *   paso=98 → Segunda espera (15 min máx)
+ *   paso=98 → Segunda espera (30 min máx)
  *              Si llegan propuestas → envía top 3, paso=99
  *              Si pasa timeout sin propuestas → CANCELA oferta, avisa al cliente
  */
@@ -75,8 +75,8 @@ log_separador('INICIO DE EJECUCIÓN');
 log_msg('INFO', "PID=$pid | PROPOSAL_TIMEOUT=" . (defined('PROPOSAL_TIMEOUT') ? PROPOSAL_TIMEOUT : 'no definido'));
 
 // Timeouts
-$timeout_paso4  = defined('PROPOSAL_TIMEOUT') ? PROPOSAL_TIMEOUT : 1800; // 30 min
-$timeout_paso98 = 900; // 15 min segunda espera
+$timeout_paso4  = 7200; // 2 horas antes de avisar al cliente si nadie responde
+$timeout_paso98 = 1800; // 30 min segunda espera
 
 // ═══════════════════════════════════════════════════════════
 //  FUNCIÓN: Enviar top 3 presupuestos al cliente
@@ -135,8 +135,97 @@ function enviarTop3(string $ofertaId, string $telefono, array $presupuestos): bo
     return $enviado;
 }
 
+function reminderKey(string $ofertaId, int $threshold): string {
+    return $ofertaId . ':' . $threshold;
+}
+
+function cargarRemindersEnviados(): array {
+    $file = __DIR__ . '/provider_reminders_sent.json';
+    if (!file_exists($file)) return [];
+    $data = json_decode(file_get_contents($file), true);
+    return is_array($data) ? $data : [];
+}
+
+function guardarRemindersEnviados(array $data): void {
+    file_put_contents(__DIR__ . '/provider_reminders_sent.json', json_encode($data, JSON_PRETTY_PRINT), LOCK_EX);
+}
+
+function notificarProfesionalesRecordatorio(array $oferta, int $threshold): void {
+    $ofertaId = (string)($oferta['id'] ?? '');
+    if (!$ofertaId) return;
+
+    $sent = cargarRemindersEnviados();
+    $key = reminderKey($ofertaId, $threshold);
+    if (!empty($sent[$key])) {
+        log_msg('INFO', "  Recordatorio $threshold ya enviado para oferta $ofertaId");
+        return;
+    }
+
+    $categoria = trim($oferta['categoria'] ?? '');
+    $zonaRaw = trim($oferta['zona'] ?? '');
+    $descripcion = trim($oferta['descripcion'] ?? '');
+    if (!$categoria || !$zonaRaw) return;
+
+    $norm = function(string $s): string {
+        $s = mb_strtolower(trim($s));
+        $s = @iconv('UTF-8', 'ASCII//TRANSLIT', $s) ?: $s;
+        return trim(preg_replace('/[^a-z0-9\s]/', ' ', $s));
+    };
+
+    $zonaNorm = $norm($zonaRaw);
+    $variantes = [strtolower($categoria), ucfirst(strtolower($categoria))];
+    $profesionales = [];
+    foreach ($variantes as $v) {
+        $enc = urlencode('{' . $v . '}');
+        $res = supabaseRequest('GET', "usuarios?categoria=cs.$enc&select=id,nombre,apellido,celular,provincia,ciudad&limit=50");
+        if (is_array($res)) $profesionales = array_merge($profesionales, $res);
+    }
+
+    $dedupe = [];
+    foreach ($profesionales as $p) {
+        if (!empty($p['id'])) $dedupe[$p['id']] = $p;
+    }
+    $profesionales = array_values($dedupe);
+
+    $profesionales = array_values(array_filter($profesionales, function($p) use ($zonaNorm, $norm) {
+        $ciudad = $norm($p['ciudad'] ?? '');
+        $prov = $norm($p['provincia'] ?? '');
+        return ($ciudad && strpos($zonaNorm, $ciudad) !== false) || ($prov && strpos($zonaNorm, $prov) !== false);
+    }));
+
+    $profesionales = array_slice($profesionales, 0, 15);
+    if (count($profesionales) === 0) {
+        log_msg('WARN', "  Recordatorio oferta $ofertaId sin profesionales candidatos");
+        return;
+    }
+
+    $minutos = (int)round($threshold / 60);
+    $descLinea = $descripcion ? "📝 Pedido: " . mb_substr($descripcion, 0, 160) . "\n" : '';
+    $msg = "⏰ *Recordatorio pedido #$ofertaId*\n\n" .
+           "Todavía necesitamos presupuesto para:\n" .
+           "📋 $categoria\n" .
+           "📍 $zonaRaw\n" .
+           $descLinea . "\n" .
+           "Ya pasaron aprox. $minutos min. Si podés tomarlo, respondé con monto y horario.\n" .
+           "Ejemplo: *$25000 hoy 18hs*\n" .
+           "Si no podés, respondé *NO*.";
+
+    $ok = 0;
+    foreach ($profesionales as $prof) {
+        $celular = preg_replace('/\D/', '', $prof['celular'] ?? '');
+        if (!$celular) continue;
+        $wa = (substr($celular, 0, 2) === '54') ? "whatsapp:+$celular" : "whatsapp:+54$celular";
+        if (enviarWhatsApp($wa, $msg)) $ok++;
+        usleep(250000);
+    }
+
+    $sent[$key] = ['at' => date('c'), 'sent' => $ok];
+    guardarRemindersEnviados($sent);
+    log_msg('SEND', "  Recordatorio $threshold oferta $ofertaId enviado a $ok profesionales");
+}
+
 // ═══════════════════════════════════════════════════════════
-//  SECCIÓN 1 — Ofertas en paso=4 (primera espera, 30 min)
+//  SECCIÓN 1 — Ofertas en paso=4 (primera espera, 2 horas)
 // ═══════════════════════════════════════════════════════════
 log_separador('SECCIÓN 1: Ofertas paso=4 (primera espera)');
 
@@ -183,19 +272,25 @@ if (!is_array($ofertas_paso4) || count($ofertas_paso4) === 0) {
                 enviarTop3($ofertaId, $telefono, $presupuestos);
             } else {
                 // Sin presupuestos → avisar y pasar a paso 98 (segunda espera)
-                log_msg('WARN', "  Sin presupuestos tras 30 min → paso 98");
+                log_msg('WARN', "  Sin presupuestos tras 2 horas → paso 98");
                 if (!empty($telefono)) {
                     $msgSinProp = "😕 Por ahora no recibimos propuestas de profesionales para tu solicitud.\n\n" .
-                                  "Vamos a seguir buscando 15 minutos más. Si no encontramos, te avisamos.\n\n" .
+                                  "Vamos a seguir buscando 30 minutos más. Si no encontramos, te avisamos.\n\n" .
                                   "Si querés cancelar, escribí *eliminar*.";
                     $enviado = enviarWhatsApp($telefono, $msgSinProp);
                     if ($enviado) {
                         supabaseRequest("PATCH", "nuevaOferta?id=eq.$ofertaId", [
                             "paso"       => 98,
-                            "created_at" => date('Y-m-d H:i:s'), // Reset timer para los 15 min
+                            "created_at" => date('Y-m-d H:i:s'), // Reset timer para los 30 min
                         ]);
-                        log_msg('OK', "  Oferta $ofertaId → Paso 98 (segunda espera, created_at reseteado)");
+                        log_msg('OK', "  Oferta $ofertaId → Paso 98 (segunda espera 30 min, created_at reseteado)");
                     }
+                }
+            }
+        } else if ($cantidad === 0) {
+            foreach ([1800, 3600, 5400] as $threshold) {
+                if ($segundos >= $threshold) {
+                    notificarProfesionalesRecordatorio($oferta, $threshold);
                 }
             }
         } else {

@@ -32,6 +32,17 @@ if (!$telefono) { http_response_code(400); exit; }
 _log("WEBHOOK | tel=$telefono | msg=" . substr($mensaje, 0, 60) . " | media=" . count($mediaUrls));
 
 // ─────────────────────────────────────────────
+//  RESPUESTA DIRECTA DE PRESTADORES
+//  Permite que un prestador responda por WhatsApp con:
+//  - NO / no puedo  → descarta sin crear conversación de cliente
+//  - $25000 hoy 18hs / 25000 mañana → crea presupuesto directo
+// ─────────────────────────────────────────────
+if (manejarRespuestaProfesional($telefono, $mensaje)) {
+    http_response_code(200);
+    exit;
+}
+
+// ─────────────────────────────────────────────
 //  BUSCAR OFERTA ACTIVA DEL CLIENTE
 // ─────────────────────────────────────────────
 $telEnc   = urlencode($telefono);
@@ -287,16 +298,142 @@ function notificarProfesionales(string $ofertaId, array $camposNuevos, array $of
         if (!$celular) continue;
         $wa = (substr($celular, 0, 2) === '54') ? "whatsapp:+$celular" : "whatsapp:+54$celular";
 
-        $msg = "🔔 *¡Nueva solicitud disponible!*\n\n" .
+        $descripcion = trim($camposNuevos['descripcion'] ?? $ofertaOriginal['descripcion'] ?? '');
+        $descLinea = $descripcion ? "📝 Pedido: " . mb_substr($descripcion, 0, 180) . "\n" : '';
+
+        $msg = "🔔 *Nuevo pedido #$ofertaId disponible*\n\n" .
                "📋 Servicio: $categoria\n" .
-               "📍 Zona: $zonaRaw\n\n" .
-               "Ingresá para ver los detalles y enviar tu presupuesto 💼\n" .
-               "https://tooriserviciosya.com/ofertas.php\n\n" .
-               "📱 App: https://play.google.com/store/apps/details?id=com.alex_6775.appTrabajo";
+               "📍 Zona: $zonaRaw\n" .
+               $descLinea . "\n" .
+               "Podés presupuestar respondiendo este WhatsApp.\n" .
+               "Ejemplo: *$25000 hoy 18hs*\n" .
+               "Si no podés tomarlo, respondé *NO*.\n\n" .
+               "También podés verlo en la web/app:\n" .
+               "https://tooriserviciosya.com/ofertas.php";
 
         enviarWhatsApp($wa, $msg);
         _log("  -> Notificado: " . ($prof['nombre'] ?? '') . " | $wa");
     }
+}
+
+function soloDigitosTelefono(string $telefono): string {
+    return preg_replace('/\D/', '', $telefono);
+}
+
+function buscarUsuarioPorTelefono(string $telefono): ?array {
+    $digits = soloDigitosTelefono($telefono);
+    if (!$digits) return null;
+    $last10 = substr($digits, -10);
+    if (strlen($last10) < 8) return null;
+
+    $usuarios = supabaseRequest('GET', 'usuarios?select=id,nombre,apellido,celular,categoria,provincia,ciudad&celular=ilike.*' . urlencode($last10) . '&limit=5');
+    if (!is_array($usuarios) || count($usuarios) === 0) return null;
+    foreach ($usuarios as $u) {
+        $cat = $u['categoria'] ?? null;
+        $tieneCategoria = is_array($cat) ? count($cat) > 0 : trim((string)$cat) !== '';
+        if ($tieneCategoria) return $u;
+    }
+    return null;
+}
+
+function extraerMontoPresupuesto(string $mensaje): ?float {
+    $m = trim($mensaje);
+    if (preg_match('/(?:\$|ars\s*)?\s*(\d{2,3}(?:[\.\s]?\d{3})+|\d{4,8})(?:[,\.]\d{1,2})?/iu', $m, $match)) {
+        $raw = preg_replace('/[^0-9,\.]/', '', $match[1]);
+        $raw = str_replace('.', '', $raw);
+        $raw = str_replace(',', '.', $raw);
+        if (is_numeric($raw) && (float)$raw > 0) return (float)$raw;
+    }
+    return null;
+}
+
+function obtenerOfertaParaProfesional(array $profesional, string $mensaje): ?array {
+    $ofertaId = null;
+    if (preg_match('/#\s*(\d+)/', $mensaje, $m)) $ofertaId = $m[1];
+
+    if ($ofertaId) {
+        $ofertas = supabaseRequest('GET', 'nuevaOferta?id=eq.' . urlencode($ofertaId) . '&estado=eq.completa&limit=1');
+        if (is_array($ofertas) && count($ofertas) > 0) return $ofertas[0];
+    }
+
+    $cats = $profesional['categoria'] ?? [];
+    if (is_string($cats)) {
+        $decoded = json_decode($cats, true);
+        if (is_array($decoded)) $cats = $decoded;
+        else $cats = array_filter(array_map('trim', explode(',', $cats)));
+    }
+    if (!is_array($cats)) $cats = [];
+
+    $ofertas = supabaseRequest('GET', 'nuevaOferta?estado=eq.completa&paso=in.(4,98)&order=created_at.desc&limit=20');
+    if (!is_array($ofertas)) return null;
+
+    $norm = function(string $s): string {
+        $s = mb_strtolower(trim($s));
+        $s = @iconv('UTF-8', 'ASCII//TRANSLIT', $s) ?: $s;
+        return trim(preg_replace('/[^a-z0-9\s]/', ' ', $s));
+    };
+
+    $profCats = array_map($norm, array_filter($cats));
+    $profCiudad = $norm($profesional['ciudad'] ?? '');
+    $profProv = $norm($profesional['provincia'] ?? '');
+
+    foreach ($ofertas as $oferta) {
+        $cat = $norm($oferta['categoria'] ?? '');
+        $zona = $norm($oferta['zona'] ?? '');
+        $catOk = empty($profCats) || in_array($cat, $profCats, true);
+        $zonaOk = (!$profCiudad || strpos($zona, $profCiudad) !== false) || (!$profProv || strpos($zona, $profProv) !== false);
+        if ($catOk && $zonaOk) return $oferta;
+    }
+
+    return $ofertas[0] ?? null;
+}
+
+function manejarRespuestaProfesional(string $telefono, string $mensaje): bool {
+    $texto = trim($mensaje);
+    if ($texto === '') return false;
+
+    $prof = buscarUsuarioPorTelefono($telefono);
+    if (!$prof || empty($prof['id'])) return false;
+
+    $oferta = obtenerOfertaParaProfesional($prof, $texto);
+    if (!$oferta || empty($oferta['id'])) return false;
+
+    $ofertaId = $oferta['id'];
+    $nombre = trim(($prof['nombre'] ?? '') . ' ' . ($prof['apellido'] ?? ''));
+
+    if (preg_match('/^\s*(no|no puedo|no estoy|ocupado|ocupada|paso|rechazo)\b/iu', $texto)) {
+        _log("Prestador {$prof['id']} descartó oferta $ofertaId por WhatsApp");
+        enviarWhatsApp($telefono, "Gracias $nombre, te marco como no disponible para este pedido. Te avisamos en el próximo 🙌");
+        return true;
+    }
+
+    $monto = extraerMontoPresupuesto($texto);
+    if (!$monto) {
+        enviarWhatsApp($telefono, "Para cargar tu presupuesto del pedido #$ofertaId, respondé con monto y horario. Ejemplo: *$25000 hoy 18hs*. Si no podés, respondé *NO*.");
+        return true;
+    }
+
+    $existentes = supabaseRequest('GET', 'presupuestos?oferta_id=eq.' . urlencode($ofertaId) . '&trabajador_uuid=eq.' . urlencode($prof['id']) . '&limit=1');
+    $payload = [
+        'oferta_id' => intval($ofertaId),
+        'trabajador_uuid' => $prof['id'],
+        'monto' => $monto,
+        'horarios_disponibles' => $texto,
+        'descripcion' => 'Presupuesto enviado por WhatsApp: ' . $texto,
+        'score' => 3,
+        'estado' => 'activo',
+        'estado_confirmacion' => 'pendiente',
+    ];
+
+    if (is_array($existentes) && count($existentes) > 0 && !empty($existentes[0]['id'])) {
+        supabaseRequest('PATCH', 'presupuestos?id=eq.' . urlencode($existentes[0]['id']), $payload);
+    } else {
+        supabaseRequest('POST', 'presupuestos', $payload);
+    }
+
+    _log("Prestador {$prof['id']} presupuestó oferta $ofertaId por WhatsApp monto=$monto");
+    enviarWhatsApp($telefono, "Listo $nombre, cargué tu presupuesto para el pedido #$ofertaId: $" . number_format($monto, 0, ',', '.') . ". Si el cliente te elige, te avisamos por acá ✅");
+    return true;
 }
 
 // ═════════════════════════════════════════════
