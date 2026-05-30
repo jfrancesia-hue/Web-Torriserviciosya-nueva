@@ -411,7 +411,7 @@
             <div class="soluciones-flow-item"><i class="bi bi-kanban"></i><div><strong>Tickets, proveedores y seguimiento</strong><span>Asignás responsables, pedís presupuestos y ves el estado de cada caso.</span></div></div>
             <div class="soluciones-flow-item"><i class="bi bi-receipt"></i><div><strong>Facturación ARCA, cobranzas y reportes</strong><span>Menos herramientas sueltas, menos errores y más control del negocio.</span></div></div>
           </div>
-          <a href="https://wa.me/5493512139046?text=Hola!%20Quiero%20conocer%20SolucionesYa%20para%20mi%20empresa" class="btn btn-primary btn-ripple" style="background:linear-gradient(135deg,#2DB5A0,#4A2C82);box-shadow:0 12px 30px rgba(45,181,160,.28);">Quiero conocer SolucionesYa</a>
+          <a href="https://solucionesya360.vercel.app" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-ripple" style="background:linear-gradient(135deg,#2DB5A0,#4A2C82);box-shadow:0 12px 30px rgba(45,181,160,.28);">Entrar a SolucionesYa360</a>
         </div>
         <div class="soluciones-visual reveal-right">
           <div class="sy-card">
@@ -1500,8 +1500,8 @@
                         <li><i class="bi bi-check-circle-fill"></i> CRM, propiedades y dashboard</li>
                         <li><i class="bi bi-check-circle-fill"></i> WhatsApp e IA como respaldo operativo</li>
                     </ul>
-                    <a href="https://toori360-app.vercel.app" target="_blank" rel="noopener noreferrer" class="platform-card-btn">
-                        Acceder a Toori360 <i class="bi bi-arrow-right"></i>
+                    <a href="https://solucionesya360.vercel.app" target="_blank" rel="noopener noreferrer" class="platform-card-btn">
+                        Acceder a SolucionesYa360 <i class="bi bi-arrow-right"></i>
                     </a>
                 </div>
 
