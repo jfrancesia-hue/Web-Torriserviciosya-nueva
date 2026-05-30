@@ -383,8 +383,8 @@
                     El sistema operativo para inmobiliarias, consorcios y empresas que necesitan orden, trazabilidad y control total sobre sus propiedades y servicios.
                 </p>
                 <div class="hero-360-buttons">
-                    <a href="https://toori360-app.vercel.app/login" target="_blank" class="btn-360-primary">
-                        <i class="bi bi-play-circle"></i> Solicitar demo
+                    <a href="https://solucionesya360.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn-360-primary">
+                        <i class="bi bi-play-circle"></i> Entrar a SolucionesYa360
                     </a>
                     <a href="#features" class="btn-360-secondary">
                         <i class="bi bi-grid"></i> Ver funcionalidades
@@ -573,8 +573,8 @@
             Unite a las inmobiliarias y empresas que ya gestionán sus propiedades con Toori360.
         </p>
         <div class="reveal" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
-            <a href="https://toori360-app.vercel.app/login" target="_blank" class="btn-360-primary">
-                <i class="bi bi-whatsapp"></i> Agendar demo gratuita
+            <a href="https://solucionesya360.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn-360-primary">
+                <i class="bi bi-box-arrow-up-right"></i> Entrar a SolucionesYa360
             </a>
             <a href="./" class="btn-360-secondary">
                 <i class="bi bi-arrow-left"></i> Volver a ServiciosYa

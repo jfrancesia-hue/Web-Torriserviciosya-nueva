@@ -28,7 +28,7 @@
       <div class="footer-col">
         <h4>Soluciones</h4>
         <ul>
-          <li><a href="index.php#solucionesya" style="color:var(--toori-green);">SolucionesYa B2B <i class="bi bi-arrow-up-right"></i></a></li>
+          <li><a href="https://solucionesya360.vercel.app/" target="_blank" rel="noopener noreferrer" style="color:var(--toori-green);">SolucionesYa B2B <i class="bi bi-arrow-up-right"></i></a></li>
           <li><a href="https://wa.me/5493512139046?text=Hola!%20Quiero%20conocer%20SolucionesYa%20para%20mi%20empresa" target="_blank" rel="noopener">Consultar demo</a></li>
         </ul>
       </div>

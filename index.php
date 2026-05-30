@@ -313,7 +313,7 @@
           <div class="hero-cta-bar">
             <a href="https://wa.me/5493512139046" class="btn btn-primary btn-ripple">Buscar un servicio</a>
             <a href="registro.php" class="btn btn-ripple" style="background: #f1f8e9; color: #558b2f; font-weight: 600;">Ofrecer servicios</a>
-            <a href="#solucionesya" class="btn btn-ripple" style="background: linear-gradient(135deg,#2DB5A0,#4A2C82); color: #fff; font-weight: 700; box-shadow: 0 10px 26px rgba(45,181,160,0.34);">SolucionesYa B2B</a>
+            <a href="https://solucionesya360.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-ripple" style="background: linear-gradient(135deg,#2DB5A0,#4A2C82); color: #fff; font-weight: 700; box-shadow: 0 10px 26px rgba(45,181,160,0.34);">Entrar a SolucionesYa360</a>
           </div>
         </div>
 
@@ -411,7 +411,7 @@
             <div class="soluciones-flow-item"><i class="bi bi-kanban"></i><div><strong>Tickets, proveedores y seguimiento</strong><span>Asignás responsables, pedís presupuestos y ves el estado de cada caso.</span></div></div>
             <div class="soluciones-flow-item"><i class="bi bi-receipt"></i><div><strong>Facturación ARCA, cobranzas y reportes</strong><span>Menos herramientas sueltas, menos errores y más control del negocio.</span></div></div>
           </div>
-          <a href="https://solucionesya360.vercel.app" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-ripple" style="background:linear-gradient(135deg,#2DB5A0,#4A2C82);box-shadow:0 12px 30px rgba(45,181,160,.28);">Entrar a SolucionesYa360</a>
+          <a href="https://solucionesya360.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-ripple" style="background:linear-gradient(135deg,#2DB5A0,#4A2C82);box-shadow:0 12px 30px rgba(45,181,160,.28);">Entrar a SolucionesYa360</a>
         </div>
         <div class="soluciones-visual reveal-right">
           <div class="sy-card">
@@ -1500,7 +1500,7 @@
                         <li><i class="bi bi-check-circle-fill"></i> CRM, propiedades y dashboard</li>
                         <li><i class="bi bi-check-circle-fill"></i> WhatsApp e IA como respaldo operativo</li>
                     </ul>
-                    <a href="https://solucionesya360.vercel.app" target="_blank" rel="noopener noreferrer" class="platform-card-btn">
+                    <a href="https://solucionesya360.vercel.app/" target="_blank" rel="noopener noreferrer" class="platform-card-btn">
                         Acceder a SolucionesYa360 <i class="bi bi-arrow-right"></i>
                     </a>
                 </div>
