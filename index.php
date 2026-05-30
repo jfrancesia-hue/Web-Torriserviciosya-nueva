@@ -42,32 +42,42 @@
     <?php include 'header.php'; ?>
 
     <style>
-      /* Home: menú transparente sobre hero, con color al interactuar/scroll */
+      /* Home: barra superior siempre visible sobre el hero */
       .home-page .navbar.navbar--sticky {
         position: fixed;
         top: 0;
         left: 0;
         right: 0;
-        background: rgba(8, 13, 28, 0.08) !important;
-        border-bottom: 1px solid rgba(255,255,255,0.12) !important;
-        box-shadow: none !important;
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
+        z-index: 5000 !important;
+        height: 82px;
+        background: rgba(8, 13, 28, 0.72) !important;
+        border-bottom: 1px solid rgba(255,255,255,0.18) !important;
+        box-shadow: 0 14px 36px rgba(0, 0, 0, 0.18) !important;
+        backdrop-filter: blur(18px) saturate(150%);
+        -webkit-backdrop-filter: blur(18px) saturate(150%);
         transition: background 0.28s ease, box-shadow 0.28s ease, height 0.28s ease;
       }
-      .home-page .navbar:not(.navbar--scrolled) .logo span,
-      .home-page .navbar:not(.navbar--scrolled) .nav-link,
-      .home-page .navbar:not(.navbar--scrolled) .menu-toggle {
-        color: #fff;
-        text-shadow: 0 2px 14px rgba(0,0,0,0.35);
+      .home-page .navbar .container-header {
+        height: 100%;
       }
-      .home-page .navbar:not(.navbar--scrolled) .nav-link {
+      .home-page .navbar .logo span,
+      .home-page .navbar .nav-link,
+      .home-page .navbar .menu-toggle {
+        color: #fff !important;
+        text-shadow: 0 2px 14px rgba(0,0,0,0.36);
+      }
+      .home-page .navbar .logo img {
+        height: 58px !important;
+        margin-top: 0 !important;
+        filter: drop-shadow(0 8px 18px rgba(0,0,0,0.22));
+      }
+      .home-page .navbar .nav-link {
         padding: 9px 14px;
         border-radius: 999px;
       }
-      .home-page .navbar:not(.navbar--scrolled) .nav-link:hover,
-      .home-page .navbar:not(.navbar--scrolled) .nav-link:focus,
-      .home-page .navbar:not(.navbar--scrolled) .nav-link:active {
+      .home-page .navbar .nav-link:hover,
+      .home-page .navbar .nav-link:focus,
+      .home-page .navbar .nav-link:active {
         background: rgba(255,255,255,0.18);
         color: #fff;
       }
@@ -83,23 +93,8 @@
         box-shadow: 0 16px 34px rgba(45,181,160,0.38);
       }
       .home-page .navbar.navbar--scrolled {
-        background: rgba(8, 13, 28, 0.28) !important;
+        background: rgba(8, 13, 28, 0.82) !important;
         border-bottom: 1px solid rgba(255,255,255,0.16) !important;
-        box-shadow: 0 10px 34px rgba(0, 0, 0, 0.14) !important;
-        backdrop-filter: blur(18px) saturate(140%);
-        -webkit-backdrop-filter: blur(18px) saturate(140%);
-      }
-      .home-page .navbar.navbar--scrolled .logo span,
-      .home-page .navbar.navbar--scrolled .nav-link,
-      .home-page .navbar.navbar--scrolled .menu-toggle {
-        color: #fff;
-        text-shadow: 0 2px 14px rgba(0,0,0,0.34);
-      }
-      .home-page .navbar.navbar--scrolled .nav-link:hover,
-      .home-page .navbar.navbar--scrolled .nav-link:focus,
-      .home-page .navbar.navbar--scrolled .nav-link:active {
-        background: rgba(255,255,255,0.16);
-        color: #fff;
       }
       /* Override fuerte: badges del hero limpios, sin pastillas marcadas */
       .home-page .hero-slideshow .trust-badges {
@@ -131,7 +126,7 @@
         margin-right: 2px !important;
       }
       @media (max-width: 768px) {
-        .home-page .navbar.navbar--sticky { background: rgba(255,255,255,0.96) !important; }
+        .home-page .navbar.navbar--sticky { background: rgba(255,255,255,0.96) !important; height: 76px; }
         .home-page .navbar .nav-link,
         .home-page .navbar .logo span,
         .home-page .navbar .menu-toggle { color: var(--toori-dark) !important; text-shadow: none !important; }
