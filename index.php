@@ -1500,8 +1500,48 @@
                         <li><i class="bi bi-check-circle-fill"></i> CRM, propiedades y dashboard</li>
                         <li><i class="bi bi-check-circle-fill"></i> WhatsApp e IA como respaldo operativo</li>
                     </ul>
-                    <a href="https://wa.me/5493512139046?text=Hola!%20Quiero%20conocer%20SolucionesYa%20para%20mi%20empresa" class="platform-card-btn">
-                        Consultar por SolucionesYa <i class="bi bi-arrow-right"></i>
+                    <a href="https://toori360-app.vercel.app" target="_blank" rel="noopener noreferrer" class="platform-card-btn">
+                        Acceder a Toori360 <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- CRM -->
+                <div class="platform-card crm reveal">
+                    <div class="platform-card-icon"><i class="bi bi-people-fill"></i></div>
+                    <div class="platform-card-title">
+                        <h3>Toori CRM</h3>
+                        <span class="platform-soon">Pronto</span>
+                    </div>
+                    <p class="platform-card-desc">
+                        Pipeline visual, WhatsApp integrado y automatizaciones para equipos comerciales que quieren vender más.
+                    </p>
+                    <ul class="platform-features">
+                        <li><i class="bi bi-check-circle-fill"></i> Pipeline Kanban</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Reportes en tiempo real</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Multi-usuario</li>
+                    </ul>
+                    <a href="crm.php" class="platform-card-btn">
+                        Reservar acceso <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- FacturaIA -->
+                <div class="platform-card fact reveal">
+                    <div class="platform-card-icon"><i class="bi bi-receipt"></i></div>
+                    <div class="platform-card-title">
+                        <h3>FacturaIA</h3>
+                        <span class="platform-soon">Pronto</span>
+                    </div>
+                    <p class="platform-card-desc">
+                        Facturación electrónica AFIP con asistente IA. Emite comprobantes A, B, C y notas en segundos.
+                    </p>
+                    <ul class="platform-features">
+                        <li><i class="bi bi-check-circle-fill"></i> Conexión directa AFIP</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Asistente IA integrado</li>
+                        <li><i class="bi bi-check-circle-fill"></i> PDF + envío automático</li>
+                    </ul>
+                    <a href="facturacion.php" class="platform-card-btn">
+                        Reservar acceso <i class="bi bi-arrow-right"></i>
                     </a>
                 </div>
             </div>

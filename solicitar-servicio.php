@@ -89,8 +89,8 @@ window.supabase = window.supabase.createClient(supabaseUrl, supabaseKey)
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
-        .loc-suggestións,
-        .cat-suggestións {
+        .loc-suggestions,
+        .cat-suggestions {
             position: absolute;
             background: white;
             width: 100%;
@@ -187,7 +187,7 @@ window.supabase = window.supabase.createClient(supabaseUrl, supabaseKey)
                                     <div style="position: relative;">
                                         <input type="text" id="search-profesion" class="form-control"
                                             placeholder="Ej: Plomero, Electricista..." autocomplete="off" required>
-                                        <div id="category-suggestións" class="cat-suggestións"></div>
+                                        <div id="category-suggestions" class="cat-suggestions"></div>
                                         <input type="hidden" id="reg-profesion" required>
                                     </div>
                                 </div>
@@ -201,7 +201,7 @@ window.supabase = window.supabase.createClient(supabaseUrl, supabaseKey)
                                         <input type="text" id="reg-ciudad" class="form-control"
                                             placeholder="¿Dónde necesitás el servicio?" autocomplete="off" required>
                                     </div>
-                                    <div id="loc-suggestións" class="loc-suggestións"></div>
+                                    <div id="loc-suggestions" class="loc-suggestions"></div>
                                     <input type="hidden" id="reg-lat">
                                     <input type="hidden" id="reg-lon">
                                 </div>
@@ -210,6 +210,17 @@ window.supabase = window.supabase.createClient(supabaseUrl, supabaseKey)
                                     <label class="form-label" for="reg-descripcion">Descripción del problema</label>
                                     <textarea id="reg-descripcion" class="form-control" rows="4"
                                         placeholder="Contanos brevemente qué necesitás resolver..." required></textarea>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label class="form-label" for="reg-responsable-pago">Quien paga</label>
+                                    <select id="reg-responsable-pago" class="form-control">
+                                        <option value="A_DEFINIR">A definir</option>
+                                        <option value="INQUILINO">Paga inquilino</option>
+                                        <option value="PROPIETARIO">Paga propietario</option>
+                                        <option value="INMOBILIARIA">Paga inmobiliaria</option>
+                                        <option value="COMPARTIDO">Compartido</option>
+                                    </select>
                                 </div>
 
                                 <div class="col-12 mt-4">
