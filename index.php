@@ -23,6 +23,18 @@
     <link rel="stylesheet" crossorigin href="./assets/main-D3W1u2cc.css">
     <link rel="stylesheet" href="./assets/toori-enhanced.css">
     <link rel="stylesheet" href="./assets/toori-design-refresh.css?v=20260529-2038">
+    <script>
+      (function () {
+        var solucionesUrl = "https://solucionesya360.vercel.app/";
+        function redirectSolucionesYa() {
+          if (window.location.hash === "#solucionesya") {
+            window.location.replace(solucionesUrl);
+          }
+        }
+        redirectSolucionesYa();
+        window.addEventListener("hashchange", redirectSolucionesYa);
+      })();
+    </script>
 </head>
 
 <body class="home-page">
