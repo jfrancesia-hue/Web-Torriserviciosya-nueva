@@ -83,6 +83,7 @@ Por eso el flujo debe usar templates aprobados cuando el prestador no tiene vent
 - Minuto 0: enviar pedido a 5–10 prestadores mejor rankeados.
 - Minuto 10: recordar solo a los notificados que no respondieron.
 - Minuto 20: ampliar a otros prestadores compatibles.
+- Minuto 40: hacer una ampliación profunda/guardia a prestadores nuevos si no hubo ninguna respuesta.
 - Hasta 2 horas: seguir buscando sin avisar fracaso temprano al cliente.
 - Luego de 2 horas sin respuesta: avisar con honestidad y escalar a humano/admin (`modo_agente=true`).
 - El panel/admin debe poder consultar estado por pedido: fase, prestadores notificados, respuestas, NO, presupuestos y etapa.
@@ -97,6 +98,7 @@ Priorizar por:
 - Perfil más completo.
 - Historial de presupuestos enviados.
 - Menos rechazos previos.
+- Penalizar fuerte a quienes fueron notificados y no respondieron después de 30 minutos, especialmente si fue reciente.
 
 La deduplicación debe hacerse principalmente por teléfono para evitar contactar dos veces al mismo prestador con distinto ID.
 
@@ -111,9 +113,9 @@ El mensaje debe ser claro:
 
 > Nuevo pedido de plomero en Córdoba Capital.  
 > Problema: pérdida de agua/canilla.  
-> Respondé con presupuesto aproximado y horario disponible.  
-> Ejemplo: “$25.000 hoy 18hs”.  
-> Si no podés, respondé NO.
+> Respondé solo una de estas opciones:  
+> “SI $25.000 hoy 18hs”  
+> o “NO” si no podés tomarlo.
 
 ## Tracking obligatorio
 
@@ -146,8 +148,8 @@ Antes de declarar cambios listos:
 - Se agregó respuesta directa de prestadores por WhatsApp.
 - Se creó template Twilio `toori_provider_new_order_20260529`.
 - Content SID: `HX4243c5b61969e03597f42ab230a11b62`.
-- Estado al momento de documentación: pendiente de aprobación WhatsApp.
-- Hasta aprobación, mensajes fríos pueden fallar con Twilio/WhatsApp error `63016`.
+- Estado 2026-05-30: plantilla aprobada y prueba controlada entregada (`delivered`). También se probaron prestadores reales: los mensajes llegaron/leyeron, pero no respondieron; el cuello ya no es técnico sino de activación/compromiso de red.
+- Se ajustó el flujo para mensaje más directo, penalización por no-respuesta y expansión profunda a minuto 40.
 - Se agregó endpoint de estado `api_panel.php?action=estado_pedido&id=...`.
 - Se agregó escalamiento automático `modo_agente=true` cuando pasan 2h sin propuestas.
 - Mica transcribe audios con Whisper/OpenAI y los usa como mensaje del cliente.

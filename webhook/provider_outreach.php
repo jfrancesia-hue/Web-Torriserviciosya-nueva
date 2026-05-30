@@ -151,6 +151,45 @@ function po_provider_responded(array $offerState, array $prof): bool {
     return !empty($offerState['providers'][$key]['responded']);
 }
 
+function po_minutes_since(?string $date): ?int {
+    if (!$date) return null;
+    $ts = strtotime($date);
+    if (!$ts) return null;
+    return max(0, (int)floor((time() - $ts) / 60));
+}
+
+function po_provider_history_stats(string $providerKey, array $globalState): array {
+    $stats = [
+        'budgets' => 0,
+        'declines' => 0,
+        'no_response' => 0,
+        'recent_no_response' => 0,
+        'last_response_at' => null,
+    ];
+
+    foreach (($globalState['offers'] ?? []) as $offerState) {
+        $p = $offerState['providers'][$providerKey] ?? null;
+        if (!$p) continue;
+
+        if (!empty($p['budget_sent'])) $stats['budgets']++;
+        if (!empty($p['declined'])) $stats['declines']++;
+
+        if (!empty($p['responded_at'])) {
+            if (!$stats['last_response_at'] || strtotime($p['responded_at']) > strtotime($stats['last_response_at'])) {
+                $stats['last_response_at'] = $p['responded_at'];
+            }
+        }
+
+        $mins = po_minutes_since($p['last_notified_at'] ?? ($p['notified_at'] ?? null));
+        if (empty($p['responded']) && $mins !== null && $mins >= 30) {
+            $stats['no_response']++;
+            if ($mins <= 180) $stats['recent_no_response']++;
+        }
+    }
+
+    return $stats;
+}
+
 function po_provider_score(array $prof, array $oferta, array $globalState): int {
     $score = 0;
     $zona = po_normalize_zone_aliases($oferta['zona'] ?? '');
@@ -164,16 +203,10 @@ function po_provider_score(array $prof, array $oferta, array $globalState): int 
     if (!empty($prof['apellido'])) $score += 3;
 
     $providerKey = po_provider_key($prof);
-    $responses = 0;
-    $declines = 0;
-    foreach (($globalState['offers'] ?? []) as $offerState) {
-        $p = $offerState['providers'][$providerKey] ?? null;
-        if (!$p) continue;
-        if (!empty($p['budget_sent'])) $responses += 1;
-        if (!empty($p['declined'])) $declines += 1;
-    }
-    $score += min(50, $responses * 12);
-    $score -= min(35, $declines * 7);
+    $stats = po_provider_history_stats($providerKey, $globalState);
+    $score += min(60, $stats['budgets'] * 15);
+    $score -= min(35, $stats['declines'] * 7);
+    $score -= min(55, ($stats['no_response'] * 10) + ($stats['recent_no_response'] * 12));
     return $score;
 }
 
@@ -236,9 +269,9 @@ function po_build_message(array $oferta, string $stage): string {
             "ðŸ“‹ Servicio: $categoria\n" .
             "ðŸ“ Zona: $zona\n" .
             $descLinea . "\n" .
-            "Si podÃ©s tomarlo, respondÃ© con monto y horario.\n" .
-            "Ejemplo: *$25000 hoy 18hs*.\n" .
-            "Si no podÃ©s, respondÃ© *NO*.";
+            "RespondÃ© solo una de estas opciones:\n" .
+            "*SI $25000 hoy 18hs*\n" .
+            "o *NO* si no podÃ©s tomarlo.";
     }
 
     if ($stage === 'expand_20') {
@@ -247,20 +280,27 @@ function po_build_message(array $oferta, string $stage): string {
             "ðŸ“‹ Servicio: $categoria\n" .
             "ðŸ“ Zona: $zona\n" .
             $descLinea . "\n" .
-            "RespondÃ© con presupuesto aproximado y horario disponible.\n" .
-            "Ejemplo: *$25000 hoy 18hs*.\n" .
-            "Si no podÃ©s, respondÃ© *NO*.";
+            "RespondÃ© solo una de estas opciones:\n" .
+            "*SI $25000 hoy 18hs*\n" .
+            "o *NO* si no podÃ©s tomarlo.";
     }
 
     return "ðŸ”” *Nuevo pedido #$ofertaId disponible*\n\n" .
         "ðŸ“‹ Servicio: $categoria\n" .
         "ðŸ“ Zona: $zona\n" .
         $descLinea . "\n" .
-        "RespondÃ© con presupuesto aproximado y horario disponible.\n" .
-        "Ejemplo: *$25000 hoy 18hs*.\n" .
-        "Si no podÃ©s, respondÃ© *NO*.\n\n" .
+        "RespondÃ© solo una de estas opciones:\n" .
+        "*SI $25000 hoy 18hs*\n" .
+        "o *NO* si no podÃ©s tomarlo.\n\n" .
         "TambiÃ©n podÃ©s verlo en la web/app:\n" .
         "https://tooriserviciosya.com/ofertas.php";
+}
+
+function po_template_detail(array $oferta): string {
+    $ofertaId = $oferta['id'] ?? '';
+    $descripcion = trim($oferta['descripcion'] ?? 'pedido de servicio');
+    $base = "Pedido #$ofertaId: " . $descripcion . " Respondé SI + monto + horario, o NO.";
+    return mb_substr($base, 0, 120);
 }
 
 function po_send_to_professionals(array $oferta, array $profesionales, string $stage): int {
@@ -277,7 +317,7 @@ function po_send_to_professionals(array $oferta, array $profesionales, string $s
             '1' => mb_substr($nombre, 0, 40),
             '2' => mb_substr(trim($oferta['categoria'] ?? 'servicio'), 0, 60),
             '3' => mb_substr(trim($oferta['zona'] ?? 'tu zona'), 0, 80),
-            '4' => mb_substr(trim($oferta['descripcion'] ?? 'pedido de servicio'), 0, 120),
+            '4' => po_template_detail($oferta),
         ];
         $sent = function_exists('enviarWhatsAppTemplate')
             ? enviarWhatsAppTemplate($wa, $templateSid, $templateVars, $msg)
@@ -319,6 +359,16 @@ function po_send_expansion(array $oferta, int $limit = 15): int {
 
     $pros = po_find_professionals($oferta, $limit, 0, true);
     return po_send_to_professionals($oferta, $pros, 'expand_20');
+}
+
+function po_send_deep_expansion(array $oferta, int $limit = 20): int {
+    $ofertaId = (string)($oferta['id'] ?? '');
+    $state = po_load_state();
+    $offerState = po_get_offer_state($state, $ofertaId);
+    if (!empty($offerState['stages']['expand_40'])) return 0;
+
+    $pros = po_find_professionals($oferta, $limit, 0, true);
+    return po_send_to_professionals($oferta, $pros, 'expand_40');
 }
 
 function po_find_provider_by_phone(string $telefono): ?array {
@@ -387,6 +437,7 @@ function po_offer_status(string $ofertaId): array {
         'responded' => 0,
         'declined' => 0,
         'budget_sent' => 0,
+        'no_response_30m' => 0,
         'stages' => $offerState['stages'] ?? [],
         'providers' => $providers,
     ];
@@ -395,6 +446,8 @@ function po_offer_status(string $ofertaId): array {
         if (!empty($p['responded'])) $summary['responded']++;
         if (!empty($p['declined'])) $summary['declined']++;
         if (!empty($p['budget_sent'])) $summary['budget_sent']++;
+        $mins = po_minutes_since($p['last_notified_at'] ?? ($p['notified_at'] ?? null));
+        if (empty($p['responded']) && $mins !== null && $mins >= 30) $summary['no_response_30m']++;
     }
     return $summary;
 }

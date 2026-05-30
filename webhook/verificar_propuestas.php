@@ -298,6 +298,10 @@ if (!is_array($ofertas_paso4) || count($ofertas_paso4) === 0) {
                 $sentExpansion = po_send_expansion($oferta, 15);
                 if ($sentExpansion > 0) log_msg('SEND', "  Minuto 20: búsqueda ampliada a $sentExpansion nuevos prestadores");
             }
+            if ($segundos >= 2400) {
+                $sentDeepExpansion = po_send_deep_expansion($oferta, 20);
+                if ($sentDeepExpansion > 0) log_msg('SEND', "  Minuto 40: guardia ampliada a $sentDeepExpansion prestadores nuevos");
+            }
         } else {
             log_msg('INFO', "  Esperando más presupuestos. Skipping.");
         }
